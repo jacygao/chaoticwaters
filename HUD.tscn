@@ -1,0 +1,13 @@
+[gd_scene format=2]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="Label" type="Label" parent="."]
+margin_left = 799.0
+margin_top = 6.0
+margin_right = 1018.0
+margin_bottom = 23.0
+text = "Food: 120  Water: 45  Gold: 20000"
+__meta__ = {
+"_edit_use_anchors_": false
+}
