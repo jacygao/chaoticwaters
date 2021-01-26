@@ -13,12 +13,15 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if durability <= 0:
-		# TODO: sink ship
+		# TODO: ship sinking animation
 		print("NPC boat has sunk")
 		queue_free()
 	
 	#var velocity = Vector2()  # The ship's movement vector.
 	$AnimatedSprite.animation = "right"
+	$Body.rotation_degrees = 90
+	$Body.position.x = 5
+	$Body.position.y = 60
 	$AnimatedSprite.play()
 		
 func hit(damage):
