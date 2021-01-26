@@ -16,6 +16,11 @@ func _process(_delta):
 		# TODO: sink ship
 		print("NPC boat has sunk")
 		queue_free()
+	
+	#var velocity = Vector2()  # The ship's movement vector.
+	$AnimatedSprite.animation = "right"
+	$AnimatedSprite.play()
+		
 func hit(damage):
 	durability -= damage
 	print("NPC boat is hit, current durability: ", durability)

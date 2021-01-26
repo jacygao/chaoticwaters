@@ -39,7 +39,7 @@ visible = false
 position = Vector2( -169.786, 62.3281 )
 
 [node name="PlayerBoat" parent="." instance=ExtResource( 1 )]
-position = Vector2( 86.3068, 0 )
+position = Vector2( 165.351, -10.0908 )
 
 [node name="NPCBoat" parent="." instance=ExtResource( 4 )]
 position = Vector2( -20.5254, 48.0986 )

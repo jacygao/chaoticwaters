@@ -35,7 +35,8 @@ func _input(event):
 func _process(delta):
 	if durability == 0:
 		print("player boat has sunk")
-	
+		# TODO: player boat has sunk.. what now?
+		
 	var velocity = Vector2()  # The player's movement vector.
 	
 	if position.distance_to(target) > 5:
@@ -44,16 +45,32 @@ func _process(delta):
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
 		$AnimatedSprite.play()
-	else:
-		$AnimatedSprite.stop()
 
 	move_and_collide(velocity * delta)
 
-	if velocity.x != 0:
-		$AnimatedSprite.flip_v = false
-		# See the note below about boolean assignment
-		$AnimatedSprite.flip_h = velocity.x > 0
-	
+	var y_dis = abs(target.y - position.y)
+	var x_dis = abs(target.x - position.x)
+
+	if x_dis >= y_dis:
+		$AnimatedSprite.scale = Vector2(1.3, 1.3)
+		$Body.rotation_degrees = 90
+		$Body.position.y = 30
+		if velocity.x > 0:
+			$Body.position.x = -10
+			$AnimatedSprite.animation = "right"
+		elif velocity.x < 0:
+			$Body.position.x = -20
+			$AnimatedSprite.animation = "left"
+	else:
+		$AnimatedSprite.scale = Vector2(1, 1)
+		$Body.rotation_degrees = 0
+		$Body.position.x = 0
+		$Body.position.y = 0
+		if velocity.y > 0:
+			$AnimatedSprite.animation = "down"
+		if velocity.y < 0:
+			$AnimatedSprite.animation = "up"
+		
 	if $ShootRaySouth.is_colliding():
 		if $ShootRaySouth.get_collision_point().y - position.y > fire_blind_range:
 			if $ShootRaySouth.get_collider().get_class() == "KinematicBody2D":
