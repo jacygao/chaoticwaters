@@ -2,12 +2,23 @@ extends KinematicBody2D
 
 # Fire cannon ball at target.
 signal fire
+
+const ready = 0
+const reloading = 1
+
  # How fast the player will move (pixels/sec).
 export var speed = 200
 # Default to 10. Boat sinks when durability reaches 0.
 export var durability = 10
 # How far can cannon balls reach when shooting.
 export var fire_blind_range = 150
+# How fast cannons reload.
+export var fire_rate = 2
+# How much damage do cannon balls cause.
+export var fire_damage = 1
+# State of the cannon.
+export var cannon_state = ready
+
 # Size of the game window.
 var screen_size
 # Add this variable to hold the clicked position.
@@ -27,8 +38,7 @@ func _input(event):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if durability == 0:
-		#TODO: define sink method
-		pass
+		print("player boat has sunk")
 	
 	var velocity = Vector2()  # The player's movement vector.
 	
@@ -51,11 +61,9 @@ func _process(delta):
 	if $ShootRaySouth.is_colliding():
 		if $ShootRaySouth.get_collision_point().y - position.y > fire_blind_range:
 			if $ShootRaySouth.get_collider().get_class() == "KinematicBody2D":
-				print("hit South")
-				emit_signal("fire", $ShootRaySouth.get_collider())
+				$ShootRaySouth.get_collider().call("hit", fire_damage)
 			
 	if $ShootRayNorth.is_colliding():
 		if position.y - $ShootRayNorth.get_collision_point().y > fire_blind_range:
 			if $ShootRayNorth.get_collider().get_class() == "KinematicBody2D":
-				print("hit North")
-				emit_signal("fire", $ShootRayNorth.get_collider())
+				$ShootRayNorth.get_collider().call("hit", fire_damage)
