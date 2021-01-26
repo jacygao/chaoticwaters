@@ -8,7 +8,7 @@ export var speed = 200
 # Default to 10. Boat sinks when durability reaches 0.
 export var durability = 10
 # How far can cannon balls reach when shooting.
-export var fire_blind_range = 150
+export var fire_blind_range = 100
 # How fast cannons reload.
 export var fire_rate = 2
 # How much damage do cannon balls cause.
@@ -16,6 +16,9 @@ export var fire_damage = 1
 
 # State of the cannon.
 var fire_state = reloading
+
+var nav_direction
+
 # Size of the game window.
 var screen_size
 # Add this variable to hold the clicked position.
@@ -55,6 +58,8 @@ func _process(delta):
 		$AnimatedSprite.scale = Vector2(1.3, 1.3)
 		$Body.rotation_degrees = 90
 		$Body.position.y = 30
+		$ShootRayNorth.rotation_degrees = 0
+		$ShootRaySouth.rotation_degrees = 180
 		if velocity.x > 0:
 			$Body.position.x = -10
 			$AnimatedSprite.animation = "right"
@@ -66,20 +71,24 @@ func _process(delta):
 		$Body.rotation_degrees = 0
 		$Body.position.x = 0
 		$Body.position.y = 0
+		$ShootRayNorth.rotation_degrees = 90
+		$ShootRaySouth.rotation_degrees = 270
 		if velocity.y > 0:
 			$AnimatedSprite.animation = "down"
 		if velocity.y < 0:
 			$AnimatedSprite.animation = "up"
 		
 	if $ShootRaySouth.is_colliding():
-		if $ShootRaySouth.get_collision_point().y - position.y > fire_blind_range:
-			if $ShootRaySouth.get_collider().get_class() == "KinematicBody2D":
-				fire($ShootRaySouth.get_collider())
+		var south_collider = $ShootRaySouth.get_collider()
+		if south_collider.get_class() == "KinematicBody2D":
+			if is_in_range(south_collider):
+				fire(south_collider)
 			
 	if $ShootRayNorth.is_colliding():
-		if position.y - $ShootRayNorth.get_collision_point().y > fire_blind_range:
-			if $ShootRayNorth.get_collider().get_class() == "KinematicBody2D":
-				fire($ShootRayNorth.get_collider())
+		var north_collider = $ShootRayNorth.get_collider()
+		if north_collider.get_class() == "KinematicBody2D":
+			if is_in_range(north_collider):
+					fire(north_collider)
 
 # Fires cannon balls
 func fire(vec):
@@ -92,3 +101,9 @@ func _on_FireReloadTimer_timeout():
 	print("cannon reloaded")
 	fire_state = ready
 	$FireReloadTimer.stop()
+
+func is_in_range(enemy):
+	if abs(enemy.position.y - position.y) > fire_blind_range || abs(enemy.position.x - position.x) > fire_blind_range:
+		return true
+	else:
+		return false
