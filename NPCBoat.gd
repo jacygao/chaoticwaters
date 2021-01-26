@@ -11,7 +11,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if durability <= 0:
 		# TODO: sink ship
 		print("NPC boat has sunk")

@@ -41,3 +41,8 @@ cast_to = Vector2( 0, 200 )
 rotation = 3.14159
 enabled = true
 cast_to = Vector2( 0, 200 )
+
+[node name="FireReloadTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+[connection signal="timeout" from="FireReloadTimer" to="." method="_on_FireReloadTimer_timeout"]

@@ -1,8 +1,5 @@
 extends KinematicBody2D
 
-# Fire cannon ball at target.
-signal fire
-
 const ready = 0
 const reloading = 1
 
@@ -16,9 +13,9 @@ export var fire_blind_range = 150
 export var fire_rate = 2
 # How much damage do cannon balls cause.
 export var fire_damage = 1
-# State of the cannon.
-export var cannon_state = ready
 
+# State of the cannon.
+var fire_state = reloading
 # Size of the game window.
 var screen_size
 # Add this variable to hold the clicked position.
@@ -27,9 +24,8 @@ var target = Vector2()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = $Camera2D.position
-	print(screen_size)
 	target = $Camera2D.position
-
+	
 # Change the target whenever a touch event happens.
 func _input(event):
 	if event is InputEventScreenTouch and event.pressed:
@@ -61,9 +57,21 @@ func _process(delta):
 	if $ShootRaySouth.is_colliding():
 		if $ShootRaySouth.get_collision_point().y - position.y > fire_blind_range:
 			if $ShootRaySouth.get_collider().get_class() == "KinematicBody2D":
-				$ShootRaySouth.get_collider().call("hit", fire_damage)
+				fire($ShootRaySouth.get_collider())
 			
 	if $ShootRayNorth.is_colliding():
 		if position.y - $ShootRayNorth.get_collision_point().y > fire_blind_range:
 			if $ShootRayNorth.get_collider().get_class() == "KinematicBody2D":
-				$ShootRayNorth.get_collider().call("hit", fire_damage)
+				fire($ShootRayNorth.get_collider())
+
+# Fires cannon balls
+func fire(vec):
+	if fire_state == ready:
+		vec.call("hit", fire_damage)
+		fire_state = reloading
+		$FireReloadTimer.start()
+		
+func _on_FireReloadTimer_timeout():
+	print("cannon reloaded")
+	fire_state = ready
+	$FireReloadTimer.stop()
