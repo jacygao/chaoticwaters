@@ -22,8 +22,11 @@ func _process(_delta):
 	$Body.rotation_degrees = 90
 	$Body.position.x = 5
 	$Body.position.y = 60
+	$ParticleFire.position.x = -5
+	$ParticleFire.position.y = 60
 	$AnimatedSprite.play()
 		
 func hit(damage):
 	durability -= damage
+	$ParticleFire.set_emitting(true)
 	print("NPC boat is hit, current durability: ", durability)

@@ -60,11 +60,14 @@ func _process(delta):
 		$Body.position.y = 30
 		$ShootRayNorth.rotation_degrees = 0
 		$ShootRaySouth.rotation_degrees = 180
+		$ParticleShoot.position.y = 45
 		if velocity.x > 0:
 			$Body.position.x = -10
+			$ParticleShoot.position.x = -30
 			$AnimatedSprite.animation = "right"
 		elif velocity.x < 0:
 			$Body.position.x = -20
+			$ParticleShoot.position.x = 0
 			$AnimatedSprite.animation = "left"
 	else:
 		$AnimatedSprite.scale = Vector2(1, 1)
@@ -93,6 +96,7 @@ func _process(delta):
 # Fires cannon balls
 func fire(vec):
 	if fire_state == ready:
+		$ParticleShoot.set_emitting(true)
 		vec.call("hit", fire_damage)
 		fire_state = reloading
 		$FireReloadTimer.start()
