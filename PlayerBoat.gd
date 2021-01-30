@@ -17,12 +17,13 @@ export var fire_damage = 1
 # State of the cannon.
 var fire_state = reloading
 
-var nav_direction
+var direction = Vector2()
 
 # Size of the game window.
 var screen_size
 # Add this variable to hold the clicked position.
 var target = Vector2()
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -33,6 +34,7 @@ func _ready():
 func _input(event):
 	if event is InputEventScreenTouch and event.pressed:
 		target = get_global_mouse_position()
+		direction = target - position
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -50,16 +52,17 @@ func _process(delta):
 		$AnimatedSprite.play()
 
 	move_and_collide(velocity * delta)
-
 	var y_dis = abs(target.y - position.y)
 	var x_dis = abs(target.x - position.x)
 
+	var angle = rad2deg(direction.angle())
+	$ShootRayNorth.rotation_degrees = angle + 180
+	$ShootRaySouth.rotation_degrees = angle
+	
 	if x_dis >= y_dis:
 		$AnimatedSprite.scale = Vector2(1.3, 1.3)
 		$Body.rotation_degrees = 90
 		$Body.position.y = 30
-		$ShootRayNorth.rotation_degrees = 0
-		$ShootRaySouth.rotation_degrees = 180
 		$ParticleShoot.position.y = 45
 		if velocity.x > 0:
 			$Body.position.x = -10
@@ -74,8 +77,6 @@ func _process(delta):
 		$Body.rotation_degrees = 0
 		$Body.position.x = 0
 		$Body.position.y = 0
-		$ShootRayNorth.rotation_degrees = 90
-		$ShootRaySouth.rotation_degrees = 270
 		if velocity.y > 0:
 			$AnimatedSprite.animation = "down"
 		if velocity.y < 0:
@@ -111,3 +112,4 @@ func is_in_range(enemy):
 		return true
 	else:
 		return false
+

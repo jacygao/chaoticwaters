@@ -152,7 +152,6 @@ rotation = 0.00872665
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( -0.999962, 0.00872654 )
 frames = SubResource( 17 )
 animation = "down"
 offset = Vector2( -10, 0 )
@@ -180,7 +179,7 @@ wait_time = 2.0
 autostart = true
 
 [node name="ParticleShoot" type="Particles2D" parent="."]
-scale = Vector2( 0.05, 0.05 )
+scale = Vector2( 0.2, 0.2 )
 emitting = false
 amount = 1
 lifetime = 0.3

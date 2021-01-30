@@ -160,9 +160,10 @@ position = Vector2( -4.2045, 11.7726 )
 shape = SubResource( 18 )
 
 [node name="ParticleFire" type="Particles2D" parent="."]
-scale = Vector2( 0.1, 0.1 )
+scale = Vector2( 0.2, 0.2 )
 emitting = false
 amount = 1
+lifetime = 0.5
 one_shot = true
 process_material = SubResource( 19 )
 texture = SubResource( 20 )
