@@ -53,41 +53,15 @@ func _process(delta):
 	
 	if position.distance_to(target) > 5:
 		velocity = target - position
-
+	
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
-		$AnimatedSprite.play()
+		move_and_collide(velocity * delta)
 
-	move_and_collide(velocity * delta)
-	var y_dis = abs(target.y - position.y)
-	var x_dis = abs(target.x - position.x)
-
-	var angle = rad2deg(direction.angle())
+	var angle = rad2deg(target.angle_to_point(position))
+	animate(angle)
 	$ShootRayNorth.rotation_degrees = angle + 180
 	$ShootRaySouth.rotation_degrees = angle
-	
-	if x_dis >= y_dis:	# Show left/right animation
-		$AnimatedSprite.scale = Vector2(1.3, 1.3)
-		$Body.rotation_degrees = 90
-		$Body.position.y = 20
-		$Cannon.position.y = 30
-		if velocity.x > 0:
-			$Body.position.x = -30
-			$Cannon.position.x = -20
-			$AnimatedSprite.animation = "right"
-		elif velocity.x < 0:
-			$Body.position.x = 0
-			$Cannon.position.x = 0
-			$AnimatedSprite.animation = "left"
-	else:	# Show up/down animation
-		$AnimatedSprite.scale = Vector2(1, 1)
-		$Body.rotation_degrees = 0
-		$Body.position.x = 0
-		$Body.position.y = 0
-		if velocity.y > 0:
-			$AnimatedSprite.animation = "down"
-		if velocity.y < 0:
-			$AnimatedSprite.animation = "up"
 		
 	if $ShootRaySouth.is_colliding():
 		var south_collider = $ShootRaySouth.get_collider()
@@ -101,6 +75,31 @@ func _process(delta):
 			if is_in_range(north_collider):
 				fire(north_collider)
 
+# Controls ship movement animation
+func animate(ta):
+	$AnimatedSprite.scale = Vector2(1.3, 1.3)
+	$Body.rotation_degrees = 0
+	$Body.position.x = 0
+	$Body.position.y = 0
+	if ta >= -45 && ta <= 45:
+		$Body.rotation_degrees = 90
+		$AnimatedSprite.animation = "right"
+		$Cannon.position.x = -20
+		$Body.position.x = -30
+		$Body.position.y = 20
+	elif ta > 45 && ta < 135:
+		$AnimatedSprite.animation = "down"
+		$AnimatedSprite.scale = Vector2(1, 1)
+	elif ta < -45 && ta > -135:
+		$AnimatedSprite.animation = "up"
+		$AnimatedSprite.scale = Vector2(1, 1)
+		$Body.position.y = 20
+	else:
+		$AnimatedSprite.animation = "left"
+		$Body.rotation_degrees = 90
+		$Body.position.y = 20
+		$Cannon.position.y = 30
+	
 # Fires cannon balls
 func fire(vec):
 	if fire_state == ready:

@@ -167,3 +167,5 @@ lifetime = 0.5
 one_shot = true
 process_material = SubResource( 19 )
 texture = SubResource( 20 )
+
+[node name="Navigation2D" type="Navigation2D" parent="."]
