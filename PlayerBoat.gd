@@ -60,6 +60,8 @@ func _process(delta):
 
 	var angle = rad2deg(target.angle_to_point(position))
 	animate(angle)
+	$AnimatedSprite.play()
+	
 	$ShootRayNorth.rotation_degrees = angle + 180
 	$ShootRaySouth.rotation_degrees = angle
 		

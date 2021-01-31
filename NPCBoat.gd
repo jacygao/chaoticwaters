@@ -3,7 +3,9 @@ extends KinematicBody2D
  # How fast the player will move (pixels/sec).
 export var speed = 100
 # Default to 10. Boat sinks when durability reaches 0.
-export var durability = 10
+export var durability = 2
+
+var smoke = preload("res://Smoke.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,6 +15,7 @@ func _ready():
 func _process(delta):
 	if durability <= 0:
 		# TODO: ship sinking animation
+		sink()
 		print("NPC boat has sunk")
 		queue_free()
 	
@@ -65,3 +68,9 @@ func animate(ta):
 		$Body.rotation_degrees = 90
 		$Body.position.x = 10
 		$Body.position.y = 60
+
+func sink():
+	var smoke_animation = smoke.instance()
+	smoke_animation.position = position
+	smoke_animation.set_emitting(true)
+	get_parent().add_child(smoke_animation)
