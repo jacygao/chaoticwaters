@@ -9,6 +9,7 @@ export var speed = 200
 export var durability = 10
 # How far can cannon balls reach when shooting.
 export var fire_blind_range = 100
+export var fire_max_range = 300
 # How fast cannons reload.
 export var fire_rate = 2
 # How much damage do cannon balls cause.
@@ -32,6 +33,9 @@ func _ready():
 	target = $Camera2D.position
 	$AnimatedSprite.modulate.a
 	$CannonBall/Body
+	
+func type():
+	return "ship"
 	
 # Change the target whenever a touch event happens.
 func _input(event):
@@ -65,14 +69,14 @@ func _process(delta):
 	if x_dis >= y_dis:	# Show left/right animation
 		$AnimatedSprite.scale = Vector2(1.3, 1.3)
 		$Body.rotation_degrees = 90
-		$Body.position.y = 30
+		$Body.position.y = 20
 		$Cannon.position.y = 30
 		if velocity.x > 0:
-			$Body.position.x = -10
-			$Cannon.position.x = -30
+			$Body.position.x = -30
+			$Cannon.position.x = -20
 			$AnimatedSprite.animation = "right"
 		elif velocity.x < 0:
-			$Body.position.x = -20
+			$Body.position.x = 0
 			$Cannon.position.x = 0
 			$AnimatedSprite.animation = "left"
 	else:	# Show up/down animation
@@ -87,13 +91,13 @@ func _process(delta):
 		
 	if $ShootRaySouth.is_colliding():
 		var south_collider = $ShootRaySouth.get_collider()
-		if south_collider.get_class() == "KinematicBody2D":
+		if south_collider != null && south_collider.get_class() == "KinematicBody2D":
 			if is_in_range(south_collider):
 				fire(south_collider)
 			
 	if $ShootRayNorth.is_colliding():
 		var north_collider = $ShootRayNorth.get_collider()
-		if north_collider.get_class() == "KinematicBody2D":
+		if north_collider != null && north_collider.get_class() == "KinematicBody2D":
 			if is_in_range(north_collider):
 				fire(north_collider)
 
@@ -102,7 +106,6 @@ func fire(vec):
 	if fire_state == ready:
 		$Cannon.set_emitting(true)
 		fire_animate(vec)
-		vec.call("hit", fire_damage)
 		fire_state = reloading
 		$FireReloadTimer.start()
 		
@@ -110,9 +113,8 @@ func fire(vec):
 func fire_animate(vec):
 	var cannon_ball_ins = cannon_ball.instance()
 	$GunAngle.rotation = (vec.position - position).angle()
-	print($GunAngle.rotation)
 	cannon_ball_ins.position = $GunAngle/GunPos.get_global_position()
-	cannon_ball_ins.init(cannon_ball_ins.get_angle_to(vec.position))
+	cannon_ball_ins.init(vec, fire_damage)
 	get_parent().add_child(cannon_ball_ins)
 	
 func is_target_top(vec):
@@ -132,3 +134,6 @@ func is_in_range(enemy):
 	else:
 		return false
 
+func hit(damage):
+	durability -= damage
+	print("Player boat is hit, current durability: ", durability)

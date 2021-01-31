@@ -9,7 +9,6 @@ export var durability = 10
 func _ready():
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if durability <= 0:
@@ -20,12 +19,15 @@ func _process(_delta):
 	#var velocity = Vector2()  # The ship's movement vector.
 	$AnimatedSprite.animation = "right"
 	$Body.rotation_degrees = 90
-	$Body.position.x = 5
+	$Body.position.x = -10
 	$Body.position.y = 60
 	$ParticleFire.position.x = -5
 	$ParticleFire.position.y = 60
 	$AnimatedSprite.play()
 		
+func type():
+	return "ship"
+
 func hit(damage):
 	durability -= damage
 	$ParticleFire.set_emitting(true)
