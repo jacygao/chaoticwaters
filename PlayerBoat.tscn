@@ -16,42 +16,42 @@
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 0, 164, 122, 164 )
+region = Rect2( 0, 328, 122, 164 )
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 122, 164, 122, 164 )
+region = Rect2( 122, 328, 122, 164 )
 
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 244, 164, 122, 164 )
+region = Rect2( 244, 328, 122, 164 )
 
 [sub_resource type="AtlasTexture" id=4]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 366, 164, 122, 164 )
+region = Rect2( 366, 328, 122, 164 )
 
 [sub_resource type="AtlasTexture" id=5]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 0, 328, 122, 164 )
+region = Rect2( 0, 164, 122, 164 )
 
 [sub_resource type="AtlasTexture" id=6]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 122, 328, 122, 164 )
+region = Rect2( 122, 164, 122, 164 )
 
 [sub_resource type="AtlasTexture" id=7]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 244, 328, 122, 164 )
+region = Rect2( 244, 164, 122, 164 )
 
 [sub_resource type="AtlasTexture" id=8]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 366, 328, 122, 164 )
+region = Rect2( 366, 164, 122, 164 )
 
 [sub_resource type="AtlasTexture" id=9]
 flags = 4
@@ -97,12 +97,12 @@ region = Rect2( 366, 0, 122, 164 )
 animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
-"name": "left",
+"name": "right",
 "speed": 2.0
 }, {
 "frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
-"name": "right",
+"name": "left",
 "speed": 2.0
 }, {
 "frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
@@ -189,4 +189,9 @@ one_shot = true
 process_material = SubResource( 19 )
 texture = SubResource( 20 )
 script = ExtResource( 12 )
+
+[node name="GunAngle" type="Position2D" parent="."]
+
+[node name="GunPos" type="Position2D" parent="GunAngle"]
+position = Vector2( 50, 0 )
 [connection signal="timeout" from="FireReloadTimer" to="." method="_on_FireReloadTimer_timeout"]

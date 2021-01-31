@@ -24,12 +24,14 @@ var screen_size
 # Add this variable to hold the clicked position.
 var target = Vector2()
 
+var cannon_ball = preload("res://CannonBall.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = $Camera2D.position
 	target = $Camera2D.position
 	$AnimatedSprite.modulate.a
+	$CannonBall/Body
 	
 # Change the target whenever a touch event happens.
 func _input(event):
@@ -64,7 +66,7 @@ func _process(delta):
 		$AnimatedSprite.scale = Vector2(1.3, 1.3)
 		$Body.rotation_degrees = 90
 		$Body.position.y = 30
-		$Cannon.position.y = 45
+		$Cannon.position.y = 30
 		if velocity.x > 0:
 			$Body.position.x = -10
 			$Cannon.position.x = -30
@@ -93,19 +95,26 @@ func _process(delta):
 		var north_collider = $ShootRayNorth.get_collider()
 		if north_collider.get_class() == "KinematicBody2D":
 			if is_in_range(north_collider):
-					fire(north_collider)
+				fire(north_collider)
 
 # Fires cannon balls
 func fire(vec):
 	if fire_state == ready:
 		$Cannon.set_emitting(true)
+		fire_animate(vec)
 		vec.call("hit", fire_damage)
 		fire_state = reloading
 		$FireReloadTimer.start()
 		
-func fire_animate():
-	pass		
-		
+# Fires an animated cannon ball at enermy		
+func fire_animate(vec):
+	var cannon_ball_ins = cannon_ball.instance()
+	$GunAngle.rotation = (vec.position - position).angle()
+	print($GunAngle.rotation)
+	cannon_ball_ins.position = $GunAngle/GunPos.get_global_position()
+	cannon_ball_ins.init(cannon_ball_ins.get_angle_to(vec.position))
+	get_parent().add_child(cannon_ball_ins)
+	
 func is_target_top(vec):
 	return position.y > vec.y
 		
