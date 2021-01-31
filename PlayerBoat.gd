@@ -29,6 +29,7 @@ var target = Vector2()
 func _ready():
 	screen_size = $Camera2D.position
 	target = $Camera2D.position
+	$AnimatedSprite.modulate.a
 	
 # Change the target whenever a touch event happens.
 func _input(event):
@@ -59,20 +60,20 @@ func _process(delta):
 	$ShootRayNorth.rotation_degrees = angle + 180
 	$ShootRaySouth.rotation_degrees = angle
 	
-	if x_dis >= y_dis:
+	if x_dis >= y_dis:	# Show left/right animation
 		$AnimatedSprite.scale = Vector2(1.3, 1.3)
 		$Body.rotation_degrees = 90
 		$Body.position.y = 30
-		$ParticleShoot.position.y = 45
+		$Cannon.position.y = 45
 		if velocity.x > 0:
 			$Body.position.x = -10
-			$ParticleShoot.position.x = -30
+			$Cannon.position.x = -30
 			$AnimatedSprite.animation = "right"
 		elif velocity.x < 0:
 			$Body.position.x = -20
-			$ParticleShoot.position.x = 0
+			$Cannon.position.x = 0
 			$AnimatedSprite.animation = "left"
-	else:
+	else:	# Show up/down animation
 		$AnimatedSprite.scale = Vector2(1, 1)
 		$Body.rotation_degrees = 0
 		$Body.position.x = 0
@@ -97,11 +98,20 @@ func _process(delta):
 # Fires cannon balls
 func fire(vec):
 	if fire_state == ready:
-		$ParticleShoot.set_emitting(true)
+		$Cannon.set_emitting(true)
 		vec.call("hit", fire_damage)
 		fire_state = reloading
 		$FireReloadTimer.start()
 		
+func fire_animate():
+	pass		
+		
+func is_target_top(vec):
+	return position.y > vec.y
+		
+func is_target_left(vec):
+	return position.x > vec.x
+
 func _on_FireReloadTimer_timeout():
 	print("cannon reloaded")
 	fire_state = ready
