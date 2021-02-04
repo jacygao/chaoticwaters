@@ -5,6 +5,11 @@ const reloading = 1
 
  # How fast the player will move (pixels/sec).
 export var speed = 200
+export (float) var rotation_speed = 2
+var cur_rotation = 0
+var rotation_dir = 0
+var velocity = Vector2()
+
 # Default to 10. Boat sinks when durability reaches 0.
 export var durability = 10
 # How far can cannon balls reach when shooting.
@@ -25,6 +30,9 @@ var screen_size
 # Add this variable to hold the clicked position.
 var target = Vector2()
 
+var rotating = false
+var last_x = 0
+
 var cannon_ball = preload("res://CannonBall.tscn")
 
 # Called when the node enters the scene tree for the first time.
@@ -39,26 +47,25 @@ func type():
 	
 # Change the target whenever a touch event happens.
 func _input(event):
+	rotation_dir = 0
 	if event is InputEventScreenTouch and event.pressed:
 		target = get_global_mouse_position()
 		direction = target - position
+	if event.is_action_pressed('ui_right'):
+		rotation_dir += 1
+	if event.is_action_pressed('ui_left'):
+		rotation_dir -= 1
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if durability == 0:
 		print("player boat has sunk")
 		# TODO: player boat has sunk.. what now?
-		
-	var velocity = Vector2()  # The player's movement vector.
-	
-	if position.distance_to(target) > 5:
-		velocity = target - position
-	
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
-		move_and_collide(velocity * delta)
-
-	var angle = rad2deg(target.angle_to_point(position))
+	var angle = rad2deg(cur_rotation)
+	if angle > 180:
+		angle = (360 - angle) * -1
+	if angle < -180:
+		angle = 360 - angle * -1
 	animate(angle)
 	$AnimatedSprite.play()
 	
@@ -76,6 +83,15 @@ func _process(delta):
 		if north_collider != null && north_collider.get_class() == "KinematicBody2D":
 			if is_in_range(north_collider):
 				fire(north_collider)
+
+func _physics_process(delta):
+	if cur_rotation > 2*PI:
+		cur_rotation-=2*PI
+	if cur_rotation < -2*PI:
+		cur_rotation+=2*PI
+	velocity = Vector2(speed, 0).rotated(cur_rotation)
+	cur_rotation += rotation_dir * rotation_speed * delta
+	move_and_slide(velocity)
 
 # Controls ship movement animation
 func animate(ta):
@@ -115,14 +131,8 @@ func fire_animate(vec):
 	var cannon_ball_ins = cannon_ball.instance()
 	$GunAngle.rotation = (vec.position - position).angle()
 	cannon_ball_ins.position = $GunAngle/GunPos.get_global_position()
-	cannon_ball_ins.init(vec, fire_damage)
+	cannon_ball_ins.init(vec, fire_damage, fire_max_range)
 	get_parent().add_child(cannon_ball_ins)
-	
-func is_target_top(vec):
-	return position.y > vec.y
-		
-func is_target_left(vec):
-	return position.x > vec.x
 
 func _on_FireReloadTimer_timeout():
 	print("cannon reloaded")
