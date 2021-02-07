@@ -23,7 +23,8 @@ export var fire_damage = 1
 # State of the cannon.
 var fire_state = reloading
 
-var direction = Vector2()
+var target_direction = Vector2()
+var target_rotation = 0
 
 # Size of the game window.
 var screen_size
@@ -50,7 +51,9 @@ func _input(event):
 	rotation_dir = 0
 	if event is InputEventScreenTouch and event.pressed:
 		target = get_global_mouse_position()
-		direction = target - position
+		target_direction = target - position
+		target_rotation = target_direction.angle()
+		print(rad2deg(target_rotation))
 	if event.is_action_pressed('ui_right'):
 		rotation_dir += 1
 	if event.is_action_pressed('ui_left'):
@@ -90,6 +93,16 @@ func _physics_process(delta):
 	if cur_rotation < -2*PI:
 		cur_rotation+=2*PI
 	velocity = Vector2(speed, 0).rotated(cur_rotation)
+	
+	var target_angle = target_direction.angle_to(velocity)
+	var rotate_velocity = 1
+	if abs(target_angle) < 1:
+		rotate_velocity = abs(target_angle)
+	if target_angle < 0:
+		rotation_dir = rotate_velocity
+	elif target_angle > 0:
+		rotation_dir = -1 * rotate_velocity
+	
 	cur_rotation += rotation_dir * rotation_speed * delta
 	move_and_slide(velocity)
 
