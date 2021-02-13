@@ -1,8 +1,5 @@
 extends KinematicBody2D
 
-const ready = 0
-const reloading = 1
-
  # How fast the player will move (pixels/sec).
 export var speed = 200
 export (float) var rotation_speed = 2
@@ -12,16 +9,14 @@ var velocity = Vector2()
 
 # Default to 10. Boat sinks when durability reaches 0.
 export var durability = 10
-# How far can cannon balls reach when shooting.
+
+# Setting cannon gun related attributes.
+# These values are now in the CannonGun nodes as well but 
+# they will still need to be set in order to customise
 export var fire_blind_range = 100
 export var fire_max_range = 300
-# How fast cannons reload.
 export var fire_rate = 2
-# How much damage do cannon balls cause.
 export var fire_damage = 1
-
-# State of the cannon.
-var fire_state = reloading
 
 var target_direction = Vector2()
 var target_rotation = 0
@@ -72,21 +67,9 @@ func _process(delta):
 	animate(angle)
 	$AnimatedSprite.play()
 	
-	$ShootRayNorth.rotation_degrees = angle + 180
-	$ShootRaySouth.rotation_degrees = angle
+	$CannonGunRight.rotation_degrees = angle + 180
+	$CannonGunLeft.rotation_degrees = angle
 		
-	if $ShootRaySouth.is_colliding():
-		var south_collider = $ShootRaySouth.get_collider()
-		if south_collider != null && south_collider.get_class() == "KinematicBody2D":
-			if is_in_range(south_collider):
-				fire(south_collider)
-			
-	if $ShootRayNorth.is_colliding():
-		var north_collider = $ShootRayNorth.get_collider()
-		if north_collider != null && north_collider.get_class() == "KinematicBody2D":
-			if is_in_range(north_collider):
-				fire(north_collider)
-
 func _physics_process(delta):
 	if cur_rotation > 2*PI:
 		cur_rotation-=2*PI
@@ -130,14 +113,6 @@ func animate(ta):
 		$Body.rotation_degrees = 90
 		$Body.position.y = 20
 		$Cannon.position.y = 30
-	
-# Fires cannon balls
-func fire(vec):
-	if fire_state == ready:
-		$Cannon.set_emitting(true)
-		fire_animate(vec)
-		fire_state = reloading
-		$FireReloadTimer.start()
 		
 # Fires an animated cannon ball at enermy		
 func fire_animate(vec):
@@ -147,17 +122,13 @@ func fire_animate(vec):
 	cannon_ball_ins.init(vec, fire_damage, fire_max_range)
 	get_parent().add_child(cannon_ball_ins)
 
-func _on_FireReloadTimer_timeout():
-	print("cannon reloaded")
-	fire_state = ready
-	$FireReloadTimer.stop()
-
-func is_in_range(enemy):
-	if abs(enemy.position.y - position.y) > fire_blind_range || abs(enemy.position.x - position.x) > fire_blind_range:
-		return true
-	else:
-		return false
-
 func hit(damage):
 	durability -= damage
 	print("Player boat is hit, current durability: ", durability)
+
+func _on_CannonGunLeft_fire(vec):
+	fire_animate(vec)
+
+
+func _on_CannonGunRight_fire(vec):
+	fire_animate(vec)

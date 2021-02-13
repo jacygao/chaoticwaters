@@ -42,4 +42,4 @@ position = Vector2( -169.786, 62.3281 )
 position = Vector2( 242.426, 138.402 )
 
 [node name="NPCBoat" parent="." instance=ExtResource( 4 )]
-position = Vector2( 7127.37, -387.177 )
+position = Vector2( 1305, 137.542 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://assets/ship/player_ship_sprite.png" type="Texture" id=1]
 [ext_resource path="res://PlayerBoat.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://assets/texture/smoke/whitePuff06.png" type="Texture" id=10]
 [ext_resource path="res://assets/texture/smoke/whitePuff01.png" type="Texture" id=11]
 [ext_resource path="res://Cannon.gd" type="Script" id=12]
+[ext_resource path="res://CannonGun.tscn" type="PackedScene" id=13]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -166,15 +167,6 @@ position = Vector2( -0.0597201, -0.132855 )
 current = true
 smoothing_enabled = true
 
-[node name="ShootRaySouth" type="RayCast2D" parent="."]
-enabled = true
-cast_to = Vector2( 0, 300 )
-
-[node name="ShootRayNorth" type="RayCast2D" parent="."]
-rotation = 3.14159
-enabled = true
-cast_to = Vector2( 0, 300 )
-
 [node name="FireReloadTimer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
@@ -194,4 +186,11 @@ script = ExtResource( 12 )
 
 [node name="GunPos" type="Position2D" parent="GunAngle"]
 position = Vector2( 80, 0 )
+
+[node name="CannonGunLeft" parent="." instance=ExtResource( 13 )]
+
+[node name="CannonGunRight" parent="." instance=ExtResource( 13 )]
+rotation = 3.14159
 [connection signal="timeout" from="FireReloadTimer" to="." method="_on_FireReloadTimer_timeout"]
+[connection signal="fire" from="CannonGunLeft" to="." method="_on_CannonGunLeft_fire"]
+[connection signal="fire" from="CannonGunRight" to="." method="_on_CannonGunRight_fire"]
