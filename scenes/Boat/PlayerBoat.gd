@@ -29,7 +29,7 @@ var target = Vector2()
 var rotating = false
 var last_x = 0
 
-var cannon_ball = preload("res://CannonBall.tscn")
+var cannon_ball = preload("res://scenes/CannonBall/CannonBall.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -114,17 +114,20 @@ func animate(ta):
 		$Body.position.y = 20
 		$Cannon.position.y = 30
 		
-# Fires an animated cannon ball at enermy		
+# Fires an animated cannon ball at a given vector position
 func fire_animate(vec):
 	var cannon_ball_ins = cannon_ball.instance()
-	$GunAngle.rotation = (vec.position - position).angle()
-	cannon_ball_ins.position = $GunAngle/GunPos.get_global_position()
+	$CannonGunAngle.rotation = (vec.position - position).angle()
+	cannon_ball_ins.position = $CannonGunAngle/CannonGunPosition.get_global_position()
 	cannon_ball_ins.init(vec, fire_damage, fire_max_range)
 	get_parent().add_child(cannon_ball_ins)
 
 func hit(damage):
 	durability -= damage
 	print("Player boat is hit, current durability: ", durability)
+
+func sink():
+	pass
 
 func _on_CannonGunLeft_fire(vec):
 	fire_animate(vec)

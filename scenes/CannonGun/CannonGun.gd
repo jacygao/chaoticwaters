@@ -23,7 +23,6 @@ func _process(delta):
 		var collider = get_collider()
 		if collider != null && collider.get_class() == "KinematicBody2D":
 			if is_in_range(collider):
-				print("colliding detected")
 				fire(collider)
 
 func is_in_range(collider):

@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://PlayerBoat.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Boat/PlayerBoat.tscn" type="PackedScene" id=1]
 [ext_resource path="res://WorldMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://TileWorldMap.tscn" type="PackedScene" id=3]
-[ext_resource path="res://NPCBoat.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Boat/NPCBoat.tscn" type="PackedScene" id=4]
 [ext_resource path="res://City.tscn" type="PackedScene" id=5]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Main.gd" type="Script" id=7]

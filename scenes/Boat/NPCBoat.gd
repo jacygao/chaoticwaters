@@ -5,11 +5,17 @@ export var speed = 100
 # Default to 10. Boat sinks when durability reaches 0.
 export var durability = 10
 
+export var fire_damage = 1
+
+export var fire_max_range = 400
+
 var smoke = preload("res://Smoke.tscn")
+var cannon_ball = preload("res://scenes/CannonBall/CannonBall.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	$CannonGunLeft.rotation_degrees = 0
+	$CannonGunRight.rotation_degrees = 180
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -69,8 +75,24 @@ func animate(ta):
 		$Body.position.x = 10
 		$Body.position.y = 60
 
+# Fires an animated cannon ball at a given vector position
+func fire_animate(vec):
+	var cannon_ball_ins = cannon_ball.instance()
+	$CannonGunAngle.rotation = (vec.position - position).angle()
+	cannon_ball_ins.position = $CannonGunAngle/CannonGunPosition.get_global_position()
+	cannon_ball_ins.init(vec, fire_damage, fire_max_range)
+	get_parent().add_child(cannon_ball_ins)
+	
 func sink():
 	var smoke_animation = smoke.instance()
 	smoke_animation.position = position
 	smoke_animation.set_emitting(true)
 	get_parent().add_child(smoke_animation)
+
+
+func _on_CannonGunLeft_fire(target):
+	fire_animate(target)
+
+
+func _on_CannonGunRight_fire(target):
+	fire_animate(target)

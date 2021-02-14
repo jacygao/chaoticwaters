@@ -1,14 +1,13 @@
-extends Particles2D
+extends Position2D
 
 
 # Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+export var default_cannon_gun_position = float(80)
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	$CannonGunPosition.transform.x = Vector2(default_cannon_gun_position, 0)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
