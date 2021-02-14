@@ -35,8 +35,6 @@ var cannon_ball = preload("res://scenes/CannonBall/CannonBall.tscn")
 func _ready():
 	screen_size = $Camera2D.position
 	target = $Camera2D.position
-	$AnimatedSprite.modulate.a
-	$CannonBall/Body
 	
 func type():
 	return "ship"
@@ -48,14 +46,13 @@ func _input(event):
 		target = get_global_mouse_position()
 		target_direction = target - position
 		target_rotation = target_direction.angle()
-		print(rad2deg(target_rotation))
 	if event.is_action_pressed('ui_right'):
 		rotation_dir += 1
 	if event.is_action_pressed('ui_left'):
 		rotation_dir -= 1
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if durability == 0:
 		print("player boat has sunk")
 		# TODO: player boat has sunk.. what now?

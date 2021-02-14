@@ -186,10 +186,6 @@ position = Vector2( -0.0597201, -0.132855 )
 current = true
 smoothing_enabled = true
 
-[node name="FireReloadTimer" type="Timer" parent="."]
-wait_time = 2.0
-autostart = true
-
 [node name="Cannon" type="Particles2D" parent="."]
 show_behind_parent = true
 scale = Vector2( 0.2, 0.2 )
@@ -207,6 +203,5 @@ script = SubResource( 21 )
 rotation = 3.14159
 
 [node name="CannonGunAngle" parent="." instance=ExtResource( 12 )]
-[connection signal="timeout" from="FireReloadTimer" to="." method="_on_FireReloadTimer_timeout"]
 [connection signal="fire" from="CannonGunLeft" to="." method="_on_CannonGunLeft_fire"]
 [connection signal="fire" from="CannonGunRight" to="." method="_on_CannonGunRight_fire"]

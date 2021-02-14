@@ -31,13 +31,12 @@ func _process(delta):
 	
 	if position.distance_to(targetPos) > 5:
 		velocity = targetPos - position
-
 	var gun_angle = rad2deg(velocity.angle())
 	$CannonGunRight.rotation_degrees = gun_angle + 180
 	$CannonGunLeft.rotation_degrees = gun_angle
 	
 	var target_angle = rad2deg(targetPos.angle_to_point(position))
-	
+		
 	animate(target_angle)
 	$AnimatedSprite.play()
 	
