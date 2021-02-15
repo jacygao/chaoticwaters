@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://scenes/Boat/PlayerBoat.gd" type="Script" id=1]
 [ext_resource path="res://assets/texture/smoke/whitePuff08.png" type="Texture" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://scenes/CannonGun/CannonGunAngle.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/CannonGun/CannonGun.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/Boat/Fire.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/HealthDisplay.tscn" type="PackedScene" id=15]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -206,5 +207,7 @@ script = SubResource( 21 )
 rotation = 3.14159
 
 [node name="CannonGunAngle" parent="." instance=ExtResource( 12 )]
+
+[node name="HealthDisplay" parent="." instance=ExtResource( 15 )]
 [connection signal="fire" from="CannonGunLeft" to="." method="_on_CannonGunLeft_fire"]
 [connection signal="fire" from="CannonGunRight" to="." method="_on_CannonGunRight_fire"]

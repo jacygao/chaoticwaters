@@ -50,6 +50,7 @@ func type():
 func hit(damage):
 	durability -= damage
 	$Fire.set_emitting(true)
+	$HealthDisplay.update_healthbar(durability * 10)
 	print("NPC boat is hit, current durability: ", durability)
 
 func animate(ta):
