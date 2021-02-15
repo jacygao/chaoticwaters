@@ -49,7 +49,7 @@ func type():
 
 func hit(damage):
 	durability -= damage
-	$ParticleFire.set_emitting(true)
+	$Fire.set_emitting(true)
 	print("NPC boat is hit, current durability: ", durability)
 
 func animate(ta):
@@ -57,8 +57,8 @@ func animate(ta):
 	$Body.rotation_degrees = 0
 	$Body.position.x = 0
 	$Body.position.y = 0
-	$ParticleFire.position.x = -5
-	$ParticleFire.position.y = 60
+	$Fire.position.x = -5
+	$Fire.position.y = 60
 	if ta >= -45 && ta <= 45:
 		$Body.rotation_degrees = 90
 		$AnimatedSprite.animation = "right"
@@ -66,12 +66,12 @@ func animate(ta):
 		$Body.position.y = 60
 	elif ta > 45 && ta < 135:
 		$AnimatedSprite.animation = "down"
-		$ParticleFire.position.y = 10
+		$Fire.position.y = 10
 	elif ta < -45 && ta > -135:
 		$AnimatedSprite.animation = "up"
 		$AnimatedSprite.scale = Vector2(1.8, 1.8)
 		$Body.position.y = 20
-		$ParticleFire.position.y = 10
+		$Fire.position.y = 10
 	else:
 		$AnimatedSprite.animation = "left"
 		$Body.rotation_degrees = 90

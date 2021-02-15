@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://scenes/Boat/PlayerBoat.gd" type="Script" id=1]
 [ext_resource path="res://assets/texture/smoke/whitePuff08.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/texture/smoke/whitePuff00.png" type="Texture" id=11]
 [ext_resource path="res://scenes/CannonGun/CannonGunAngle.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/CannonGun/CannonGun.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/Boat/Fire.tscn" type="PackedScene" id=14]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -185,6 +186,8 @@ shape = SubResource( 18 )
 position = Vector2( -0.0597201, -0.132855 )
 current = true
 smoothing_enabled = true
+
+[node name="Fire" parent="." instance=ExtResource( 14 )]
 
 [node name="Cannon" type="Particles2D" parent="."]
 show_behind_parent = true

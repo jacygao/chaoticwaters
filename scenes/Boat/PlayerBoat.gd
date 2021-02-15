@@ -92,12 +92,14 @@ func animate(ta):
 	$Body.rotation_degrees = 0
 	$Body.position.x = 0
 	$Body.position.y = 0
+	$Fire.position.y = 60
 	if ta >= -45 && ta <= 45:
 		$Body.rotation_degrees = 90
 		$AnimatedSprite.animation = "right"
 		$Cannon.position.x = -20
 		$Body.position.x = -30
 		$Body.position.y = 20
+		$Fire.position.x = -10
 	elif ta > 45 && ta < 135:
 		$AnimatedSprite.animation = "down"
 		$AnimatedSprite.scale = Vector2(1, 1)
@@ -121,6 +123,7 @@ func fire_animate(vec):
 
 func hit(damage):
 	durability -= damage
+	$Fire.set_emitting(true)
 	print("Player boat is hit, current durability: ", durability)
 
 func sink():
