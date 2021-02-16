@@ -96,7 +96,6 @@ func animate(ta):
 	if ta >= -45 && ta <= 45:
 		$Body.rotation_degrees = 90
 		$AnimatedSprite.animation = "right"
-		$Cannon.position.x = -20
 		$Body.position.x = -30
 		$Body.position.y = 20
 		$Fire.position.x = -10
@@ -111,7 +110,6 @@ func animate(ta):
 		$AnimatedSprite.animation = "left"
 		$Body.rotation_degrees = 90
 		$Body.position.y = 20
-		$Cannon.position.y = 30
 		
 # Fires an animated cannon ball at a given vector position
 func fire_animate(vec):
@@ -119,6 +117,7 @@ func fire_animate(vec):
 	$CannonGunAngle.rotation = (vec.position - position).angle()
 	cannon_ball_ins.position = $CannonGunAngle/CannonGunPosition.get_global_position()
 	cannon_ball_ins.init(vec, fire_damage, fire_max_range)
+	$CannonGunAngle/CannonGunFireSmoke.set_emitting(true)
 	get_parent().add_child(cannon_ball_ins)
 
 func hit(damage):

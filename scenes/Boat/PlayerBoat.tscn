@@ -1,16 +1,7 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://scenes/Boat/PlayerBoat.gd" type="Script" id=1]
-[ext_resource path="res://assets/texture/smoke/whitePuff08.png" type="Texture" id=2]
-[ext_resource path="res://assets/texture/smoke/whitePuff04.png" type="Texture" id=3]
-[ext_resource path="res://assets/texture/smoke/whitePuff07.png" type="Texture" id=4]
-[ext_resource path="res://assets/texture/smoke/whitePuff03.png" type="Texture" id=5]
-[ext_resource path="res://assets/texture/smoke/whitePuff02.png" type="Texture" id=6]
-[ext_resource path="res://assets/texture/smoke/whitePuff06.png" type="Texture" id=7]
 [ext_resource path="res://assets/ship/player_ship_sprite.png" type="Texture" id=8]
-[ext_resource path="res://assets/texture/smoke/whitePuff05.png" type="Texture" id=9]
-[ext_resource path="res://assets/texture/smoke/whitePuff01.png" type="Texture" id=10]
-[ext_resource path="res://assets/texture/smoke/whitePuff00.png" type="Texture" id=11]
 [ext_resource path="res://scenes/CannonGun/CannonGunAngle.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/CannonGun/CannonGun.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/Boat/Fire.tscn" type="PackedScene" id=14]
@@ -123,53 +114,6 @@ animations = [ {
 radius = 22.2869
 height = 68.201
 
-[sub_resource type="ParticlesMaterial" id=19]
-flag_disable_z = true
-gravity = Vector3( 0, 0, 0 )
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-
-[sub_resource type="AnimatedTexture" id=20]
-flags = 4
-frames = 9
-fps = 9.0
-frame_0/texture = ExtResource( 11 )
-frame_1/texture = ExtResource( 10 )
-frame_1/delay_sec = 0.0
-frame_2/texture = ExtResource( 6 )
-frame_2/delay_sec = 0.0
-frame_3/texture = ExtResource( 5 )
-frame_3/delay_sec = 0.0
-frame_4/texture = ExtResource( 3 )
-frame_4/delay_sec = 0.0
-frame_5/texture = ExtResource( 9 )
-frame_5/delay_sec = 0.0
-frame_6/texture = ExtResource( 7 )
-frame_6/delay_sec = 0.0
-frame_7/texture = ExtResource( 4 )
-frame_7/delay_sec = 0.0
-frame_8/texture = ExtResource( 2 )
-frame_8/delay_sec = 0.0
-
-[sub_resource type="GDScript" id=21]
-script/source = "extends Particles2D
-
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-"
-
 [node name="PlayerBoat" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
@@ -189,17 +133,6 @@ current = true
 smoothing_enabled = true
 
 [node name="Fire" parent="." instance=ExtResource( 14 )]
-
-[node name="Cannon" type="Particles2D" parent="."]
-show_behind_parent = true
-scale = Vector2( 0.2, 0.2 )
-emitting = false
-amount = 1
-lifetime = 0.3
-one_shot = true
-process_material = SubResource( 19 )
-texture = SubResource( 20 )
-script = SubResource( 21 )
 
 [node name="CannonGunLeft" parent="." instance=ExtResource( 13 )]
 
