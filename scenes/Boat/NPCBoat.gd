@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
  # How fast the player will move (pixels/sec).
-export var speed = 100
+export var speed = 50
 # Default to 10. Boat sinks when durability reaches 0.
 export var durability = 10
 

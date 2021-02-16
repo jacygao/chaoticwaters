@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
  # How fast the player will move (pixels/sec).
-export var speed = 200
+export var speed = 100
 export (float) var rotation_speed = 2
 var cur_rotation = 0
 var rotation_dir = 0

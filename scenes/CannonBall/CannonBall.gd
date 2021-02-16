@@ -32,6 +32,5 @@ func disappear():
 
 func _on_CannonBall_body_entered(body):
 	if body.has_method("type") && body.type() == "ship":
-		print(body.type())
 		fire_target.call("hit", fire_damage)
 	self.hide()
