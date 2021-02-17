@@ -2,13 +2,14 @@ extends KinematicBody2D
 
  # How fast the player will move (pixels/sec).
 export var speed = 100
-export (float) var rotation_speed = 2
+export (float) var rotation_speed = 1
 var cur_rotation = 0
 var rotation_dir = 0
 var velocity = Vector2()
 
 # Default to 10. Boat sinks when durability reaches 0.
 export var durability = 10
+export var max_durability = 10
 
 # Setting cannon gun related attributes.
 # These values are now in the CannonGun nodes as well but 
@@ -88,28 +89,18 @@ func _physics_process(delta):
 
 # Controls ship movement animation
 func animate(ta):
-	$AnimatedSprite.scale = Vector2(1.3, 1.3)
-	$Body.rotation_degrees = 0
+	$AnimatedSprite.animation = "hp_green"
+	if durability < max_durability * 0.7:
+		$AnimatedSprite.animation = "hp_yellow"
+	elif durability < max_durability * 0.35:
+		$AnimatedSprite.animation = "hp_red"
+		
+	$AnimatedSprite.scale = Vector2(1, 1)
+	$Body.rotation_degrees = ta - 90
+	$AnimatedSprite.rotation_degrees = ta - 90
 	$Body.position.x = 0
 	$Body.position.y = 0
 	$Fire.position.y = 60
-	if ta >= -45 && ta <= 45:
-		$Body.rotation_degrees = 90
-		$AnimatedSprite.animation = "right"
-		$Body.position.x = -30
-		$Body.position.y = 20
-		$Fire.position.x = -10
-	elif ta > 45 && ta < 135:
-		$AnimatedSprite.animation = "down"
-		$AnimatedSprite.scale = Vector2(1, 1)
-	elif ta < -45 && ta > -135:
-		$AnimatedSprite.animation = "up"
-		$AnimatedSprite.scale = Vector2(1, 1)
-		$Body.position.y = 20
-	else:
-		$AnimatedSprite.animation = "left"
-		$Body.rotation_degrees = 90
-		$Body.position.y = 20
 		
 # Fires an animated cannon ball at a given vector position
 func fire_animate(vec):

@@ -4,6 +4,7 @@ extends KinematicBody2D
 export var speed = 50
 # Default to 10. Boat sinks when durability reaches 0.
 export var durability = 10
+export var max_durability = 10
 
 export var fire_damage = 1
 
@@ -54,30 +55,13 @@ func hit(damage):
 	print("NPC boat is hit, current durability: ", durability)
 
 func animate(ta):
-	$AnimatedSprite.scale = Vector2(2, 2)
-	$Body.rotation_degrees = 0
-	$Body.position.x = 0
-	$Body.position.y = 0
-	$Fire.position.x = -5
-	$Fire.position.y = 60
-	if ta >= -45 && ta <= 45:
-		$Body.rotation_degrees = 90
-		$AnimatedSprite.animation = "right"
-		$Body.position.x = -10
-		$Body.position.y = 60
-	elif ta > 45 && ta < 135:
-		$AnimatedSprite.animation = "down"
-		$Fire.position.y = 10
-	elif ta < -45 && ta > -135:
-		$AnimatedSprite.animation = "up"
-		$AnimatedSprite.scale = Vector2(1.8, 1.8)
-		$Body.position.y = 20
-		$Fire.position.y = 10
-	else:
-		$AnimatedSprite.animation = "left"
-		$Body.rotation_degrees = 90
-		$Body.position.x = 10
-		$Body.position.y = 60
+	$AnimatedSprite.animation = "hp_green"
+	if durability < max_durability * 0.7:
+		$AnimatedSprite.animation = "hp_yellow"
+	if durability < max_durability * 0.35:
+		$AnimatedSprite.animation = "hp_red"
+	$Body.rotation_degrees = ta - 90
+	$AnimatedSprite.rotation_degrees = ta - 90
 
 # Fires an animated cannon ball at a given vector position
 func fire_animate(vec):
