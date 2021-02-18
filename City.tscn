@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/city/towerDefense_tile249.png" type="Texture" id=2]
 [ext_resource path="res://City.gd" type="Script" id=3]
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
@@ -12,7 +12,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
@@ -25,9 +25,9 @@ script = ExtResource( 3 )
 
 [node name="Base" type="AnimatedSprite" parent="."]
 scale = Vector2( 1.5, 1.5 )
-frames = SubResource( 3 )
+frames = SubResource( 1 )
 
 [node name="Cannon" type="AnimatedSprite" parent="."]
 rotation = 1.5708
 scale = Vector2( 1.2, 1.2 )
-frames = SubResource( 1 )
+frames = SubResource( 2 )
