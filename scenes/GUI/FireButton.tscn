@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/icons/cannon_shot.png" type="Texture" id=1]
+[ext_resource path="res://scenes/GUI/FireButton.gd" type="Script" id=2]
+
+[node name="FireButton" type="TextureButton"]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sweep" type="TextureProgress" parent="."]
+modulate = Color( 0.145098, 0.145098, 0.145098, 0.87451 )
+margin_right = 512.0
+margin_bottom = 512.0
+fill_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Counter" type="MarginContainer" parent="."]
+margin_left = 419.0
+margin_top = 479.0
+margin_right = 490.0
+margin_bottom = 512.0
+custom_constants/margin_right = 0
+custom_constants/margin_left = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="Label" parent="Counter"]
+margin_left = 5.0
+margin_top = 9.0
+margin_right = 71.0
+margin_bottom = 23.0
+text = "test12345"
+align = 2
+clip_text = true
+[connection signal="pressed" from="." to="." method="_on_FireButton_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

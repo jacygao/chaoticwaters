@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/Boat/PlayerBoat.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/GUI/FireButton.tscn" type="PackedScene" id=2]
 [ext_resource path="res://WorldMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/Boat/NPCBoat.tscn" type="PackedScene" id=4]
 [ext_resource path="res://City.tscn" type="PackedScene" id=5]
@@ -12,19 +13,19 @@ script = ExtResource( 7 )
 
 [node name="HUD" parent="." instance=ExtResource( 6 )]
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchor_left = -0.0704756
-anchor_top = -5.98102
-anchor_right = -0.0704756
-anchor_bottom = -5.98102
-margin_left = -8567.06
-margin_top = -7363.53
-margin_right = 9475.94
-margin_bottom = 14304.5
-color = Color( 0.0509804, 0.380392, 0.521569, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="FireButtonRight" parent="HUD" instance=ExtResource( 2 )]
+margin_left = 950.0
+margin_top = 530.0
+margin_right = 1462.0
+margin_bottom = 1042.0
+rect_scale = Vector2( 0.1, 0.1 )
+
+[node name="FireButtonLeft" parent="HUD" instance=ExtResource( 2 )]
+margin_left = 20.0
+margin_top = 530.0
+margin_right = 532.0
+margin_bottom = 1042.0
+rect_scale = Vector2( 0.1, 0.1 )
 
 [node name="WorldMap" parent="." instance=ExtResource( 3 )]
 position = Vector2( 287.769, -3741.88 )
@@ -45,3 +46,5 @@ scale = Vector2( 0.5, 0.5 )
 [node name="NPCBoat" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1305, 137.542 )
 scale = Vector2( 0.5, 0.5 )
+[connection signal="cannon_fired" from="HUD/FireButtonRight" to="." method="_on_FireButtonRight_cannon_fired"]
+[connection signal="cannon_fired" from="HUD/FireButtonLeft" to="." method="_on_FireButtonLeft_cannon_fired"]

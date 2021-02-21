@@ -17,7 +17,7 @@ func _ready():
 	disappear()
 
 func init(vec, damage, fr):
-	fire_rotation = self.get_angle_to(vec.position)
+	fire_rotation = vec.angle()
 	fire_target = vec
 	fire_damage = damage
 	fire_range = fr
@@ -32,5 +32,5 @@ func disappear():
 
 func _on_CannonBall_body_entered(body):
 	if body.has_method("type") && body.type() == "ship":
-		fire_target.call("hit", fire_damage)
+		body.call("hit", fire_damage)
 	self.hide()

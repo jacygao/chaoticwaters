@@ -16,7 +16,7 @@ export var max_durability = 10
 # they will still need to be set in order to customise
 export var fire_blind_range = 100
 export var fire_max_range = 300
-export var fire_rate = 2
+export var fire_rate = 2.0
 export var fire_damage = 1
 
 var target_direction = Vector2()
@@ -40,13 +40,14 @@ func _ready():
 func type():
 	return "ship"
 	
-# Change the target whenever a touch event happens.
-func _input(event):
-	rotation_dir = 0
-	if event is InputEventScreenTouch and event.pressed:
+func _unhandled_input(event):
+	if event.is_action_pressed('ui_touch'):
 		target = get_global_mouse_position()
 		target_direction = target - position
 		target_rotation = target_direction.angle()
+# Change the target whenever a touch event happens.
+func _input(event):
+	rotation_dir = 0
 	if event.is_action_pressed('ui_right'):
 		rotation_dir += 1
 	if event.is_action_pressed('ui_left'):
@@ -102,10 +103,16 @@ func animate(ta):
 	$Body.position.y = 0
 	$Fire.position.y = 60
 		
+func fire_animate_left():
+	fire_animate(velocity.rotated(deg2rad(-90)))
+		
+func fire_animate_right():
+	fire_animate(velocity.rotated(deg2rad(90)))
+	
 # Fires an animated cannon ball at a given vector position
 func fire_animate(vec):
 	var cannon_ball_ins = cannon_ball.instance()
-	$CannonGunAngle.rotation = (vec.position - position).angle()
+	$CannonGunAngle.rotation = vec.angle()
 	cannon_ball_ins.position = $CannonGunAngle/CannonGunPosition.get_global_position()
 	cannon_ball_ins.init(vec, fire_damage, fire_max_range)
 	$CannonGunAngle/CannonGunFireSmoke.set_emitting(true)
@@ -119,10 +126,3 @@ func hit(damage):
 
 func sink():
 	pass
-
-func _on_CannonGunLeft_fire(vec):
-	fire_animate(vec)
-
-
-func _on_CannonGunRight_fire(vec):
-	fire_animate(vec)
