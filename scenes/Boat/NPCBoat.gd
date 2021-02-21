@@ -2,6 +2,12 @@ extends KinematicBody2D
 
  # How fast the player will move (pixels/sec).
 export var speed = 50
+
+var rotation_speed = 1
+var cur_rotation = 0
+var rotation_dir = 0
+var velocity = Vector2()
+
 # Default to 10. Boat sinks when durability reaches 0.
 export var durability = 10
 export var max_durability = 10
@@ -9,6 +15,8 @@ export var max_durability = 10
 export var fire_damage = 1
 
 export var fire_max_range = 400
+
+var is_target_seen = false
 
 var smoke = preload("res://Smoke.tscn")
 var cannon_ball = preload("res://scenes/CannonBall/CannonBall.tscn")
@@ -25,26 +33,42 @@ func _process(delta):
 		sink()
 		print("NPC boat has sunk")
 		queue_free()
+
+	var angle = rad2deg(cur_rotation)
+	if angle > 180:
+		angle = (360 - angle) * -1
+	if angle < -180:
+		angle = 360 - angle * -1
+		
+	$CannonGunRight.rotation_degrees = angle + 180
+	$CannonGunLeft.rotation_degrees = angle
 	
-	var velocity = Vector2()  # The player's movement vector.
+	animate(angle)
+	$AnimatedSprite.play()
+		
+func _physics_process(delta):
+	if cur_rotation > 2*PI:
+		cur_rotation-=2*PI
+	if cur_rotation < -2*PI:
+		cur_rotation+=2*PI
+	velocity = Vector2(speed, 0).rotated(cur_rotation)
 	
 	var targetPos = get_parent().get_node("PlayerBoat").position
+	var target_direction = targetPos - position
+	var target_angle = rad2deg(target_direction.angle_to(velocity))
+	if is_target_seen:
+		target_angle = target_angle + 90
 	
-	if position.distance_to(targetPos) > 5:
-		velocity = targetPos - position
-	var gun_angle = rad2deg(velocity.angle())
-	$CannonGunRight.rotation_degrees = gun_angle + 180
-	$CannonGunLeft.rotation_degrees = gun_angle
+	var rotate_velocity = 1
+	if abs(target_angle) < 1:
+		rotate_velocity = abs(target_angle)
+	if target_angle < 0:
+		rotation_dir = rotate_velocity
+	elif target_angle > 0:
+		rotation_dir = -1 * rotate_velocity
+	cur_rotation += rotation_dir * rotation_speed * delta
+	move_and_slide(velocity)
 	
-	var target_angle = rad2deg(targetPos.angle_to_point(position))
-		
-	animate(target_angle)
-	$AnimatedSprite.play()
-	
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
-		move_and_collide(velocity * delta)
-		
 func type():
 	return "ship"
 
@@ -68,7 +92,7 @@ func fire_animate(vec):
 	var cannon_ball_ins = cannon_ball.instance()
 	$CannonGunAngle.rotation = (vec.position - position).angle()
 	cannon_ball_ins.position = $CannonGunAngle/CannonGunPosition.get_global_position()
-	cannon_ball_ins.init(vec, fire_damage, fire_max_range)
+	cannon_ball_ins.init(vec.position - position, fire_damage, fire_max_range)
 	get_parent().add_child(cannon_ball_ins)
 	
 func sink():
@@ -77,10 +101,18 @@ func sink():
 	smoke_animation.set_emitting(true)
 	get_parent().add_child(smoke_animation)
 
-
 func _on_CannonGunLeft_fire(target):
 	fire_animate(target)
 
-
 func _on_CannonGunRight_fire(target):
 	fire_animate(target)
+
+func _on_VisionCircle_body_entered(body):
+	if body.get_class() == "KinematicBody2D":
+		is_target_seen = true
+		print("target is in range")
+
+func _on_TargetCircle_body_exited(body):
+	if body.get_class() == "KinematicBody2D":
+		is_target_seen = false
+		print("target is out of sight")

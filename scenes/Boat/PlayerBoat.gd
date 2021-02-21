@@ -48,7 +48,7 @@ func _unhandled_input(event):
 	if event.is_action_pressed('ui_touch'):
 		target = get_global_mouse_position()
 		target_direction = target - position
-		target_rotation = target_direction.angle()
+		
 # Change the target whenever a touch event happens.
 func _input(event):
 	rotation_dir = 0
@@ -67,11 +67,12 @@ func _process(_delta):
 		angle = (360 - angle) * -1
 	if angle < -180:
 		angle = 360 - angle * -1
-	animate(angle)
-	$AnimatedSprite.play()
 	
 	$CannonGunRight.rotation_degrees = angle + 180
 	$CannonGunLeft.rotation_degrees = angle
+	
+	animate(angle)
+	$AnimatedSprite.play()
 		
 func _physics_process(delta):
 	if cur_rotation > 2*PI:
@@ -105,7 +106,6 @@ func animate(ta):
 	$AnimatedSprite.rotation_degrees = ta - 90
 	$Body.position.x = 0
 	$Body.position.y = 0
-	$Fire.position.y = 60
 		
 func fire_animate_left():
 	fire_animate(velocity.rotated(deg2rad(-90)))

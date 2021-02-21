@@ -61,5 +61,3 @@ rotation = 3.14159
 [node name="CannonGunAngle" parent="." instance=ExtResource( 12 )]
 
 [node name="HealthDisplay" parent="." instance=ExtResource( 15 )]
-[connection signal="fire" from="CannonGunLeft" to="." method="_on_CannonGunLeft_fire"]
-[connection signal="fire" from="CannonGunRight" to="." method="_on_CannonGunRight_fire"]
