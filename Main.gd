@@ -21,3 +21,11 @@ func _on_FireButtonLeft_cannon_fired():
 
 func _on_FireButtonRight_cannon_fired():
 	$PlayerBoat.call("fire_animate_right")
+
+
+func _on_AnchorButton_anchor_on():
+	$PlayerBoat.call("anchor_on")
+
+
+func _on_AnchorButton_anchor_off():
+	$PlayerBoat.call("anchor_off")

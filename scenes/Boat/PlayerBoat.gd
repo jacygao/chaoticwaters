@@ -1,8 +1,12 @@
 extends KinematicBody2D
 
  # How fast the player will move (pixels/sec).
-export var speed = 100
-export (float) var rotation_speed = 1
+export var default_speed = 100
+var speed = default_speed
+
+export (float) var default_rotation_speed = 1
+var rotation_speed = default_rotation_speed
+
 var cur_rotation = 0
 var rotation_dir = 0
 var velocity = Vector2()
@@ -117,6 +121,14 @@ func fire_animate(vec):
 	cannon_ball_ins.init(vec, fire_damage, fire_max_range)
 	$CannonGunAngle/CannonGunFireSmoke.set_emitting(true)
 	get_parent().add_child(cannon_ball_ins)
+
+func anchor_on():
+	speed = 0
+	rotation_speed = 0
+
+func anchor_off():
+	speed = default_speed
+	rotation_speed = default_rotation_speed
 
 func hit(damage):
 	durability -= damage
