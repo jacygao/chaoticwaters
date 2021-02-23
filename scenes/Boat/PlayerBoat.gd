@@ -21,7 +21,7 @@ export var max_durability = 10
 export var fire_blind_range = 100
 export var fire_max_range = 300
 export var fire_rate = 2.0
-export var fire_damage = 1
+export var fire_damage = 10
 
 var target_direction = Vector2()
 var target_rotation = 0
@@ -61,6 +61,7 @@ func _input(event):
 func _process(_delta):
 	if durability == 0:
 		print("player boat has sunk")
+		sink()
 		# TODO: player boat has sunk.. what now?
 	var angle = rad2deg(cur_rotation)
 	if angle > 180:
@@ -98,9 +99,11 @@ func animate(ta):
 	$AnimatedSprite.animation = "hp_green"
 	if durability < max_durability * 0.7:
 		$AnimatedSprite.animation = "hp_yellow"
-	elif durability < max_durability * 0.35:
+	if durability < max_durability * 0.35:
 		$AnimatedSprite.animation = "hp_red"
-		
+	if durability <= 0:
+		$AnimatedSprite.animation = "hp_0"
+	
 	$AnimatedSprite.scale = Vector2(1, 1)
 	$Body.rotation_degrees = ta - 90
 	$AnimatedSprite.rotation_degrees = ta - 90
@@ -137,4 +140,5 @@ func hit(damage):
 	print("Player boat is hit, current durability: ", durability)
 
 func sink():
-	pass
+	speed = 0
+	rotation_speed = 0

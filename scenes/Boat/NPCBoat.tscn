@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/Boat/NPCBoat.gd" type="Script" id=1]
 [ext_resource path="res://scenes/CannonGun/CannonGunAngle.tscn" type="PackedScene" id=2]
@@ -7,7 +7,7 @@
 [ext_resource path="res://scenes/HealthDisplay.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/ships/ship (2).png" type="Texture" id=6]
 [ext_resource path="res://assets/ships/ship (14).png" type="Texture" id=7]
-[ext_resource path="res://assets/ship/pirate_ship_sprite.png" type="Texture" id=8]
+[ext_resource path="res://Smoke.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/ships/ship (20).png" type="Texture" id=9]
 [ext_resource path="res://assets/ships/ship (8).png" type="Texture" id=10]
 
@@ -18,9 +18,9 @@ animations = [ {
 "name": "hp_green",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 7 ) ],
+"frames": [ ExtResource( 9 ) ],
 "loop": true,
-"name": "hp_red",
+"name": "hp_0",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 10 ) ],
@@ -28,123 +28,20 @@ animations = [ {
 "name": "hp_yellow",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 9 ) ],
+"frames": [ ExtResource( 7 ) ],
 "loop": true,
-"name": "hp_0",
+"name": "hp_red",
 "speed": 5.0
 } ]
 
-[sub_resource type="AtlasTexture" id=2]
-flags = 4
-atlas = ExtResource( 8 )
-region = Rect2( 0, 192, 80, 96 )
-
-[sub_resource type="AtlasTexture" id=3]
-flags = 4
-atlas = ExtResource( 8 )
-region = Rect2( 80, 192, 80, 96 )
-
-[sub_resource type="AtlasTexture" id=4]
-flags = 4
-atlas = ExtResource( 8 )
-region = Rect2( 160, 192, 80, 96 )
-
-[sub_resource type="AtlasTexture" id=5]
-flags = 4
-atlas = ExtResource( 8 )
-region = Rect2( 240, 192, 80, 96 )
-
-[sub_resource type="AtlasTexture" id=6]
-flags = 4
-atlas = ExtResource( 8 )
-region = Rect2( 0, 96, 80, 96 )
-
-[sub_resource type="AtlasTexture" id=7]
-flags = 4
-atlas = ExtResource( 8 )
-region = Rect2( 80, 96, 80, 96 )
-
-[sub_resource type="AtlasTexture" id=8]
-flags = 4
-atlas = ExtResource( 8 )
-region = Rect2( 160, 96, 80, 96 )
-
-[sub_resource type="AtlasTexture" id=9]
-flags = 4
-atlas = ExtResource( 8 )
-region = Rect2( 240, 96, 80, 96 )
-
-[sub_resource type="AtlasTexture" id=10]
-flags = 4
-atlas = ExtResource( 8 )
-region = Rect2( 0, 288, 80, 96 )
-
-[sub_resource type="AtlasTexture" id=11]
-flags = 4
-atlas = ExtResource( 8 )
-region = Rect2( 80, 288, 80, 96 )
-
-[sub_resource type="AtlasTexture" id=12]
-flags = 4
-atlas = ExtResource( 8 )
-region = Rect2( 160, 288, 80, 96 )
-
-[sub_resource type="AtlasTexture" id=13]
-flags = 4
-atlas = ExtResource( 8 )
-region = Rect2( 240, 288, 80, 96 )
-
-[sub_resource type="AtlasTexture" id=14]
-flags = 4
-atlas = ExtResource( 8 )
-region = Rect2( 0, 0, 80, 96 )
-
-[sub_resource type="AtlasTexture" id=15]
-flags = 4
-atlas = ExtResource( 8 )
-region = Rect2( 80, 0, 80, 96 )
-
-[sub_resource type="AtlasTexture" id=16]
-flags = 4
-atlas = ExtResource( 8 )
-region = Rect2( 160, 0, 80, 96 )
-
-[sub_resource type="AtlasTexture" id=17]
-flags = 4
-atlas = ExtResource( 8 )
-region = Rect2( 240, 0, 80, 96 )
-
-[sub_resource type="SpriteFrames" id=18]
-animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
-"loop": true,
-"name": "right",
-"speed": 2.0
-}, {
-"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
-"loop": true,
-"name": "left",
-"speed": 2.0
-}, {
-"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
-"loop": true,
-"name": "up",
-"speed": 2.0
-}, {
-"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
-"loop": true,
-"name": "down",
-"speed": 2.0
-} ]
-
-[sub_resource type="CapsuleShape2D" id=19]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 21.7045
 height = 73.1362
 
-[sub_resource type="CircleShape2D" id=20]
+[sub_resource type="CircleShape2D" id=3]
 radius = 300.0
 
-[sub_resource type="CircleShape2D" id=21]
+[sub_resource type="CircleShape2D" id=4]
 radius = 400.0
 
 [node name="NPCBoat" type="KinematicBody2D"]
@@ -154,16 +51,12 @@ script = ExtResource( 1 )
 frames = SubResource( 1 )
 animation = "hp_green"
 
-[node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
-visible = false
-scale = Vector2( 2, 2 )
-frames = SubResource( 18 )
-animation = "down"
-
 [node name="Body" type="CollisionShape2D" parent="."]
-shape = SubResource( 19 )
+shape = SubResource( 2 )
 
 [node name="Fire" parent="." instance=ExtResource( 4 )]
+
+[node name="Smoke" parent="." instance=ExtResource( 8 )]
 
 [node name="CannonGunLeft" parent="." instance=ExtResource( 3 )]
 
@@ -179,16 +72,26 @@ rotation = 3.14159
 [node name="VisionCircle" type="Area2D" parent="."]
 
 [node name="InnerCircle" type="CollisionShape2D" parent="VisionCircle"]
-shape = SubResource( 20 )
+shape = SubResource( 3 )
 one_way_collision = true
 
 [node name="TargetCircle" type="Area2D" parent="."]
 
 [node name="OutterCircle" type="CollisionShape2D" parent="TargetCircle"]
-shape = SubResource( 21 )
+shape = SubResource( 4 )
 one_way_collision = true
+
+[node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+
+[node name="DisappearTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
 [connection signal="fire" from="CannonGunLeft" to="." method="_on_CannonGunLeft_fire"]
 [connection signal="fire" from="CannonGunRight" to="." method="_on_CannonGunRight_fire"]
 [connection signal="area_entered" from="VisionCircle" to="." method="_on_VisionCircle_area_entered"]
 [connection signal="body_entered" from="VisionCircle" to="." method="_on_VisionCircle_body_entered"]
 [connection signal="body_exited" from="TargetCircle" to="." method="_on_TargetCircle_body_exited"]
+[connection signal="timeout" from="RespawnTimer" to="." method="_on_RespawnTimer_timeout"]
+[connection signal="timeout" from="DisappearTimer" to="." method="_on_DisappearTimer_timeout"]

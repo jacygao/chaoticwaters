@@ -12,11 +12,13 @@ var velocity = Vector2()
 export var durability = 10
 export var max_durability = 10
 
-export var fire_damage = 1
+export var fire_damage = 10
 
 export var fire_max_range = 400
 
 export var is_target_seen = false
+
+export var respawn_wait_time = 30
 
 var smoke = preload("res://Smoke.tscn")
 var cannon_ball = preload("res://scenes/CannonBall/CannonBall.tscn")
@@ -25,6 +27,7 @@ var cannon_ball = preload("res://scenes/CannonBall/CannonBall.tscn")
 func _ready():
 	$CannonGunLeft.rotation_degrees = 0
 	$CannonGunRight.rotation_degrees = 180
+	$RespawnTimer.wait_time = respawn_wait_time
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -32,7 +35,6 @@ func _process(delta):
 		# TODO: ship sinking animation
 		sink()
 		print("NPC boat has sunk")
-		queue_free()
 
 	var angle = rad2deg(cur_rotation)
 	if angle > 180:
@@ -76,7 +78,8 @@ func type():
 
 func hit(damage):
 	durability -= damage
-	$Fire.set_emitting(true)
+	if durability > 0:
+		$Fire.set_emitting(true)
 	$HealthDisplay.update_healthbar(durability * 10)
 	print("NPC boat is hit, current durability: ", durability)
 
@@ -86,6 +89,8 @@ func animate(ta):
 		$AnimatedSprite.animation = "hp_yellow"
 	if durability < max_durability * 0.35:
 		$AnimatedSprite.animation = "hp_red"
+	if durability <= 0:
+		$AnimatedSprite.animation = "hp_0"
 	$Body.rotation_degrees = ta - 90
 	$AnimatedSprite.rotation_degrees = ta - 90
 
@@ -98,10 +103,11 @@ func fire_animate(vec):
 	get_parent().add_child(cannon_ball_ins)
 	
 func sink():
-	var smoke_animation = smoke.instance()
-	smoke_animation.position = position
-	smoke_animation.set_emitting(true)
-	get_parent().add_child(smoke_animation)
+	$Smoke.set_emitting(true)
+	speed = 0
+	rotation_speed = 0
+	$DisappearTimer.start()
+	$RespawnTimer.start()
 
 func _on_CannonGunLeft_fire(target):
 	fire_animate(target)
@@ -119,3 +125,17 @@ func _on_TargetCircle_body_exited(body):
 	if body.get_class() == "KinematicBody2D":
 		is_target_seen = false
 		print("target is out of sight")
+
+
+func _on_DisappearTimer_timeout():
+	queue_free()
+	$DisappearTimer.stop()
+
+
+func _on_RespawnTimer_timeout():
+	# re-appear on the map
+	pass # Replace with function body.
+
+
+func _on_SmokeTimer_timeout():
+	pass # Replace with function body.
