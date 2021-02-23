@@ -16,7 +16,7 @@ export var fire_damage = 1
 
 export var fire_max_range = 400
 
-var is_target_seen = false
+export var is_target_seen = false
 
 var smoke = preload("res://Smoke.tscn")
 var cannon_ball = preload("res://scenes/CannonBall/CannonBall.tscn")
@@ -54,8 +54,10 @@ func _physics_process(delta):
 	velocity = Vector2(speed, 0).rotated(cur_rotation)
 	
 	var targetPos = get_parent().get_node("PlayerBoat").position
+	
 	var target_direction = targetPos - position
 	var target_angle = rad2deg(target_direction.angle_to(velocity))
+	print(is_target_seen)
 	if is_target_seen:
 		target_angle = target_angle + 90
 	
@@ -108,9 +110,10 @@ func _on_CannonGunRight_fire(target):
 	fire_animate(target)
 
 func _on_VisionCircle_body_entered(body):
-	if body.get_class() == "KinematicBody2D":
-		is_target_seen = true
-		print("target is in range")
+	if body != self:
+		if body.get_class() == "KinematicBody2D":
+			is_target_seen = true
+			print("target is in range")
 
 func _on_TargetCircle_body_exited(body):
 	if body.get_class() == "KinematicBody2D":
