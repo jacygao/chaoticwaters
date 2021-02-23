@@ -4,12 +4,13 @@
 [ext_resource path="res://scenes/CannonGun/CannonGunAngle.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/CannonGun/CannonGun.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/Boat/Fire.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/HealthDisplay.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Widget/HealthDisplay.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/ships/ship (2).png" type="Texture" id=6]
 [ext_resource path="res://assets/ships/ship (14).png" type="Texture" id=7]
-[ext_resource path="res://Smoke.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/Boat/Smoke.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/ships/ship (20).png" type="Texture" id=9]
 [ext_resource path="res://assets/ships/ship (8).png" type="Texture" id=10]
+
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -45,6 +46,8 @@ radius = 300.0
 radius = 400.0
 
 [node name="NPCBoat" type="KinematicBody2D"]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]

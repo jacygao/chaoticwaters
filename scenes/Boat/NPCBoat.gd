@@ -20,7 +20,7 @@ export var is_target_seen = false
 
 export var respawn_wait_time = 30
 
-var smoke = preload("res://Smoke.tscn")
+var smoke = preload("res://scenes/Boat/Smoke.tscn")
 var cannon_ball = preload("res://scenes/CannonBall/CannonBall.tscn")
 
 # Called when the node enters the scene tree for the first time.
@@ -59,7 +59,6 @@ func _physics_process(delta):
 	
 	var target_direction = targetPos - position
 	var target_angle = rad2deg(target_direction.angle_to(velocity))
-	print(is_target_seen)
 	if is_target_seen:
 		target_angle = target_angle + 90
 	
@@ -100,6 +99,7 @@ func fire_animate(vec):
 	$CannonGunAngle.rotation = (vec.position - position).angle()
 	cannon_ball_ins.position = $CannonGunAngle/CannonGunPosition.get_global_position()
 	cannon_ball_ins.init(vec.position - position, fire_damage, fire_max_range)
+	$CannonGunAngle/CannonGunFireSmoke.set_emitting(true)
 	get_parent().add_child(cannon_ball_ins)
 	
 func sink():

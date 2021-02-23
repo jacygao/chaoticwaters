@@ -31,6 +31,10 @@ func disappear():
 	queue_free()
 
 func _on_CannonBall_body_entered(body):
-	if body.has_method("type") && body.type() == "ship":
-		body.call("hit", fire_damage)
-	self.hide()
+	if body.has_method("type"):
+		if body.type() == "ship":
+			body.call("hit", fire_damage)
+			self.hide()
+		if body.type() == "city":
+			print("hit city")
+			self.hide()
