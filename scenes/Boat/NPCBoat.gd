@@ -12,7 +12,7 @@ var velocity = Vector2()
 export var durability = 10
 export var max_durability = 10
 
-export var fire_damage = 10
+export var fire_damage = 1
 
 export var fire_max_range = 400
 

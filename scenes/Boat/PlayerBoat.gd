@@ -7,9 +7,13 @@ var speed = default_speed
 export (float) var default_rotation_speed = 1
 var rotation_speed = default_rotation_speed
 
+export (float) var default_acceleration = 1
+var acceleration = default_acceleration
+
 var cur_rotation = 0
 var rotation_dir = 0
 var velocity = Vector2()
+var isAnchorOn = false
 
 # Default to 10. Boat sinks when durability reaches 0.
 export var durability = 10
@@ -21,7 +25,7 @@ export var max_durability = 10
 export var fire_blind_range = 100
 export var fire_max_range = 300
 export var fire_rate = 2.0
-export var fire_damage = 10
+export var fire_damage = 1
 
 var target_direction = Vector2()
 var target_rotation = 0
@@ -46,8 +50,9 @@ func type():
 	
 func _unhandled_input(event):
 	if event.is_action_pressed('ui_touch'):
-		target = get_global_mouse_position()
-		target_direction = target - position
+		if !isAnchorOn:
+			target = get_global_mouse_position()
+			target_direction = target - position
 		
 # Change the target whenever a touch event happens.
 func _input(event):
@@ -76,10 +81,12 @@ func _process(_delta):
 	$AnimatedSprite.play()
 		
 func _physics_process(delta):
-	if cur_rotation > 2*PI:
-		cur_rotation-=2*PI
-	if cur_rotation < -2*PI:
-		cur_rotation+=2*PI
+	if !isAnchorOn:
+		if speed < default_speed:
+			speed += acceleration
+		if speed > default_speed:
+			speed = default_speed
+		
 	velocity = Vector2(speed, 0).rotated(cur_rotation)
 	
 	var target_angle = target_direction.angle_to(velocity)
@@ -128,11 +135,12 @@ func fire_animate(vec):
 func anchor_on():
 	speed = 0
 	rotation_speed = 0
-
+	isAnchorOn = true
+	
 func anchor_off():
-	speed = default_speed
 	rotation_speed = default_rotation_speed
-
+	isAnchorOn = false
+	
 func hit(damage):
 	durability -= damage
 	$Fire.set_emitting(true)
