@@ -13,7 +13,9 @@ var acceleration = default_acceleration
 var cur_rotation = 0
 var rotation_dir = 0
 var velocity = Vector2()
+var static_velocity = Vector2()
 var isAnchorOn = false
+var angle = 0
 
 # Default to 10. Boat sinks when durability reaches 0.
 export var durability = 10
@@ -68,7 +70,7 @@ func _process(_delta):
 		print("player boat has sunk")
 		sink()
 		# TODO: player boat has sunk.. what now?
-	var angle = rad2deg(cur_rotation)
+	angle = rad2deg(cur_rotation)
 	if angle > 180:
 		angle = (360 - angle) * -1
 	if angle < -180:
@@ -88,6 +90,8 @@ func _physics_process(delta):
 			speed = default_speed
 		
 	velocity = Vector2(speed, 0).rotated(cur_rotation)
+	if speed > 0:
+		static_velocity = velocity
 	
 	var target_angle = target_direction.angle_to(velocity)
 	var rotate_velocity = 1
@@ -118,17 +122,18 @@ func animate(ta):
 	$Body.position.y = 0
 		
 func fire_animate_left():
-	fire_animate(velocity.rotated(deg2rad(-90)))
+	fire_animate(static_velocity.rotated(deg2rad(-90)))
 		
 func fire_animate_right():
-	fire_animate(velocity.rotated(deg2rad(90)))
+	fire_animate(static_velocity.rotated(deg2rad(90)))
 	
 # Fires an animated cannon ball at a given vector position
 func fire_animate(vec):
 	var cannon_ball_ins = cannon_ball.instance()
-	$CannonGunAngle.rotation = vec.angle()
+	var angle = vec.angle()
+	$CannonGunAngle.rotation = angle
 	cannon_ball_ins.position = $CannonGunAngle/CannonGunPosition.get_global_position()
-	cannon_ball_ins.init(vec, fire_damage, fire_max_range)
+	cannon_ball_ins.init(angle, fire_damage, fire_max_range)
 	$CannonGunAngle/CannonGunFireSmoke.set_emitting(true)
 	get_parent().add_child(cannon_ball_ins)
 

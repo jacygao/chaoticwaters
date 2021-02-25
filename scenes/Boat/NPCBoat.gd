@@ -96,9 +96,10 @@ func animate(ta):
 # Fires an animated cannon ball at a given vector position
 func fire_animate(vec):
 	var cannon_ball_ins = cannon_ball.instance()
-	$CannonGunAngle.rotation = (vec.position - position).angle()
+	var angle = (vec.position - position).angle()
+	$CannonGunAngle.rotation = angle
 	cannon_ball_ins.position = $CannonGunAngle/CannonGunPosition.get_global_position()
-	cannon_ball_ins.init(vec.position - position, fire_damage, fire_max_range)
+	cannon_ball_ins.init(angle, fire_damage, fire_max_range)
 	$CannonGunAngle/CannonGunFireSmoke.set_emitting(true)
 	get_parent().add_child(cannon_ball_ins)
 	
