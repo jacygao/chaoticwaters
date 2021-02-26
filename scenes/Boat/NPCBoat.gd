@@ -75,6 +75,12 @@ func _physics_process(delta):
 func type():
 	return "ship"
 
+func id():
+	return "npc_boat_1"
+	
+func team():
+	return 2
+	
 func hit(damage):
 	durability -= damage
 	if durability > 0:

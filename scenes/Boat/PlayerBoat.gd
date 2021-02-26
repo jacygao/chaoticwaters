@@ -50,6 +50,12 @@ func _ready():
 func type():
 	return "ship"
 	
+func id():
+	return "player_boat_1"
+
+func team():
+	return 1
+	
 func _unhandled_input(event):
 	if event.is_action_pressed('ui_touch'):
 		if !isAnchorOn:

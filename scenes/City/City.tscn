@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/city/towerDefense_tile181.png" type="Texture" id=1]
 [ext_resource path="res://assets/city/towerDefense_tile249.png" type="Texture" id=2]
 [ext_resource path="res://scenes/City/City.gd" type="Script" id=3]
+[ext_resource path="res://scenes/CannonGun/CannonGunFireSmoke.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/CannonGun/CannonGun.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/CannonGun/CannonGunAngle.tscn" type="PackedScene" id=6]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -37,9 +40,23 @@ scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 1 )
 
 [node name="Cannon" type="AnimatedSprite" parent="."]
-rotation = 1.5708
 scale = Vector2( 1.2, 1.2 )
 frames = SubResource( 2 )
+
+[node name="CannonGunFireSmoke" parent="Cannon" instance=ExtResource( 4 )]
+position = Vector2( 0, -70 )
+scale = Vector2( 0.166667, 0.166667 )
+
+[node name="CannonGun" parent="Cannon" instance=ExtResource( 5 )]
+rotation = 3.14159
+collision_mask = 4
+fire_range = 500
+fire_damage = 10
+fire_interval = 5
+
+[node name="CannonGunAngle" parent="Cannon" instance=ExtResource( 6 )]
+position = Vector2( 0, -100 )
+rotation = -1.5708
 
 [node name="Body" type="CollisionShape2D" parent="."]
 shape = SubResource( 3 )
@@ -48,5 +65,6 @@ shape = SubResource( 3 )
 
 [node name="FireRange" type="CollisionShape2D" parent="Outpost"]
 shape = SubResource( 4 )
+[connection signal="fire" from="Cannon/CannonGun" to="." method="_on_CannonGun_fire"]
 [connection signal="body_entered" from="Outpost" to="." method="_on_Outpost_body_entered"]
 [connection signal="body_exited" from="Outpost" to="." method="_on_Outpost_body_exited"]

@@ -38,7 +38,6 @@ func fire(collider):
 		fire_state = reloading
 		$Reloading.start()
 
-
 func _on_Reloading_timeout():
 	print("cannon reloaded")
 	fire_state = ready
