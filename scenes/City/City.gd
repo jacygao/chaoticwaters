@@ -42,6 +42,8 @@ func _on_Outpost_body_exited(body):
 			targets.erase(body.id())
 
 func _on_CannonGun_fire(vec):
+	if vec.has_method("team") && vec.team() == team:
+		return
 	fire_animate(vec.position - position)
 
 # Fires an animated cannon ball at a given vector position
