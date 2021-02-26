@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+export var team = 2
  # How fast the player will move (pixels/sec).
 export var speed = 50
 
@@ -79,7 +80,7 @@ func id():
 	return "npc_boat_1"
 	
 func team():
-	return 2
+	return team
 	
 func hit(damage):
 	durability -= damage

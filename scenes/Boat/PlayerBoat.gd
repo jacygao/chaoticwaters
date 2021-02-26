@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+export var team = 1
+
  # How fast the player will move (pixels/sec).
 export var default_speed = 100
 var speed = default_speed
@@ -54,7 +56,7 @@ func id():
 	return "player_boat_1"
 
 func team():
-	return 1
+	return team
 	
 func _unhandled_input(event):
 	if event.is_action_pressed('ui_touch'):

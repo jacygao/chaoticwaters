@@ -4,6 +4,7 @@ extends Node2D
 export var fire_range = 500
 export var fire_damage = 5
 export (float) var default_rotation_speed = 1
+export var team = 1
 var rotation_speed = default_rotation_speed
 
 var cur_rotation
@@ -19,13 +20,16 @@ func _ready():
 func _process(delta):
 	if !targets.empty():
 		target = targets.values().front()
-		$Cannon.rotation = (target.position - position).angle()
+		if position.length() > target.position.length():
+			$Cannon.rotation = (position - target.position).angle()
+		else:
+			$Cannon.rotation = (target.position - position).angle()
 	
 func type():
 	return "city"
 
 func team():
-	return 1
+	return team
 
 func _on_Outpost_body_entered(body):
 	if body.has_method("type"):

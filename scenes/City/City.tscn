@@ -62,6 +62,7 @@ rotation = -1.5708
 shape = SubResource( 3 )
 
 [node name="Outpost" type="Area2D" parent="."]
+gravity = 0.0
 
 [node name="FireRange" type="CollisionShape2D" parent="Outpost"]
 shape = SubResource( 4 )
