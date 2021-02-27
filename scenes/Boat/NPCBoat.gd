@@ -10,8 +10,8 @@ var rotation_dir = 0
 var velocity = Vector2()
 
 # Default to 10. Boat sinks when durability reaches 0.
-export var durability = 10
 export var max_durability = 10
+var durability = max_durability
 
 export var fire_damage = 1
 
@@ -20,6 +20,8 @@ export var fire_max_range = 400
 export var is_target_seen = false
 
 export var respawn_wait_time = 30
+
+var has_sunk = false
 
 var smoke = preload("res://scenes/Boat/Smoke.tscn")
 var cannon_ball = preload("res://scenes/CannonBall/CannonBall.tscn")
@@ -86,7 +88,7 @@ func hit(damage):
 	durability -= damage
 	if durability > 0:
 		$Fire.set_emitting(true)
-	$HealthDisplay.update_healthbar(durability * 10)
+	$HealthDisplay.update_healthbar(durability)
 	print("NPC boat is hit, current durability: ", durability)
 
 func animate(ta):
@@ -114,14 +116,17 @@ func sink():
 	$Smoke.set_emitting(true)
 	speed = 0
 	rotation_speed = 0
+	has_sunk = true
 	$DisappearTimer.start()
 	$RespawnTimer.start()
 
 func _on_CannonGunLeft_fire(target):
-	fire_animate(target)
+	if !has_sunk:
+		fire_animate(target)
 
 func _on_CannonGunRight_fire(target):
-	fire_animate(target)
+	if !has_sunk:
+		fire_animate(target)
 
 func _on_VisionCircle_body_entered(body):
 	if body != self:

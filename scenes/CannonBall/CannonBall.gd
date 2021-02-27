@@ -6,8 +6,6 @@ var fire_range = 0
 
 var fire_rotation = 0
 
-var fire_target = Vector2()
-
 var fire_damage = 1
 
 # Called when the node enters the scene tree for the first time.
@@ -16,9 +14,8 @@ func _ready():
 	apply_impulse(Vector2(), Vector2(speed, 0).rotated(fire_rotation))
 	disappear()
 
-func init(vec, damage, fr):
-	fire_rotation = vec.angle()
-	fire_target = vec
+func init(angle, damage, fr):
+	fire_rotation = angle
 	fire_damage = damage
 	fire_range = fr
 	
@@ -38,3 +35,4 @@ func _on_CannonBall_body_entered(body):
 		if body.type() == "city":
 			print("hit city")
 			self.hide()
+			

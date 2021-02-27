@@ -15,7 +15,6 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	global_rotation = 0
-	print(healthbar.max_value)
 
 func update_healthbar(value):
 	healthbar.texture_progress = bar_green
