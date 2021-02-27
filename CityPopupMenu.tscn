@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/GUI/BaseButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://CityPopupMenu.gd" type="Script" id=2]
+
+[node name="CityPopupMenu" type="Panel"]
+margin_left = -1.0
+margin_top = 498.0
+margin_right = 1020.0
+margin_bottom = 600.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FireUpgrade" parent="." instance=ExtResource( 1 )]
+margin_left = 20.0
+margin_top = 25.0
+margin_right = 120.0
+margin_bottom = 125.0
+rect_scale = Vector2( 0.5, 0.5 )
+cooldown = 1.0
+texture_path = "res://assets/icons/cannon_shot_plus.png"
+[connection signal="button_pressed" from="FireUpgrade" to="." method="_on_FireUpgrade_button_pressed"]

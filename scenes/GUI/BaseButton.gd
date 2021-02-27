@@ -7,7 +7,7 @@ export var counter_text = ""
 export var texture_path = "res://assets/icons/cannon_shot.png"
 export var desciption = ""
 
-signal cannon_fired
+signal button_pressed
 
 func _ready():
 	self.texture_normal = load(texture_path)
@@ -27,7 +27,7 @@ func set_cooldown(value):
 
 func _on_FireButton_pressed():
 	disabled = true
-	emit_signal("cannon_fired")
+	emit_signal("button_pressed")
 	set_process(true)
 	$Timer.start()
 	time_label.show()

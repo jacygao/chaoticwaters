@@ -1,13 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/Boat/PlayerBoat.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/GUI/FireButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/GUI/BaseButton.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/World/WorldMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/Boat/NPCBoat.tscn" type="PackedScene" id=4]
-[ext_resource path="res://City.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/City/City.tscn" type="PackedScene" id=5]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Main.gd" type="Script" id=7]
 [ext_resource path="res://scenes/GUI/AnchorButton.tscn" type="PackedScene" id=8]
+[ext_resource path="res://CityPopupMenu.tscn" type="PackedScene" id=9]
 
 [node name="Main" type="Node"]
 script = ExtResource( 7 )
@@ -17,23 +18,29 @@ script = ExtResource( 7 )
 [node name="FireButtonRight" parent="HUD" instance=ExtResource( 2 )]
 margin_left = 950.0
 margin_top = 530.0
-margin_right = 1462.0
-margin_bottom = 1042.0
-rect_scale = Vector2( 0.1, 0.1 )
+margin_right = 1050.0
+margin_bottom = 630.0
+rect_scale = Vector2( 0.5, 0.5 )
 
 [node name="FireButtonLeft" parent="HUD" instance=ExtResource( 2 )]
 margin_left = 20.0
 margin_top = 530.0
-margin_right = 532.0
-margin_bottom = 1042.0
-rect_scale = Vector2( 0.1, 0.1 )
+margin_right = 120.0
+margin_bottom = 630.0
+rect_scale = Vector2( 0.5, 0.5 )
 
 [node name="AnchorButton" parent="HUD" instance=ExtResource( 8 )]
 margin_left = 950.0
 margin_top = 450.0
-margin_right = 1462.0
-margin_bottom = 962.0
-rect_scale = Vector2( 0.1, 0.1 )
+margin_right = 1050.0
+margin_bottom = 550.0
+rect_scale = Vector2( 0.5, 0.5 )
+
+[node name="PopupMenu" parent="HUD" instance=ExtResource( 9 )]
+visible = false
+margin_left = 0.0
+margin_top = 500.0
+margin_right = 1025.0
 
 [node name="WorldMap" parent="." instance=ExtResource( 3 )]
 position = Vector2( 287.769, -3741.88 )
@@ -46,15 +53,19 @@ position = Vector2( -20.2207, 225.83 )
 [node name="CityRiga" parent="." instance=ExtResource( 5 )]
 position = Vector2( 7585.57, -314.648 )
 rotation = -1.5708
+team = 2
 
 [node name="PlayerBoat" parent="." instance=ExtResource( 1 )]
-position = Vector2( 242.426, 138.402 )
+position = Vector2( 164.679, 62.5228 )
 scale = Vector2( 0.5, 0.5 )
 
 [node name="NPCBoat" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1305, 137.542 )
+position = Vector2( 843.442, 223.161 )
 scale = Vector2( 0.5, 0.5 )
-[connection signal="cannon_fired" from="HUD/FireButtonRight" to="." method="_on_FireButtonRight_cannon_fired"]
-[connection signal="cannon_fired" from="HUD/FireButtonLeft" to="." method="_on_FireButtonLeft_cannon_fired"]
+[connection signal="button_pressed" from="HUD/FireButtonRight" to="." method="_on_FireButtonRight_button_pressed"]
+[connection signal="button_pressed" from="HUD/FireButtonLeft" to="." method="_on_FireButtonLeft_button_pressed"]
 [connection signal="anchor_off" from="HUD/AnchorButton" to="." method="_on_AnchorButton_anchor_off"]
 [connection signal="anchor_on" from="HUD/AnchorButton" to="." method="_on_AnchorButton_anchor_on"]
+[connection signal="fire_upgrade_pressed" from="HUD/PopupMenu" to="." method="_on_PopupMenu_fire_upgrade_pressed"]
+[connection signal="city_entered" from="CityStockholm" to="." method="_on_CityStockholm_city_entered"]
+[connection signal="city_exited" from="CityStockholm" to="." method="_on_CityStockholm_city_exited"]

@@ -12,10 +12,14 @@ var targets = {}
 var target = null
 var cannon_ball = preload("res://scenes/CannonBall/CannonBall.tscn")
 
+signal city_entered
+signal city_exited
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Outpost/FireRange.shape.radius = fire_range
-
+	
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if !targets.empty():
@@ -33,13 +37,19 @@ func team():
 
 func _on_Outpost_body_entered(body):
 	if body.has_method("type"):
-		if body.type() == "ship" && body.team() != team():
-			targets[body.id()] = body
+		if body.type() == "ship":
+			if body.team() != team():
+				targets[body.id()] = body
+			else:
+				emit_signal("city_entered")
 			
 func _on_Outpost_body_exited(body):
 	if body.has_method("type"):
-		if body.type() == "ship" && body.team() != team():
-			targets.erase(body.id())
+		if body.type() == "ship": 
+			if body.team() != team():
+				targets.erase(body.id())
+			else:
+				emit_signal("city_exited")
 
 func _on_CannonGun_fire(vec):
 	if vec.has_method("team") && vec.team() == team:
