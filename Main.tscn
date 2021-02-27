@@ -66,6 +66,7 @@ scale = Vector2( 0.5, 0.5 )
 [connection signal="button_pressed" from="HUD/FireButtonLeft" to="." method="_on_FireButtonLeft_button_pressed"]
 [connection signal="anchor_off" from="HUD/AnchorButton" to="." method="_on_AnchorButton_anchor_off"]
 [connection signal="anchor_on" from="HUD/AnchorButton" to="." method="_on_AnchorButton_anchor_on"]
+[connection signal="armor_upgrade_pressed" from="HUD/PopupMenu" to="." method="_on_PopupMenu_armor_upgrade_pressed"]
 [connection signal="fire_upgrade_pressed" from="HUD/PopupMenu" to="." method="_on_PopupMenu_fire_upgrade_pressed"]
 [connection signal="city_entered" from="CityStockholm" to="." method="_on_CityStockholm_city_entered"]
 [connection signal="city_exited" from="CityStockholm" to="." method="_on_CityStockholm_city_exited"]

@@ -1,6 +1,7 @@
 extends Panel
 
 signal fire_upgrade_pressed
+signal armor_upgrade_pressed
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,3 +15,7 @@ func _ready():
 
 func _on_FireUpgrade_button_pressed():
 	emit_signal("fire_upgrade_pressed")
+
+
+func _on_ArmorUpgrade_button_pressed():
+	emit_signal("armor_upgrade_pressed")

@@ -3,8 +3,6 @@ extends Node
 
 # Declare member variables here. Examples:
 export var fire_rate = 2.0
-# var b = "text"
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -46,3 +44,9 @@ func _on_FireButtonLeft_button_pressed():
 
 func _on_PopupMenu_fire_upgrade_pressed():
 	$PlayerBoat.fire_damage+=1
+
+
+func _on_PopupMenu_armor_upgrade_pressed():
+	$PlayerBoat.max_durability+=1
+	$PlayerBoat.durability+=1
+	$PlayerBoat.call("update_durability")

@@ -22,14 +22,14 @@ animations = [ {
 "name": "hp_yellow",
 "speed": 2.0
 }, {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "hp_red",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
 "name": "hp_0",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "hp_red",
 "speed": 5.0
 } ]
 

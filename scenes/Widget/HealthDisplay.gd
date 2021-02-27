@@ -9,12 +9,13 @@ onready var healthbar = $HealthBar
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	hide()
-	if get_parent() and get_parent().get("max_health"):
-		healthbar.max_value = get_parent().max_health
+	if get_parent() and get_parent().get("max_durability"):
+		healthbar.max_value = get_parent().max_durability
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	global_rotation = 0
+	print(healthbar.max_value)
 
 func update_healthbar(value):
 	healthbar.texture_progress = bar_green
@@ -25,3 +26,6 @@ func update_healthbar(value):
 	if value < healthbar.max_value:
 		show()
 	healthbar.value = value
+
+func update_max_health(value):
+	healthbar.max_value = value

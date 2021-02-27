@@ -20,7 +20,7 @@ var isAnchorOn = false
 var angle = 0
 
 # Default to 10. Boat sinks when durability reaches 0.
-export var durability = 10
+var durability = 10
 export var max_durability = 10
 
 # Setting cannon gun related attributes.
@@ -87,6 +87,7 @@ func _process(_delta):
 	$CannonGunRight.rotation_degrees = angle + 180
 	$CannonGunLeft.rotation_degrees = angle
 	
+	animate_health_bar()
 	animate(angle)
 	$AnimatedSprite.play()
 		
@@ -115,6 +116,11 @@ func _physics_process(delta):
 
 # Controls ship movement animation
 func animate(ta):
+	$AnimatedSprite.scale = Vector2(1, 1)
+	$Body.rotation_degrees = ta - 90
+	$AnimatedSprite.rotation_degrees = ta - 90
+		
+func animate_health_bar():
 	$AnimatedSprite.animation = "hp_green"
 	if durability < max_durability * 0.7:
 		$AnimatedSprite.animation = "hp_yellow"
@@ -122,12 +128,6 @@ func animate(ta):
 		$AnimatedSprite.animation = "hp_red"
 	if durability <= 0:
 		$AnimatedSprite.animation = "hp_0"
-	
-	$AnimatedSprite.scale = Vector2(1, 1)
-	$Body.rotation_degrees = ta - 90
-	$AnimatedSprite.rotation_degrees = ta - 90
-	$Body.position.x = 0
-	$Body.position.y = 0
 		
 func fire_animate_left():
 	fire_animate(static_velocity.rotated(deg2rad(-90)))
@@ -157,9 +157,13 @@ func anchor_off():
 func hit(damage):
 	durability -= damage
 	$Fire.set_emitting(true)
-	$HealthDisplay.update_healthbar(durability * 10)
+	$HealthDisplay.update_healthbar(durability)
 	print("Player boat is hit, current durability: ", durability)
 
 func sink():
 	speed = 0
 	rotation_speed = 0
+
+func update_durability():
+	$HealthDisplay.update_max_health(max_durability)
+	$HealthDisplay.update_healthbar(durability)
