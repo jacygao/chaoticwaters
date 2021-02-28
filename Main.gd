@@ -47,15 +47,17 @@ func _on_FireButtonLeft_button_pressed():
 
 # Economy section starts here
 func _on_PopupMenu_fire_upgrade_pressed(cost):
-	$PlayerBoat.fire_damage+=1
-	updateCoins(coins-cost)
+	if cost <= coins:
+		$PlayerBoat.fire_damage+=1
+		updateCoins(coins-cost)
 
 
 func _on_PopupMenu_armor_upgrade_pressed(cost):
-	$PlayerBoat.max_durability+=1
-	$PlayerBoat.durability+=1
-	$PlayerBoat.call("update_durability")
-	updateCoins(coins-cost)
+	if cost <= coins:
+		$PlayerBoat.max_durability+=1
+		$PlayerBoat.durability+=1
+		$PlayerBoat.call("update_durability")
+		updateCoins(coins-cost)
 	
 func updateCoins(c):
 	coins = c

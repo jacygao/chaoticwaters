@@ -21,7 +21,7 @@ export var is_target_seen = false
 
 export var respawn_wait_time = 30
 
-var has_sunk = false
+var object_type = "ship"
 
 var smoke = preload("res://scenes/Boat/Smoke.tscn")
 var cannon_ball = preload("res://scenes/CannonBall/CannonBall.tscn")
@@ -76,7 +76,7 @@ func _physics_process(delta):
 	move_and_slide(velocity)
 	
 func type():
-	return "ship"
+	return object_type
 
 func id():
 	return "npc_boat_1"
@@ -116,16 +116,16 @@ func sink():
 	$Smoke.set_emitting(true)
 	speed = 0
 	rotation_speed = 0
-	has_sunk = true
+	object_type = "wreck"
 	$DisappearTimer.start()
 	$RespawnTimer.start()
 
 func _on_CannonGunLeft_fire(target):
-	if !has_sunk:
+	if object_type == "ship":
 		fire_animate(target)
 
 func _on_CannonGunRight_fire(target):
-	if !has_sunk:
+	if object_type == "ship" :
 		fire_animate(target)
 
 func _on_VisionCircle_body_entered(body):

@@ -37,7 +37,6 @@ margin_bottom = 550.0
 rect_scale = Vector2( 0.5, 0.5 )
 
 [node name="PopupMenu" parent="HUD" instance=ExtResource( 9 )]
-visible = false
 margin_left = 0.0
 margin_top = 500.0
 margin_right = 1025.0

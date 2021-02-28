@@ -21,7 +21,7 @@ func _ready():
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if !targets.empty():
 		target = targets.values().front()
 		if position.length() > target.position.length():
@@ -50,7 +50,9 @@ func _on_Outpost_body_exited(body):
 func _on_CannonGun_fire(vec):
 	if vec.has_method("team") && vec.team() == team:
 		return
-	fire_animate(vec.position - position)
+		
+	if vec.has_method("type") && vec.type() == "ship":
+		fire_animate(vec.position - position)
 
 # Fires an animated cannon ball at a given vector position
 func fire_animate(vec):
