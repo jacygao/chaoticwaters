@@ -3,6 +3,7 @@ extends Node
 
 # Declare member variables here. Examples:
 export var fire_rate = 2.0
+export var coins = 200
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,6 +13,8 @@ func _ready():
 	$CityStockholm.rotation_degrees = 90
 	
 	$CityRiga.rotation_degrees = -90
+	
+	updateCoins(coins)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -42,11 +45,18 @@ func _on_FireButtonLeft_button_pressed():
 	$PlayerBoat.call("fire_animate_left")
 
 
-func _on_PopupMenu_fire_upgrade_pressed():
+# Economy section starts here
+func _on_PopupMenu_fire_upgrade_pressed(cost):
 	$PlayerBoat.fire_damage+=1
+	updateCoins(coins-cost)
 
 
-func _on_PopupMenu_armor_upgrade_pressed():
+func _on_PopupMenu_armor_upgrade_pressed(cost):
 	$PlayerBoat.max_durability+=1
 	$PlayerBoat.durability+=1
 	$PlayerBoat.call("update_durability")
+	updateCoins(coins-cost)
+	
+func updateCoins(c):
+	coins = c
+	$HUD.update_coins(coins)

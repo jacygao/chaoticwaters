@@ -6,6 +6,7 @@ export var cooldown = 2.0
 export var counter_text = ""
 export var texture_path = "res://assets/icons/cannon_shot.png"
 export var desciption = ""
+export var cost = 100
 
 signal button_pressed
 

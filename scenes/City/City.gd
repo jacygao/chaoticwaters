@@ -40,16 +40,12 @@ func _on_Outpost_body_entered(body):
 		if body.type() == "ship":
 			if body.team() != team():
 				targets[body.id()] = body
-			else:
-				emit_signal("city_entered")
 			
 func _on_Outpost_body_exited(body):
 	if body.has_method("type"):
 		if body.type() == "ship": 
 			if body.team() != team():
 				targets.erase(body.id())
-			else:
-				emit_signal("city_exited")
 
 func _on_CannonGun_fire(vec):
 	if vec.has_method("team") && vec.team() == team:
@@ -64,3 +60,14 @@ func fire_animate(vec):
 	cannon_ball_ins.init(angle, fire_damage, fire_range)
 	$Cannon/CannonGunFireSmoke.set_emitting(true)
 	get_parent().add_child(cannon_ball_ins)
+
+
+func _on_Dock_body_entered(body):
+	if body.has_method("type"):
+		if body.type() == "ship" && body.team() == team():
+			emit_signal("city_entered")
+
+func _on_Dock_body_exited(body):
+	if body.has_method("type"):
+		if body.type() == "ship" && body.team() == team():
+			emit_signal("city_exited")
