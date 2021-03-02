@@ -24,11 +24,8 @@ func _ready():
 func _process(_delta):
 	if !targets.empty():
 		target = targets.values().front()
-		if position.length() > target.position.length():
-			$Cannon.rotation = (position - target.position).angle()
-		else:
-			$Cannon.rotation = (target.position - position).angle()
-	
+		$Cannon.rotation = (target.position - position).angle()
+		
 func type():
 	return "city"
 

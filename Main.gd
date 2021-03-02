@@ -9,11 +9,6 @@ export var coins = 200
 func _ready():
 	$HUD/FireButtonRight.call("set_cooldown", fire_rate)
 	$HUD/FireButtonLeft.call("set_cooldown", fire_rate)
-
-	$CityStockholm.rotation_degrees = 90
-	
-	$CityRiga.rotation_degrees = -90
-	
 	updateCoins(coins)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
