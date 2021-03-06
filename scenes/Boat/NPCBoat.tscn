@@ -18,14 +18,14 @@ animations = [ {
 "name": "hp_green",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 10 ) ],
-"loop": true,
-"name": "hp_yellow",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 9 ) ],
 "loop": true,
 "name": "hp_0",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "hp_yellow",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 7 ) ],
@@ -82,18 +82,8 @@ one_way_collision = true
 [node name="OutterCircle" type="CollisionShape2D" parent="TargetCircle"]
 shape = SubResource( 4 )
 one_way_collision = true
-
-[node name="RespawnTimer" type="Timer" parent="."]
-wait_time = 30.0
-one_shot = true
-
-[node name="DisappearTimer" type="Timer" parent="."]
-wait_time = 5.0
-one_shot = true
 [connection signal="fire" from="CannonGunLeft" to="." method="_on_CannonGunLeft_fire"]
 [connection signal="fire" from="CannonGunRight" to="." method="_on_CannonGunRight_fire"]
 [connection signal="area_entered" from="VisionCircle" to="." method="_on_VisionCircle_area_entered"]
 [connection signal="body_entered" from="VisionCircle" to="." method="_on_VisionCircle_body_entered"]
 [connection signal="body_exited" from="TargetCircle" to="." method="_on_TargetCircle_body_exited"]
-[connection signal="timeout" from="RespawnTimer" to="." method="_on_RespawnTimer_timeout"]
-[connection signal="timeout" from="DisappearTimer" to="." method="_on_DisappearTimer_timeout"]

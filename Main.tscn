@@ -64,6 +64,9 @@ scale = Vector2( 0.5, 0.5 )
 [node name="NPCBoat" parent="." instance=ExtResource( 4 )]
 position = Vector2( 843.442, 223.161 )
 scale = Vector2( 0.5, 0.5 )
+
+[node name="BoatDisappearTimer" type="Timer" parent="."]
+wait_time = 10.0
 [connection signal="button_pressed" from="HUD/FireButtonRight" to="." method="_on_FireButtonRight_button_pressed"]
 [connection signal="button_pressed" from="HUD/FireButtonLeft" to="." method="_on_FireButtonLeft_button_pressed"]
 [connection signal="anchor_off" from="HUD/AnchorButton" to="." method="_on_AnchorButton_anchor_off"]
@@ -72,3 +75,5 @@ scale = Vector2( 0.5, 0.5 )
 [connection signal="fire_upgrade_pressed" from="HUD/PopupMenu" to="." method="_on_PopupMenu_fire_upgrade_pressed"]
 [connection signal="city_entered" from="CityStockholm" to="." method="_on_CityStockholm_city_entered"]
 [connection signal="city_exited" from="CityStockholm" to="." method="_on_CityStockholm_city_exited"]
+[connection signal="sinking" from="NPCBoat" to="." method="_on_NPCBoat_sinking"]
+[connection signal="timeout" from="BoatDisappearTimer" to="." method="_on_BoatDisappearTimer_timeout"]

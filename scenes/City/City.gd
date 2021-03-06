@@ -23,9 +23,13 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if !targets.empty():
-		target = targets.values().front()
-		$Cannon.rotation = (target.position - position).angle()
-		
+		var target_key = targets.keys().front()
+		target = targets.get(target_key)
+		if target.has_method("type") && target.type() == "wreck":
+			targets.erase(target_key)
+		else:
+			$Cannon.rotation = (target.position - position).angle()
+			
 func type():
 	return "city"
 

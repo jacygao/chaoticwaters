@@ -19,25 +19,23 @@ export var fire_max_range = 400
 
 export var is_target_seen = false
 
-export var respawn_wait_time = 30
-
 var object_type = "ship"
 
 var smoke = preload("res://scenes/Boat/Smoke.tscn")
 var cannon_ball = preload("res://scenes/CannonBall/CannonBall.tscn")
 
+signal sinking
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$CannonGunLeft.rotation_degrees = 0
 	$CannonGunRight.rotation_degrees = 180
-	$RespawnTimer.wait_time = respawn_wait_time
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if durability <= 0:
-		# TODO: ship sinking animation
-		sink()
-		print("NPC boat has sunk")
+		if object_type == "ship":
+			sink()
 
 	var angle = rad2deg(cur_rotation)
 	if angle > 180:
@@ -117,8 +115,7 @@ func sink():
 	speed = 0
 	rotation_speed = 0
 	object_type = "wreck"
-	$DisappearTimer.start()
-	$RespawnTimer.start()
+	emit_signal("sinking")
 
 func _on_CannonGunLeft_fire(target):
 	if object_type == "ship":
@@ -138,17 +135,3 @@ func _on_TargetCircle_body_exited(body):
 	if body.get_class() == "KinematicBody2D":
 		is_target_seen = false
 		print("target is out of sight")
-
-
-func _on_DisappearTimer_timeout():
-	queue_free()
-	$DisappearTimer.stop()
-
-
-func _on_RespawnTimer_timeout():
-	# re-appear on the map
-	pass # Replace with function body.
-
-
-func _on_SmokeTimer_timeout():
-	pass # Replace with function body.

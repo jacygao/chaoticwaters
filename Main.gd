@@ -63,3 +63,14 @@ func update_coins(c):
 
 func show_warn_message(msg):
 	$HUD.show_message($HUD.message_level_warn, msg)
+
+
+func _on_BoatDisappearTimer_timeout():
+	print("sinkking")
+	$NPCBoat.queue_free()
+	$BoatDisappearTimer.stop()
+
+
+func _on_NPCBoat_sinking():
+	print("triggered")
+	$BoatDisappearTimer.start()
