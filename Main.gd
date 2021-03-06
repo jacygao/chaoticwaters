@@ -9,7 +9,7 @@ export var coins = 200
 func _ready():
 	$HUD/FireButtonRight.call("set_cooldown", fire_rate)
 	$HUD/FireButtonLeft.call("set_cooldown", fire_rate)
-	updateCoins(coins)
+	update_coins(coins)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -44,16 +44,22 @@ func _on_FireButtonLeft_button_pressed():
 func _on_PopupMenu_fire_upgrade_pressed(cost):
 	if cost <= coins:
 		$PlayerBoat.fire_damage+=1
-		updateCoins(coins-cost)
-
+		update_coins(coins-cost)
+	else:	
+		show_warn_message("insufficient funds")
 
 func _on_PopupMenu_armor_upgrade_pressed(cost):
 	if cost <= coins:
 		$PlayerBoat.max_durability+=1
 		$PlayerBoat.durability+=1
 		$PlayerBoat.call("update_durability")
-		updateCoins(coins-cost)
-	
-func updateCoins(c):
+		update_coins(coins-cost)
+	else:	
+		show_warn_message("insufficient funds")
+		
+func update_coins(c):
 	coins = c
 	$HUD.update_coins(coins)
+
+func show_warn_message(msg):
+	$HUD.show_message($HUD.message_level_warn, msg)

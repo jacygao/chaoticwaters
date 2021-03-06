@@ -5,6 +5,7 @@
 [ext_resource path="res://scenes/GUI/PriceTag.tscn" type="PackedScene" id=4]
 
 [node name="CityPopupMenu" type="Panel"]
+visible = false
 margin_left = 1.0
 margin_top = 498.0
 margin_right = 1022.0
