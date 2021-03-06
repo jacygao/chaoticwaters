@@ -5,10 +5,10 @@
 [ext_resource path="res://scenes/World/WorldMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/Boat/NPCBoat.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/City/City.tscn" type="PackedScene" id=5]
-[ext_resource path="res://HUD.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/GUI/HUD.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Main.gd" type="Script" id=7]
 [ext_resource path="res://scenes/GUI/AnchorButton.tscn" type="PackedScene" id=8]
-[ext_resource path="res://CityPopupMenu.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/City/CityPopupMenu.tscn" type="PackedScene" id=9]
 
 [node name="Main" type="Node"]
 script = ExtResource( 7 )
@@ -37,9 +37,11 @@ margin_bottom = 550.0
 rect_scale = Vector2( 0.5, 0.5 )
 
 [node name="PopupMenu" parent="HUD" instance=ExtResource( 9 )]
-margin_left = 0.0
-margin_top = 500.0
-margin_right = 1025.0
+visible = false
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 180.0
+margin_bottom = 520.0
 
 [node name="WorldMap" parent="." instance=ExtResource( 3 )]
 position = Vector2( 287.769, -3741.88 )
