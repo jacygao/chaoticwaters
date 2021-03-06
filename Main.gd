@@ -1,6 +1,5 @@
 extends Node
 
-
 # Declare member variables here. Examples:
 export var fire_rate = 2.0
 export var coins = 200
@@ -18,27 +17,21 @@ func _ready():
 func _on_AnchorButton_anchor_on():
 	$PlayerBoat.call("anchor_on")
 
-
 func _on_AnchorButton_anchor_off():
 	$PlayerBoat.call("anchor_off")
 
-
 func _on_CityStockholm_city_entered():
 	$HUD/PopupMenu.visible = true
-
 
 func _on_CityStockholm_city_exited():
 	if $HUD/PopupMenu.visible:
 		$HUD/PopupMenu.hide()
 
-
 func _on_FireButtonRight_button_pressed():
 	$PlayerBoat.call("fire_animate_right")
 
-
 func _on_FireButtonLeft_button_pressed():
 	$PlayerBoat.call("fire_animate_left")
-
 
 # Economy section starts here
 func _on_PopupMenu_fire_upgrade_pressed(cost):
@@ -64,12 +57,10 @@ func update_coins(c):
 func show_warn_message(msg):
 	$HUD.show_message($HUD.message_level_warn, msg)
 
-
 func _on_BoatDisappearTimer_timeout():
 	print("sinkking")
 	$NPCBoat.queue_free()
 	$BoatDisappearTimer.stop()
-
 
 func _on_NPCBoat_sinking():
 	print("triggered")

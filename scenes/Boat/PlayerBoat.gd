@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends Boat
 
 export var team = 1
 
@@ -6,30 +6,18 @@ export var team = 1
 export var default_speed = 100
 var speed = default_speed
 
-export (float) var default_rotation_speed = 1
-var rotation_speed = default_rotation_speed
-
 export (float) var default_acceleration = 1
 var acceleration = default_acceleration
 
-var cur_rotation = 0
-var rotation_dir = 0
-var velocity = Vector2()
 var static_velocity = Vector2()
 var isAnchorOn = false
 var angle = 0
-
-# Default to 10. Boat sinks when durability reaches 0.
-var durability = 10
-export var max_durability = 10
 
 # Setting cannon gun related attributes.
 # These values are now in the CannonGun nodes as well but 
 # they will still need to be set in order to customise
 export var fire_blind_range = 100
-export var fire_max_range = 300
 export var fire_rate = 2.0
-export var fire_damage = 1
 
 var target_direction = Vector2()
 var target_rotation = 0
@@ -42,12 +30,12 @@ var target = Vector2()
 var rotating = false
 var last_x = 0
 
-var cannon_ball = preload("res://scenes/CannonBall/CannonBall.tscn")
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = $Camera2D.position
 	target = $Camera2D.position
+	$CannonGunRight.rotation_degrees = -90
+	$CannonGunLeft.rotation_degrees = 90
 	
 func type():
 	return "ship"
@@ -77,16 +65,9 @@ func _process(_delta):
 	if durability == 0:
 		print("player boat has sunk")
 		sink()
-		# TODO: player boat has sunk.. what now?
-	angle = rad2deg(cur_rotation)
-	if angle > 180:
-		angle = (360 - angle) * -1
-	if angle < -180:
-		angle = 360 - angle * -1
-	
-	$CannonGunRight.rotation_degrees = angle + 180
-	$CannonGunLeft.rotation_degrees = angle
-	
+		# TODO: player boat has sunk.. what now?\
+		
+	angle = angle_tidy(rad2deg(cur_rotation))
 	animate_health_bar()
 	animate(angle)
 	$AnimatedSprite.play()
@@ -117,8 +98,7 @@ func _physics_process(delta):
 # Controls ship movement animation
 func animate(ta):
 	$AnimatedSprite.scale = Vector2(1, 1)
-	$Body.rotation_degrees = ta - 90
-	$AnimatedSprite.rotation_degrees = ta - 90
+	rotation_degrees = ta - 90
 		
 func animate_health_bar():
 	$AnimatedSprite.animation = "hp_green"
@@ -130,19 +110,18 @@ func animate_health_bar():
 		$AnimatedSprite.animation = "hp_0"
 		
 func fire_animate_left():
-	fire_animate(static_velocity.rotated(deg2rad(-90)))
+	fire_animate($CannonGunLeft/CannonGunAngle)
 		
 func fire_animate_right():
-	fire_animate(static_velocity.rotated(deg2rad(90)))
+	fire_animate($CannonGunRight/CannonGunAngle)
 	
 # Fires an animated cannon ball at a given vector position
-func fire_animate(vec):
+func fire_animate(gun):
 	var cannon_ball_ins = cannon_ball.instance()
-	var angle = vec.angle()
-	$CannonGunAngle.rotation = angle
-	cannon_ball_ins.position = $CannonGunAngle/CannonGunPosition.get_global_position()
-	cannon_ball_ins.init(angle, fire_damage, fire_max_range)
-	$CannonGunAngle/CannonGunFireSmoke.set_emitting(true)
+	var pos = gun.get_node("CannonGunPosition").get_global_position()
+	cannon_ball_ins.position = pos
+	cannon_ball_ins.init((pos-position).angle(), fire_damage, fire_max_range)
+	gun.get_node("CannonGunFireSmoke").set_emitting(true)
 	get_parent().add_child(cannon_ball_ins)
 
 func anchor_on():
