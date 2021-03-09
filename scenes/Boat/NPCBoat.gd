@@ -2,7 +2,7 @@ extends Boat
 
 export var team = 2
  # How fast the player will move (pixels/sec)
-export var speed = 50
+export var speed = 100
 # A target has entered visible range of the NPC boat
 export var is_target_seen = false
 
@@ -33,7 +33,7 @@ func _physics_process(delta):
 		cur_rotation+=2*PI
 	velocity = Vector2(speed, 0).rotated(cur_rotation)
 	
-	var targetPos = get_parent().get_node("PlayerBoat").position
+	var targetPos = get_target()
 	
 	var target_direction = targetPos - position
 	var target_angle = rad2deg(target_direction.angle_to(velocity))
@@ -50,6 +50,14 @@ func _physics_process(delta):
 	cur_rotation += rotation_dir * rotation_speed * delta
 	move_and_slide(velocity)
 	
+func get_target():
+	var targetPos = null
+	if durability < max_durability * 0.3:
+		targetPos = get_parent().get_node("CityRiga").position
+	else:
+		targetPos = get_parent().get_node("PlayerBoat").position
+	return targetPos
+		
 func type():
 	return object_type
 
@@ -111,3 +119,15 @@ func _on_TargetCircle_body_exited(body):
 	if body.get_class() == "KinematicBody2D":
 		is_target_seen = false
 		print("target is out of sight")
+
+func update_durability():
+	$HealthDisplay.update_max_health(max_durability)
+	$HealthDisplay.update_healthbar(durability)
+
+func repair():
+	if durability < max_durability:
+		durability+=1
+		update_durability()
+	elif durability > max_durability:
+		durability = max_durability
+		update_durability()
