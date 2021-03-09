@@ -10,6 +10,8 @@ var rotation_speed = default_rotation_speed
 var cur_rotation
 var targets = {}
 var target = null
+var friendly_targets = null
+
 var cannon_ball = preload("res://scenes/CannonBall/CannonBall.tscn")
 
 signal city_entered
@@ -64,13 +66,18 @@ func fire_animate(vec):
 	$Cannon/CannonGunFireSmoke.set_emitting(true)
 	get_parent().add_child(cannon_ball_ins)
 
-
 func _on_Dock_body_entered(body):
 	if body.has_method("type"):
 		if body.type() == "ship" && body.team() == team():
+			friendly_targets = body
 			emit_signal("city_entered")
 
 func _on_Dock_body_exited(body):
 	if body.has_method("type"):
 		if body.type() == "ship" && body.team() == team():
+			friendly_targets = null
 			emit_signal("city_exited")
+
+func _on_BodyRepairTimer_timeout():
+	if friendly_targets != null && friendly_targets.has_method("repair"):
+		friendly_targets.repair()

@@ -65,8 +65,8 @@ func _process(_delta):
 	if durability == 0:
 		print("player boat has sunk")
 		sink()
-		# TODO: player boat has sunk.. what now?\
-		
+		# TODO: player boat has sunk.. what now?
+
 	angle = angle_tidy(rad2deg(cur_rotation))
 	animate_health_bar()
 	animate(angle)
@@ -146,3 +146,11 @@ func sink():
 func update_durability():
 	$HealthDisplay.update_max_health(max_durability)
 	$HealthDisplay.update_healthbar(durability)
+
+func repair():
+	if durability < max_durability:
+		durability+=1
+		update_durability()
+	elif durability > max_durability:
+		durability = max_durability
+		update_durability()

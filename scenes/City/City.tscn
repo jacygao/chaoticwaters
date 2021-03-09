@@ -75,8 +75,12 @@ shape = SubResource( 4 )
 [node name="DockArea" type="CollisionShape2D" parent="Dock"]
 shape = SubResource( 5 )
 one_way_collision = true
+
+[node name="BodyRepairTimer" type="Timer" parent="."]
+autostart = true
 [connection signal="fire" from="Cannon/CannonGun" to="." method="_on_CannonGun_fire"]
 [connection signal="body_entered" from="Outpost" to="." method="_on_Outpost_body_entered"]
 [connection signal="body_exited" from="Outpost" to="." method="_on_Outpost_body_exited"]
 [connection signal="body_entered" from="Dock" to="." method="_on_Dock_body_entered"]
 [connection signal="body_exited" from="Dock" to="." method="_on_Dock_body_exited"]
+[connection signal="timeout" from="BodyRepairTimer" to="." method="_on_BodyRepairTimer_timeout"]
