@@ -15,7 +15,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BaseButton" parent="." instance=ExtResource( 2 )]
+[node name="UpgradeButton" parent="." instance=ExtResource( 2 )]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -28,3 +28,4 @@ cooldown = 0.0
 texture_path = "res://assets/icons/upgrade.png"
 desciption = "Upgrade"
 cost = 0
+[connection signal="button_pressed" from="UpgradeButton" to="." method="_on_UpgradeButton_button_pressed"]

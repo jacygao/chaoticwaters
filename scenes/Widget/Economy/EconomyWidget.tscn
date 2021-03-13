@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/Widget/Economy/EconomyWidget.gd" type="Script" id=1]
+[ext_resource path="res://assets/gui/icon.png" type="Texture" id=2]
+
+[node name="EconomyWidget" type="Panel"]
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -104.0
+margin_top = 5.0
+margin_right = -3.99994
+margin_bottom = 35.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+icon_path = "res://assets/gui/coin.png"
+
+[node name="Icon" type="Sprite" parent="."]
+position = Vector2( 15, 15 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 2 )
+
+[node name="Number" type="Label" parent="."]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -60.0
+margin_top = -7.0
+margin_bottom = 7.0
+text = "20000"
+__meta__ = {
+"_edit_use_anchors_": false
+}

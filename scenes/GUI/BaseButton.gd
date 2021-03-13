@@ -12,7 +12,7 @@ signal button_pressed
 
 func _ready():
 	self.texture_normal = load(texture_path)
-	$Tooltip.text = desciption
+	$LabelPanel/Tooltip.text = desciption
 	$Timer.wait_time = cooldown
 	time_label.hide()
 	if cooldown > 0:
@@ -21,7 +21,7 @@ func _ready():
 	else: 
 		$Sweep.hide()
 		$Counter.hide()
-	$Tooltip.visible = false
+	$LabelPanel.visible = false
 	set_process(false)
 
 func _process(delta):
@@ -46,7 +46,7 @@ func _on_Timer_timeout():
 	set_process(false)
 
 func _on_BaseButton_mouse_entered():
-	$Tooltip.visible = true
+	$LabelPanel.visible = true
 
 func _on_BaseButton_mouse_exited():
-	$Tooltip.visible = false
+	$LabelPanel.visible = false

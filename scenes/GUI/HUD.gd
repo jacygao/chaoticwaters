@@ -2,18 +2,14 @@ extends CanvasLayer
 
 enum {message_level_info, message_level_warn}
 
-var coins = 200
+var coins = 20000
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	update_coins(coins)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
 func update_coins(coins):
-	$EconomyPanel/Number.text = String(coins)
+	$EconomyMenu.set_coins(coins)
 
 func show_message(level, message):
 	var color = Color(0, 0, 0, 1)
@@ -28,7 +24,9 @@ func show_message(level, message):
 	$MessagePanel.visible = true
 	$MessagePanelTimer.start()
 
-
 func _on_MessagePanelTimer_timeout():
 	$MessagePanelTimer.stop()
 	$MessagePanel.visible = false
+
+func _on_BarMenu_upgrade_button_pressed():
+	$UpgradePopupMenu.visible = true

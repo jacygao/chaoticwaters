@@ -8,7 +8,7 @@
 [ext_resource path="res://scenes/GUI/HUD.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Main.gd" type="Script" id=7]
 [ext_resource path="res://scenes/GUI/AnchorButton.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/City/CityPopupMenu.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/GUI/BarMenu.tscn" type="PackedScene" id=10]
 
 [node name="Main" type="Node"]
 script = ExtResource( 7 )
@@ -16,6 +16,7 @@ script = ExtResource( 7 )
 [node name="HUD" parent="." instance=ExtResource( 6 )]
 
 [node name="FireButtonRight" parent="HUD" instance=ExtResource( 2 )]
+visible = false
 margin_left = 950.0
 margin_top = 530.0
 margin_right = 1050.0
@@ -23,6 +24,7 @@ margin_bottom = 630.0
 rect_scale = Vector2( 0.5, 0.5 )
 
 [node name="FireButtonLeft" parent="HUD" instance=ExtResource( 2 )]
+visible = false
 margin_left = 20.0
 margin_top = 530.0
 margin_right = 120.0
@@ -36,12 +38,12 @@ margin_right = 1050.0
 margin_bottom = 550.0
 rect_scale = Vector2( 0.5, 0.5 )
 
-[node name="PopupMenu" parent="HUD" instance=ExtResource( 9 )]
-visible = false
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 180.0
-margin_bottom = 520.0
+[node name="BarMenu" parent="HUD" instance=ExtResource( 10 )]
+margin_left = -234.0
+margin_top = -70.0
+margin_right = 219.0
+margin_bottom = 50.0
+rect_scale = Vector2( 0.5, 0.5 )
 
 [node name="WorldMap" parent="." instance=ExtResource( 3 )]
 position = Vector2( 287.769, -3741.88 )
@@ -71,8 +73,6 @@ wait_time = 10.0
 [connection signal="button_pressed" from="HUD/FireButtonLeft" to="." method="_on_FireButtonLeft_button_pressed"]
 [connection signal="anchor_off" from="HUD/AnchorButton" to="." method="_on_AnchorButton_anchor_off"]
 [connection signal="anchor_on" from="HUD/AnchorButton" to="." method="_on_AnchorButton_anchor_on"]
-[connection signal="armor_upgrade_pressed" from="HUD/PopupMenu" to="." method="_on_PopupMenu_armor_upgrade_pressed"]
-[connection signal="fire_upgrade_pressed" from="HUD/PopupMenu" to="." method="_on_PopupMenu_fire_upgrade_pressed"]
 [connection signal="city_entered" from="CityStockholm" to="." method="_on_CityStockholm_city_entered"]
 [connection signal="city_exited" from="CityStockholm" to="." method="_on_CityStockholm_city_exited"]
 [connection signal="sinking" from="NPCBoat" to="." method="_on_NPCBoat_sinking"]

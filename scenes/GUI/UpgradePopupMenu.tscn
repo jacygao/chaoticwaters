@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/GUI/BaseButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/GUI/UpgradePopupMenu.gd" type="Script" id=2]
+[ext_resource path="res://scenes/GUI/PriceTag.tscn" type="PackedScene" id=4]
+
+[node name="UpgradePopupMenu" type="Panel"]
+self_modulate = Color( 0, 0, 0, 0.784314 )
+margin_left = 2.1225
+margin_right = 1026.12
+margin_bottom = 600.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ArmorUpgrade" parent="." instance=ExtResource( 1 )]
+margin_left = 10.0
+margin_top = 20.0
+margin_right = 110.0
+margin_bottom = 120.0
+cooldown = 1.0
+texture_path = "res://assets/icons/armor_plus.png"
+desciption = "Health+1"
+
+[node name="PriceTag" parent="ArmorUpgrade" instance=ExtResource( 4 )]
+margin_right = 69.0
+margin_bottom = 43.0
+text = "50"
+
+[node name="FireUpgrade" parent="." instance=ExtResource( 1 )]
+margin_left = 10.0
+margin_top = 140.0
+cooldown = 1.0
+texture_path = "res://assets/icons/cannon_shot_plus.png"
+desciption = "Damage+1"
+cost = 200
+
+[node name="PriceTag" parent="FireUpgrade" instance=ExtResource( 4 )]
+margin_right = 69.0
+margin_bottom = 43.0
+text = "200"
+
+[node name="SpeedUpgrade" parent="." instance=ExtResource( 1 )]
+margin_left = 10.0
+margin_top = 260.0
+margin_right = 110.0
+margin_bottom = 360.0
+texture_path = "res://assets/icons/sail_plus.png"
+desciption = "Speed+1"
+
+[node name="PriceTag" parent="SpeedUpgrade" instance=ExtResource( 4 )]
+margin_right = 53.0
+margin_bottom = 43.0
+text = "200"
+[connection signal="button_pressed" from="ArmorUpgrade" to="." method="_on_ArmorUpgrade_button_pressed"]
+[connection signal="button_pressed" from="FireUpgrade" to="." method="_on_FireUpgrade_button_pressed"]
+[connection signal="button_pressed" from="SpeedUpgrade" to="." method="_on_SpeedUpgrade_button_pressed"]
