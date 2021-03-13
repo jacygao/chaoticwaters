@@ -6,9 +6,14 @@
 
 [node name="UpgradePopupMenu" type="Panel"]
 self_modulate = Color( 0, 0, 0, 0.784314 )
-margin_left = 2.1225
-margin_right = 1026.12
-margin_bottom = 600.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -450.0
+margin_top = -250.0
+margin_right = 450.0
+margin_bottom = 250.0
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -53,6 +58,29 @@ desciption = "Speed+1"
 margin_right = 53.0
 margin_bottom = 43.0
 text = "200"
+
+[node name="Toolbar" type="Panel" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloseButton" parent="Toolbar" instance=ExtResource( 1 )]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -25.0
+margin_top = 5.0
+margin_right = 60.0
+rect_scale = Vector2( 0.3, 0.3 )
+cooldown = 0.0
+texture_path = "res://assets/gui/clip.png"
+show_desc_on_hover = false
+cost = 0
 [connection signal="button_pressed" from="ArmorUpgrade" to="." method="_on_ArmorUpgrade_button_pressed"]
 [connection signal="button_pressed" from="FireUpgrade" to="." method="_on_FireUpgrade_button_pressed"]
 [connection signal="button_pressed" from="SpeedUpgrade" to="." method="_on_SpeedUpgrade_button_pressed"]
+[connection signal="button_pressed" from="Toolbar/CloseButton" to="." method="_on_CloseButton_button_pressed"]

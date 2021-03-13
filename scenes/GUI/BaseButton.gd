@@ -6,6 +6,7 @@ export var cooldown = 2.0
 export var counter_text = ""
 export var texture_path = "res://assets/icons/click.png"
 export var desciption = ""
+export var show_desc_on_hover = true
 export var cost = 100
 
 signal button_pressed
@@ -46,7 +47,9 @@ func _on_Timer_timeout():
 	set_process(false)
 
 func _on_BaseButton_mouse_entered():
-	$LabelPanel.visible = true
+	if show_desc_on_hover:
+		$LabelPanel.visible = true
 
 func _on_BaseButton_mouse_exited():
-	$LabelPanel.visible = false
+	if show_desc_on_hover:
+		$LabelPanel.visible = false

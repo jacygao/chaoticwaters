@@ -30,3 +30,6 @@ func _on_MessagePanelTimer_timeout():
 
 func _on_BarMenu_upgrade_button_pressed():
 	$UpgradePopupMenu.visible = true
+
+func _on_UpgradePopupMenu_close_pressed():
+	$UpgradePopupMenu.visible = false
