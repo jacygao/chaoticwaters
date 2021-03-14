@@ -17,11 +17,10 @@ func _on_AnchorButton_anchor_off():
 	$PlayerBoat.call("anchor_off")
 
 func _on_CityStockholm_city_entered():
-	$HUD/PopupMenu.visible = true
+	pass
 
 func _on_CityStockholm_city_exited():
-	if $HUD/PopupMenu.visible:
-		$HUD/PopupMenu.hide()
+	pass
 
 func _on_FireButtonRight_button_pressed():
 	$PlayerBoat.call("fire_animate_right")
