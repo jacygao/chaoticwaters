@@ -36,6 +36,7 @@ rect_scale = Vector2( 0.5, 0.5 )
 cooldown = 1.0
 texture_path = "res://assets/icons/armor_plus.png"
 desciption = "Health+1"
+show_desc = false
 
 [node name="PriceTag" parent="ArmorUpgrade" instance=ExtResource( 4 )]
 margin_right = 69.0
@@ -49,9 +50,10 @@ margin_top = 380.271
 margin_right = 581.199
 margin_bottom = 480.271
 rect_scale = Vector2( 0.5, 0.5 )
-cooldown = 1.0
+cooldown = 4.0
 texture_path = "res://assets/icons/cannon_shot_plus.png"
 desciption = "Damage+1"
+show_desc = false
 cost = 200
 
 [node name="PriceTag" parent="FireUpgrade" instance=ExtResource( 4 )]
@@ -66,13 +68,29 @@ margin_top = 252.658
 margin_right = 547.828
 margin_bottom = 352.658
 rect_scale = Vector2( 0.5, 0.5 )
+cooldown = 4.0
 texture_path = "res://assets/icons/sail_plus.png"
 desciption = "Speed+1"
+show_desc = false
 
 [node name="PriceTag" parent="SpeedUpgrade" instance=ExtResource( 4 )]
 margin_right = 53.0
 margin_bottom = 43.0
 text = "200"
+
+[node name="VisibilityUpgrade" parent="." instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 0.784314 )
+margin_left = 272.307
+margin_top = 175.531
+margin_right = 372.307
+margin_bottom = 275.531
+rect_scale = Vector2( 0.5, 0.5 )
+texture_path = "res://assets/icons/spyglass.png"
+desciption = "Watchtower"
+show_desc = false
+
+[node name="PriceTag" parent="VisibilityUpgrade" instance=ExtResource( 4 )]
+text = "100"
 
 [node name="Toolbar" type="Panel" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )
@@ -98,4 +116,5 @@ cost = 0
 [connection signal="button_pressed" from="ArmorUpgrade" to="." method="_on_ArmorUpgrade_button_pressed"]
 [connection signal="button_pressed" from="FireUpgrade" to="." method="_on_FireUpgrade_button_pressed"]
 [connection signal="button_pressed" from="SpeedUpgrade" to="." method="_on_SpeedUpgrade_button_pressed"]
+[connection signal="button_pressed" from="VisibilityUpgrade" to="." method="_on_VisibilityButton_button_pressed"]
 [connection signal="button_pressed" from="Toolbar/CloseButton" to="." method="_on_CloseButton_button_pressed"]

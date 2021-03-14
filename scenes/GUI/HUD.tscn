@@ -61,3 +61,4 @@ visible = false
 [connection signal="close_pressed" from="UpgradePopupMenu" to="." method="_on_UpgradePopupMenu_close_pressed"]
 [connection signal="fire_upgrade_pressed" from="UpgradePopupMenu" to="." method="_on_UpgradePopupMenu_fire_upgrade_pressed"]
 [connection signal="speed_upgrade_pressed" from="UpgradePopupMenu" to="." method="_on_UpgradePopupMenu_speed_upgrade_pressed"]
+[connection signal="visibility_upgrade_pressed" from="UpgradePopupMenu" to="." method="_on_UpgradePopupMenu_visibility_upgrade_pressed"]
