@@ -10,10 +10,6 @@ func _ready():
 	$HUD/FireButtonLeft.call("set_cooldown", fire_rate)
 	update_coins(coins)
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
 func _on_AnchorButton_anchor_on():
 	$PlayerBoat.call("anchor_on")
 
