@@ -57,5 +57,7 @@ visible = false
 [node name="EconomyMenu" parent="." instance=ExtResource( 1 )]
 [connection signal="upgrade_button_pressed" from="BarMenu" to="." method="_on_BarMenu_upgrade_button_pressed"]
 [connection signal="timeout" from="MessagePanelTimer" to="." method="_on_MessagePanelTimer_timeout"]
-[connection signal="armor_upgrade_pressed" from="UpgradePopupMenu" to="EconomyMenu" method="_on_UpgradePopupMenu_armor_upgrade_pressed"]
+[connection signal="armor_upgrade_pressed" from="UpgradePopupMenu" to="." method="_on_UpgradePopupMenu_armor_upgrade_pressed"]
 [connection signal="close_pressed" from="UpgradePopupMenu" to="." method="_on_UpgradePopupMenu_close_pressed"]
+[connection signal="fire_upgrade_pressed" from="UpgradePopupMenu" to="." method="_on_UpgradePopupMenu_fire_upgrade_pressed"]
+[connection signal="speed_upgrade_pressed" from="UpgradePopupMenu" to="." method="_on_UpgradePopupMenu_speed_upgrade_pressed"]
