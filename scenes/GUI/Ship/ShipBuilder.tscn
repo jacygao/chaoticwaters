@@ -1,0 +1,239 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/GUI/Button/BaseButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/backgrounds/ship_gui_bg.png" type="Texture" id=2]
+
+[node name="ShipBuilder" type="Panel"]
+margin_left = 62.0
+margin_top = 50.0
+margin_right = 962.0
+margin_bottom = 550.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ship_gui_bg" type="Sprite" parent="."]
+position = Vector2( 449.003, 249.575 )
+scale = Vector2( 1.12514, 0.933758 )
+texture = ExtResource( 2 )
+
+[node name="CrowNest" parent="." instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 263.664
+margin_top = 47.0034
+margin_right = 363.664
+margin_bottom = 147.003
+rect_scale = Vector2( 0.5, 0.5 )
+cooldown = 30.0
+texture_path = "res://assets/icons/crow-nest.png"
+show_desc = false
+
+[node name="Sail1" parent="." instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 429.224
+margin_top = 47.7526
+margin_right = 529.224
+margin_bottom = 147.753
+rect_scale = Vector2( 0.5, 0.5 )
+cooldown = 30.0
+texture_path = "res://assets/icons/sail.png"
+show_desc = false
+
+[node name="Sail2" parent="." instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 735.743
+margin_top = 82.9855
+margin_right = 835.743
+margin_bottom = 182.986
+rect_scale = Vector2( 0.5, 0.5 )
+cooldown = 30.0
+texture_path = "res://assets/icons/sail.png"
+show_desc = false
+
+[node name="Resource1" parent="." instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 470.0
+margin_top = 360.0
+margin_right = 570.0
+margin_bottom = 460.0
+rect_scale = Vector2( 0.5, 0.5 )
+cooldown = 10.0
+texture_path = "res://assets/icons/barrel.png"
+show_desc = false
+
+[node name="Resource2" parent="." instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 540.0
+margin_top = 360.0
+margin_right = 640.0
+margin_bottom = 460.0
+rect_scale = Vector2( 0.5, 0.5 )
+cooldown = 10.0
+texture_path = "res://assets/icons/barrel.png"
+show_desc = false
+
+[node name="Resource3" parent="." instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 610.0
+margin_top = 360.0
+margin_right = 710.0
+margin_bottom = 460.0
+rect_scale = Vector2( 0.5, 0.5 )
+cooldown = 10.0
+texture_path = "res://assets/icons/padlock.png"
+show_desc = false
+
+[node name="Cargo1" parent="." instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 395.0
+margin_top = 360.0
+margin_right = 495.0
+margin_bottom = 460.0
+rect_scale = Vector2( 0.5, 0.5 )
+cooldown = 10.0
+texture_path = "res://assets/icons/wooden-crate.png"
+show_desc = false
+
+[node name="Cargo2" parent="." instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 325.0
+margin_top = 360.0
+margin_right = 425.0
+margin_bottom = 460.0
+rect_scale = Vector2( 0.5, 0.5 )
+cooldown = 10.0
+texture_path = "res://assets/icons/wooden-crate.png"
+show_desc = false
+
+[node name="Cargo3" parent="." instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 255.0
+margin_top = 360.0
+margin_right = 355.0
+margin_bottom = 460.0
+rect_scale = Vector2( 0.5, 0.5 )
+cooldown = 600.0
+texture_path = "res://assets/icons/padlock.png"
+show_desc = false
+
+[node name="GreatCabin" parent="." instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 610.0
+margin_top = 295.0
+margin_right = 710.0
+margin_bottom = 395.0
+rect_scale = Vector2( 0.5, 0.5 )
+cooldown = 600.0
+texture_path = "res://assets/icons/captain-hat-profile.png"
+show_desc = false
+
+[node name="Galley" parent="." instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 190.0
+margin_top = 295.0
+margin_right = 290.0
+margin_bottom = 395.0
+rect_scale = Vector2( 0.5, 0.5 )
+cooldown = 600.0
+texture_path = "res://assets/icons/cook.png"
+show_desc = false
+
+[node name="NavigationRoom" parent="." instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 680.0
+margin_top = 295.0
+margin_right = 780.0
+margin_bottom = 395.0
+rect_scale = Vector2( 0.5, 0.5 )
+cooldown = 600.0
+texture_path = "res://assets/icons/ship-wheel.png"
+show_desc = false
+
+[node name="GunDeck" parent="." instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 540.0
+margin_top = 295.0
+margin_right = 640.0
+margin_bottom = 395.0
+rect_scale = Vector2( 0.5, 0.5 )
+cooldown = 600.0
+texture_path = "res://assets/icons/padlock.png"
+show_desc = false
+
+[node name="CombatRoom" parent="." instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 470.0
+margin_top = 295.0
+margin_right = 570.0
+margin_bottom = 395.0
+rect_scale = Vector2( 0.5, 0.5 )
+cooldown = 600.0
+texture_path = "res://assets/icons/padlock.png"
+show_desc = false
+
+[node name="LockedRoom1" parent="." instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 395.0
+margin_top = 295.0
+margin_right = 495.0
+margin_bottom = 395.0
+rect_scale = Vector2( 0.5, 0.5 )
+cooldown = 600.0
+texture_path = "res://assets/icons/padlock.png"
+show_desc = false
+
+[node name="LockedRoom2" parent="." instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 325.0
+margin_top = 295.0
+margin_right = 425.0
+margin_bottom = 395.0
+rect_scale = Vector2( 0.5, 0.5 )
+cooldown = 600.0
+texture_path = "res://assets/icons/padlock.png"
+show_desc = false
+
+[node name="LockedRoom3" parent="." instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 255.0
+margin_top = 295.0
+margin_right = 355.0
+margin_bottom = 395.0
+rect_scale = Vector2( 0.5, 0.5 )
+cooldown = 600.0
+texture_path = "res://assets/icons/padlock.png"
+show_desc = false
+
+[node name="Deck1" parent="." instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 190.0
+margin_top = 230.0
+margin_right = 290.0
+margin_bottom = 330.0
+rect_scale = Vector2( 0.5, 0.5 )
+cooldown = 600.0
+texture_path = "res://assets/icons/deck.png"
+show_desc = false
+
+[node name="Deck2" parent="." instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 255.0
+margin_top = 230.0
+margin_right = 355.0
+margin_bottom = 330.0
+rect_scale = Vector2( 0.5, 0.5 )
+cooldown = 600.0
+texture_path = "res://assets/icons/deck.png"
+show_desc = false
+
+[node name="Deck3" parent="." instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 325.0
+margin_top = 230.0
+margin_right = 425.0
+margin_bottom = 330.0
+rect_scale = Vector2( 0.5, 0.5 )
+cooldown = 600.0
+texture_path = "res://assets/icons/deck.png"
+show_desc = false
+[connection signal="button_pressed" from="CrowNest" to="CrowNest" method="_on_CrowNest_button_pressed"]

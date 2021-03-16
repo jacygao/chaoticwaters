@@ -39,6 +39,9 @@ func _on_MessagePanelTimer_timeout():
 	message_panel.visible = false
 
 func _on_BarMenu_upgrade_button_pressed():
+	$ShipBuilder.visible = true
+
+func _on_BarMenu_research_button_pressed():
 	$UpgradePopupMenu.visible = true
 
 func _on_UpgradePopupMenu_close_pressed():
