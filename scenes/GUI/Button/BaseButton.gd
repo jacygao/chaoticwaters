@@ -8,6 +8,7 @@ export var texture_path = "res://assets/icons/click.png"
 export var desciption = ""
 export var show_desc = true
 export var cost = 100
+export var level = 0
 
 signal button_pressed
 

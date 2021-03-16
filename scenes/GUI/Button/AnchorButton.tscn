@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://assets/icons/anchor.png" type="Texture" id=1]
-[ext_resource path="res://scenes/GUI/AnchorButton.gd" type="Script" id=2]
+[ext_resource path="res://scenes/GUI/Button/AnchorButton.gd" type="Script" id=2]
 
 [node name="AnchorButton" type="TextureButton"]
 margin_right = 40.0

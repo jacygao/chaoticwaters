@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/GUI/BarMenu.gd" type="Script" id=1]
-[ext_resource path="res://scenes/GUI/BaseButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/GUI/Button/BaseButton.tscn" type="PackedScene" id=2]
 
 [node name="BarMenu" type="Panel"]
 self_modulate = Color( 1, 1, 1, 0 )
@@ -44,3 +44,4 @@ texture_path = "res://assets/icons/research.png"
 desciption = "Research"
 cost = 0
 [connection signal="button_pressed" from="UpgradeButton" to="." method="_on_UpgradeButton_button_pressed"]
+[connection signal="button_pressed" from="ResearchButton" to="." method="_on_ResearchButton_button_pressed"]
