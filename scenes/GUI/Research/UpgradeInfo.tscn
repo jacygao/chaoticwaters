@@ -1,0 +1,50 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/GUI/Research/UpgradeInfo.gd" type="Script" id=1]
+
+[node name="UpgradeInfo" type="Panel"]
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -50.0
+margin_right = 100.0
+margin_bottom = 50.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="."]
+margin_right = 105.0
+margin_bottom = 14.0
+text = "Level 0 - Level 1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Effect" type="Label" parent="."]
+margin_top = 20.0
+margin_right = 132.0
+margin_bottom = 14.0
+text = "Combat Power + 120"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cost" type="Label" parent="."]
+margin_top = 40.0
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Cost: 2000"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Time" type="Label" parent="."]
+margin_top = 60.0
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Research Time: 5 minutes"
