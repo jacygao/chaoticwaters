@@ -31,10 +31,12 @@ margin_bottom = 630.0
 rect_scale = Vector2( 0.5, 0.5 )
 
 [node name="AnchorButton" parent="HUD" instance=ExtResource( 8 )]
-margin_left = 950.0
-margin_top = 450.0
-margin_right = 1050.0
-margin_bottom = 550.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = -70.0
+margin_right = 120.0
+margin_bottom = 30.0
 rect_scale = Vector2( 0.5, 0.5 )
 
 [node name="WorldMap" parent="." instance=ExtResource( 3 )]
