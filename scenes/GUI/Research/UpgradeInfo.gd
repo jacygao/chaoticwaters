@@ -7,21 +7,21 @@ export var time = 600
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	render_text()
+	render_node()
 
 func set_cur_level(lvl):
 	level = lvl
 	
 func set_effect(desc):
 	effect = desc
-
+	
 func set_cost(val):
 	cost = val
 	
 func set_research_time(t):
 	time = t
 
-func render_text():
+func render_node():
 	$Level.text = "Level "+ String(level) + " - Level "+ String(level+1)
 	$Effect.text = effect
 	$Cost.text = "Cost: " + String(cost)
