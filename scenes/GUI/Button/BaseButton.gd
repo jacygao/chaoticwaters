@@ -2,12 +2,12 @@ extends TextureButton
 
 onready var time_label = $Counter/Value
 
-export var cooldown = 2.0
+export var cooldown = 0.0
 export var counter_text = ""
 export var texture_path = "res://assets/icons/click.png"
 export var desciption = ""
 export var show_desc = true
-export var cost = 100
+export var cost = 0
 export var level = 0
 
 signal button_pressed
@@ -36,7 +36,7 @@ func _process(_delta):
 func set_cooldown(value):
 	cooldown = value
 
-func _on_FireButton_pressed():
+func _on_BaseButton_pressed():
 	disabled = true
 	emit_signal("button_pressed")
 	set_process(true)

@@ -18,9 +18,6 @@ func _ready():
 	$SpeedUpgrade/PriceTag.text = String(speed_upgrade_cost)
 	$VisibilityUpgrade/PriceTag.text = String(visibility_upgrade_cost)
 
-func _on_CloseButton_button_pressed():
-	emit_signal("close_pressed")
-	
 func _on_FireUpgrade_button_pressed():
 	emit_signal("fire_upgrade_pressed", fire_upgrade_cost)
 
@@ -32,3 +29,6 @@ func _on_SpeedUpgrade_button_pressed():
 
 func _on_VisibilityButton_button_pressed():
 	emit_signal("visibility_upgrade_pressed", visibility_upgrade_cost)
+
+func _on_PopupToolbar_close_button_pressed():
+	emit_signal("close_pressed")

@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/GUI/Button/PopupToolbar.gd" type="Script" id=1]
+[ext_resource path="res://scenes/GUI/Button/BaseButton.tscn" type="PackedScene" id=2]
+
+[node name="PopupToolbar" type="Panel"]
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -106.0
+margin_top = 57.0
+margin_right = -66.0
+margin_bottom = 97.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloseButton" parent="." instance=ExtResource( 2 )]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -25.0
+margin_top = 5.0
+margin_right = 60.0
+rect_scale = Vector2( 0.3, 0.3 )
+texture_path = "res://assets/gui/clip.png"
+show_desc = false
+[connection signal="button_pressed" from="CloseButton" to="." method="_on_CloseButton_button_pressed"]

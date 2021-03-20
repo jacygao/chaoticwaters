@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/backgrounds/build_gui_bg.png" type="Texture" id=1]
 [ext_resource path="res://scenes/GUI/Button/BaseButton.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/GUI/PriceTag.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/GUI/Research/UpgradeMenu.gd" type="Script" id=4]
+[ext_resource path="res://scenes/GUI/Button/PopupToolbar.tscn" type="PackedScene" id=5]
 
 [node name="UpgradeMenu" type="Panel"]
 self_modulate = Color( 0, 0, 0, 0.588235 )
@@ -91,31 +92,9 @@ show_desc = false
 [node name="PriceTag" parent="VisibilityUpgrade" instance=ExtResource( 3 )]
 text = "100"
 
-[node name="PopupToolbar" type="Panel" parent="."]
-self_modulate = Color( 1, 1, 1, 0 )
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -106.0
-margin_top = 57.0
-margin_right = -66.0
-margin_bottom = 97.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CloseButton" parent="PopupToolbar" instance=ExtResource( 2 )]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -25.0
-margin_top = 5.0
-margin_right = 60.0
-rect_scale = Vector2( 0.3, 0.3 )
-cooldown = 0.0
-texture_path = "res://assets/gui/clip.png"
-show_desc = false
-cost = 0
+[node name="PopupToolbar" parent="." instance=ExtResource( 5 )]
 [connection signal="button_pressed" from="ArmorUpgrade" to="." method="_on_ArmorUpgrade_button_pressed"]
 [connection signal="button_pressed" from="FireUpgrade" to="." method="_on_FireUpgrade_button_pressed"]
 [connection signal="button_pressed" from="SpeedUpgrade" to="." method="_on_SpeedUpgrade_button_pressed"]
 [connection signal="button_pressed" from="VisibilityUpgrade" to="." method="_on_VisibilityButton_button_pressed"]
-[connection signal="button_pressed" from="PopupToolbar/CloseButton" to="." method="_on_CloseButton_button_pressed"]
+[connection signal="close_button_pressed" from="PopupToolbar" to="." method="_on_PopupToolbar_close_button_pressed"]
