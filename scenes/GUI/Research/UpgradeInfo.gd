@@ -28,10 +28,12 @@ func render_node():
 	$Time.text = "Research Time: " + get_time_str(time)
 	
 func get_time_str(secs):
+	if secs == 0:
+		return "0 second"
 	if secs == 1:
 		return "1 second"
 	if secs < 60:
-		return secs + " seconds"
+		return String(secs) + " seconds"
 	if secs < 3600:
 		var mm = secs / 60
 		var time_str = String(mm) + " minutes"

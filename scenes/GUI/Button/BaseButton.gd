@@ -2,6 +2,7 @@ extends TextureButton
 
 onready var time_label = $Counter/Value
 
+export var id = "default"
 export var cooldown = 0.0
 export var counter_text = ""
 export var texture_path = "res://assets/icons/click.png"
@@ -11,6 +12,7 @@ export var cost = 0
 export var level = 0
 
 signal button_pressed
+signal time_out
 
 func _ready():
 	self.texture_normal = load(texture_path)
@@ -35,7 +37,8 @@ func _process(_delta):
 
 func set_cooldown(value):
 	cooldown = value
-
+	$Timer.wait_time = cooldown
+		
 func _on_BaseButton_pressed():
 	disabled = true
 	emit_signal("button_pressed")
@@ -48,3 +51,4 @@ func _on_Timer_timeout():
 	disabled = false
 	time_label.hide()
 	set_process(false)
+	emit_signal("time_out")

@@ -34,6 +34,7 @@ margin_top = 140.744
 margin_right = 881.802
 margin_bottom = 240.745
 rect_scale = Vector2( 0.5, 0.5 )
+id = "deck"
 texture_path = "res://assets/icons/armor_plus.png"
 desciption = "Health+1"
 show_desc = false
@@ -51,6 +52,7 @@ margin_top = 431.604
 margin_right = 684.246
 margin_bottom = 531.604
 rect_scale = Vector2( 0.5, 0.5 )
+id = "cannon"
 texture_path = "res://assets/icons/cannon_shot_plus.png"
 desciption = "Damage+1"
 show_desc = false
@@ -68,6 +70,7 @@ margin_top = 303.323
 margin_right = 616.17
 margin_bottom = 403.323
 rect_scale = Vector2( 0.5, 0.5 )
+id = "sail"
 texture_path = "res://assets/icons/sail_plus.png"
 desciption = "Speed+1"
 show_desc = false
@@ -85,7 +88,8 @@ margin_top = 219.522
 margin_right = 439.314
 margin_bottom = 319.522
 rect_scale = Vector2( 0.5, 0.5 )
-texture_path = "res://assets/icons/crow-nest.png"
+id = "spyglass"
+texture_path = "res://assets/icons/spyglass.png"
 desciption = "Visibility+1"
 show_desc = false
 cost = 100
@@ -103,3 +107,4 @@ visible = false
 [connection signal="button_pressed" from="VisibilityUpgrade" to="." method="_on_VisibilityButton_button_pressed"]
 [connection signal="close_button_pressed" from="PopupToolbar" to="." method="_on_PopupToolbar_close_button_pressed"]
 [connection signal="close_button_pressed" from="UpgradeInfoMenu" to="." method="_on_UpgradeInfoMenu_close_button_pressed"]
+[connection signal="upgrade_button_pressed" from="UpgradeInfoMenu" to="." method="_on_UpgradeInfoMenu_upgrade_button_pressed"]

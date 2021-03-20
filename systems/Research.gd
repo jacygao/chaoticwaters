@@ -15,6 +15,7 @@ func _ready():
 	pass # Replace with function body.
 
 func upgrade(key):
+	print("upgrade "+key)
 	if !research.has(key):
 		research[key] = 1
 	else:
