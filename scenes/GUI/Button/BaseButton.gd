@@ -3,7 +3,7 @@ extends TextureButton
 onready var time_label = $Counter/Value
 
 export var id = "default"
-export var cooldown = 1.0
+export var cooldown = 0.0
 export var counter_text = ""
 export var texture_path = "res://assets/icons/click.png"
 export var desciption = ""
@@ -12,12 +12,13 @@ export var cost = 0
 export var level = 0
 
 signal button_pressed
-signal time_out
+signal time_out(id)
 
 func _ready():
 	self.texture_normal = load(texture_path)
 	$LabelPanel/Tooltip.text = desciption
-	$Timer.wait_time = cooldown
+	if cooldown > 0:
+		$Timer.wait_time = cooldown
 	time_label.hide()
 	if cooldown > 0:
 		$Sweep.texture_progress = texture_normal
@@ -51,4 +52,4 @@ func _on_Timer_timeout():
 	disabled = false
 	time_label.hide()
 	set_process(false)
-	emit_signal("time_out")
+	emit_signal("time_out", id)

@@ -107,4 +107,4 @@ visible = false
 [connection signal="button_pressed" from="VisibilityUpgrade" to="." method="_on_VisibilityButton_button_pressed"]
 [connection signal="close_button_pressed" from="PopupToolbar" to="." method="_on_PopupToolbar_close_button_pressed"]
 [connection signal="close_button_pressed" from="UpgradeInfoMenu" to="." method="_on_UpgradeInfoMenu_close_button_pressed"]
-[connection signal="upgrade_button_pressed" from="UpgradeInfoMenu" to="." method="_on_UpgradeInfoMenu_upgrade_button_pressed"]
+[connection signal="upgrade_button_time_out" from="UpgradeInfoMenu" to="." method="_on_UpgradeInfoMenu_upgrade_button_time_out"]

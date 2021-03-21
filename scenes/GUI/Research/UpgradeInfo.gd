@@ -1,6 +1,7 @@
 extends Panel
 
 export var level = 0
+export var max_level = 0
 export var effect = "Effect + 100"
 export var cost = 1000
 export var time = 600
@@ -11,7 +12,10 @@ func _ready():
 
 func set_cur_level(lvl):
 	level = lvl
-	
+
+func set_max_level(lvl):
+	max_level = lvl
+
 func set_effect(desc):
 	effect = desc
 	
@@ -22,10 +26,19 @@ func set_research_time(t):
 	time = t
 
 func render_node():
-	$Level.text = "Level "+ String(level) + " - Level "+ String(level+1)
-	$Effect.text = effect
-	$Cost.text = "Cost: " + String(cost)
-	$Time.text = "Research Time: " + get_time_str(time)
+	if level >= max_level:
+		$Level.text = "Max Level Reached"
+		$Effect.text = ""
+		$Cost.text = ""
+		$Time.text = ""
+	else:
+		$Level.text = get_level_str()
+		$Effect.text = effect
+		$Cost.text = "Cost: " + String(cost)
+		$Time.text = "Research Time: " + get_time_str(time)
+	
+func get_level_str():
+	return "Level "+ String(level) + " - Level "+ String(level+1)
 	
 func get_time_str(secs):
 	if secs == 0:
