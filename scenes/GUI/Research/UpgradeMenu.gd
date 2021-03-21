@@ -10,7 +10,41 @@ signal research_item_upgrad_started(id)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	upgrade_info_menu.visible = false
-
+	render_node()
+	
+func render_node():
+	# TODO: can we simplify this?
+	var level = 0
+	var key = ""
+	
+	key = "cannon"
+	level = Research.get_level(key)
+	if Research_Meta.can_upgrade(key, level+1):
+		$FireUpgrade/PriceTag.text = String(Research_Meta.get_upgrade_cost(key, level+1))
+	else: 
+		$FireUpgrade/PriceTag.text = "max"
+		
+	key = "deck"
+	level = Research.get_level(key)
+	if Research_Meta.can_upgrade(key, level+1):
+		$ArmorUpgrade/PriceTag.text = String(Research_Meta.get_upgrade_cost(key, level+1))
+	else:
+		$ArmorUpgrade/PriceTag.text = "max"
+		
+	key = "sail"
+	level = Research.get_level(key)
+	if Research_Meta.can_upgrade(key, level+1):
+		$SpeedUpgrade/PriceTag.text = String(Research_Meta.get_upgrade_cost(key, level+1))
+	else:
+		$SpeedUpgrade/PriceTag.text = "max"
+		
+	key = "spyglass"
+	level = Research.get_level(key)
+	if Research_Meta.can_upgrade(key, level+1):
+		$VisibilityUpgrade/PriceTag.text = String(Research_Meta.get_upgrade_cost(key, level+1))
+	else:
+		$VisibilityUpgrade/PriceTag.text = "max"
+	
 func _on_FireUpgrade_button_pressed():
 	open_upgrade_info_menu($FireUpgrade, "cannon")
 
@@ -65,7 +99,8 @@ func _on_UpgradeInfoMenu_close_button_pressed():
 func _on_UpgradeInfoMenu_upgrade_button_time_out(id):
 	is_upgrading = false
 	emit_signal("research_item_upgraded", id)
-
+	render_node()
+	
 func _on_UpgradeInfoMenu_upgrade_button_pressed(id):
 	is_upgrading = true
 	emit_signal("research_item_upgrad_started", id)

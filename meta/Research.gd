@@ -97,14 +97,14 @@ var meta = {
 				"research_time": 2,
 			},
 			2: {
-				"upgrade_cost": 100,
+				"upgrade_cost": 200,
 				"boost": {
 					"armor": 2,
 				},
 				"research_time": 4,
 			},
 			3: {
-				"upgrade_cost": 200,
+				"upgrade_cost": 400,
 				"boost": {
 					"armor": 4,
 				},
