@@ -2,7 +2,7 @@ extends Panel
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	render_node()
 
 func set_coins(num):
 	$CoinWidget.update_number(num)
@@ -15,3 +15,6 @@ func minus_coins(num):
 	
 func plus_coins(num):
 	$CoinWidget.plus(num)
+
+func render_node():
+	set_coins(Economy.get_coins())

@@ -4,9 +4,9 @@ export var icon_path = "res://assets/icons/cannon_shot_plus.png"
 export var research_id = "default"
 
 onready var upgrade_info_panel = get_node("UpgradeInfo")
-var research_mata_data = preload("res://meta/Research.gd").new()
 
 signal upgrade_button_time_out(id)
+signal upgrade_button_pressed(id)
 signal close_button_pressed
 
 # Called when the node enters the scene tree for the first time.
@@ -46,10 +46,10 @@ func render_node():
 
 func upgrade(node_id, cur_level):
 	var next_level = cur_level + 1
-	var meta = research_mata_data.get_meta(node_id)
+	var meta = Research_Meta.get_meta(node_id)
 	set_cur_level(cur_level)
 	set_cost(meta[next_level]["upgrade_cost"])
-	set_effect(research_mata_data.get_boost_st(meta[next_level]["boost"]))
+	set_effect(Research_Meta.get_boost_st(meta[next_level]["boost"]))
 	set_research_time(meta[next_level]["research_time"])
 	upgrade_info_panel.render_node()
 	

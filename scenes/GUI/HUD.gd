@@ -34,6 +34,9 @@ func show_message(level, message):
 	message_panel.visible = true
 	$MessagePanelTimer.start()
 
+func render_node():
+	economy.render_node()
+
 func _on_MessagePanelTimer_timeout():
 	$MessagePanelTimer.stop()
 	message_panel.visible = false
@@ -42,10 +45,10 @@ func _on_BarMenu_upgrade_button_pressed():
 	$ShipBuilder.visible = true
 
 func _on_BarMenu_research_button_pressed():
-	$UpgradePopupMenu.visible = true
+	$ResearchPopupMenu.visible = true
 
 func _on_UpgradePopupMenu_close_pressed():
-	$UpgradePopupMenu.visible = false
+	$ResearchPopupMenu.visible = false
 
 func _on_UpgradePopupMenu_armor_upgrade_pressed(cost):
 	if minus_coins(cost):
@@ -63,3 +66,12 @@ func _on_UpgradePopupMenu_visibility_upgrade_pressed(cost):
 	if minus_coins(cost):
 		pass
 		#TODO: implement visibility
+		
+func _on_ResearchPopupMenu_research_item_upgraded(id):
+	Research.upgrade(id)
+
+func _on_ResearchPopupMenu_research_item_upgrad_started(id):
+	var new_level = Research.get_level(id)+1
+	var cost = Research_Meta.get_upgrade_cost(id, new_level)
+	Economy.deduct_coins(cost)
+	render_node()
