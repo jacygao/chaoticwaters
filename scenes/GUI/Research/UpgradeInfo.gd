@@ -21,6 +21,12 @@ func set_effect(desc):
 	
 func set_cost(val):
 	cost = val
+
+func set_cost_sufficient():
+	$Cost.self_modulate = Color(1, 1, 0)
+	
+func set_cost_insufficient():
+	$Cost.self_modulate = Color(1, 0, 0)
 	
 func set_research_time(t):
 	time = t

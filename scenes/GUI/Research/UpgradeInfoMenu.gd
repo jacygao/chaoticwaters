@@ -36,6 +36,12 @@ func set_research_time(t):
 func hide_upgrade_button():
 	$UpgradeButton.visible = false
 
+func set_cost_sufficent():
+	upgrade_info_panel.set_cost_sufficient()
+	
+func set_cost_insufficent():
+	upgrade_info_panel.set_cost_insufficient()
+
 func set_icon_path(path):
 	icon_path = path
 

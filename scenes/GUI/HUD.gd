@@ -2,18 +2,16 @@ extends CanvasLayer
 
 enum {message_level_info, message_level_warn}
 
-var coins = 20000
-
 onready var economy = $EconomyMenu
 onready var stats = $StatisticPanel
 onready var message_panel = $MessagePanel
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	update_coins(coins)
+	economy.set_coins(Economy.get_coins())
 
 func update_coins(coins):
-	economy.set_coins(coins)
+	economy.set_coins(Economy.get_coins())
 
 func minus_coins(coins):
 	if !economy.minus_coins(coins):

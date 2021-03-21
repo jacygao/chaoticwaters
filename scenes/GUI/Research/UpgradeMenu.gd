@@ -40,11 +40,16 @@ func open_upgrade_info_menu(node, meta_key):
 	else:
 		var next_level = cur_level + 1
 		var level_meta = Research_Meta.get_meta_level(meta_key, next_level)
-		upgrade_info_menu.set_cost(level_meta["upgrade_cost"])
+		var upgrade_cost = level_meta["upgrade_cost"]
+		upgrade_info_menu.set_cost(upgrade_cost)
 		upgrade_info_menu.set_effect(Research_Meta.get_boost_st(level_meta["boost"]))
 		upgrade_info_menu.set_research_time(level_meta["research_time"])
 		upgrade_info_menu.render_node()
-		
+		if !Economy.is_insufficient(upgrade_cost):
+			upgrade_info_menu.set_cost_insufficent()
+			upgrade_info_menu.hide_upgrade_button()
+		else:
+			upgrade_info_menu.set_cost_sufficent()
 	upgrade_info_menu.visible = true
 	
 func _on_UpgradeInfoMenu_close_button_pressed():
