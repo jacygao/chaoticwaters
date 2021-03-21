@@ -24,6 +24,13 @@ config/name="Sail"
 run/main_scene="res://Main.tscn"
 config/icon="res://assets/gui/icon.png"
 
+[autoload]
+
+Research="*res://systems/Research.gd"
+Economy="*res://systems/Economy.gd"
+Statistic="*res://systems/Statistic.gd"
+Research_Meta="*res://meta/Research.gd"
+
 [input]
 
 ui_touch={

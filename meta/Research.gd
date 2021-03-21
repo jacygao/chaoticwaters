@@ -143,6 +143,11 @@ func can_upgrade(key, level):
 		
 	return false
 
+func get_upgrade_cost(key, level):
+	if !meta.has(key):
+		return 0
+	return meta[key]["level"][level]["upgrade_cost"]
+
 func get_boost_st(boost):
 	var boost_str = ""
 	var counter = 0
