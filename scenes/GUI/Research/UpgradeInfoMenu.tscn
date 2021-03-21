@@ -48,4 +48,5 @@ margin_top = 0.0
 margin_right = 0.0
 margin_bottom = 40.0
 [connection signal="button_pressed" from="UpgradeButton" to="." method="_on_UpgradeButton_button_pressed"]
+[connection signal="time_out" from="UpgradeButton" to="." method="_on_UpgradeButton_time_out"]
 [connection signal="close_button_pressed" from="PopupToolbar" to="." method="_on_PopupToolbar_close_button_pressed"]

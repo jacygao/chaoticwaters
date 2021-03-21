@@ -2,49 +2,38 @@ extends Panel
 
 signal close_pressed
 
-export var fire_upgrade_cost = 200
-export var armor_upgrade_cost = 50
-export var speed_upgrade_cost = 200
-export var visibility_upgrade_cost = 100
-
 onready var upgrade_info_menu = get_node("UpgradeInfoMenu")
 var research_sys = preload("res://systems/Research.gd").new()
+var research_mata_data = preload("res://meta/Research.gd").new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$FireUpgrade/PriceTag.text = String(fire_upgrade_cost)
-	$ArmorUpgrade/PriceTag.text = String(armor_upgrade_cost)
-	$SpeedUpgrade/PriceTag.text = String(speed_upgrade_cost)
-	$VisibilityUpgrade/PriceTag.text = String(visibility_upgrade_cost)
-
 	upgrade_info_menu.visible = false
 
 func _on_FireUpgrade_button_pressed():
-	open_upgrade_info_menu($FireUpgrade)
-	#emit_signal("fire_upgrade_pressed", fire_upgrade_cost)
+	open_upgrade_info_menu($FireUpgrade, research_mata_data.get_meta("cannon"))
 
 func _on_ArmorUpgrade_button_pressed():
-	open_upgrade_info_menu($ArmorUpgrade)
-	#emit_signal("armor_upgrade_pressed", armor_upgrade_cost)
+	open_upgrade_info_menu($ArmorUpgrade, research_mata_data.get_meta("deck"))
 
 func _on_SpeedUpgrade_button_pressed():
-	open_upgrade_info_menu($SpeedUpgrade)
-	#emit_signal("speed_upgrade_pressed", speed_upgrade_cost)
+	open_upgrade_info_menu($SpeedUpgrade, research_mata_data.get_meta("sail"))
 
 func _on_VisibilityButton_button_pressed():
-	open_upgrade_info_menu($VisibilityUpgrade)
-	#emit_signal("visibility_upgrade_pressed", visibility_upgrade_cost)
+	open_upgrade_info_menu($VisibilityUpgrade, research_mata_data.get_meta("spyglass"))
 
 func _on_PopupToolbar_close_button_pressed():
 	emit_signal("close_pressed")
 
-func open_upgrade_info_menu(node):
+func open_upgrade_info_menu(node, meta):
+	var cur_level = research_sys.get_level(node.id)
+	var next_level = cur_level + 1
 	upgrade_info_menu.set_id(node.id)
-	upgrade_info_menu.set_cur_level(research_sys.get_level(node.id))
+	upgrade_info_menu.set_cur_level(cur_level)
 	upgrade_info_menu.set_icon_path(node.texture_path)
-	upgrade_info_menu.set_cost(node.cost)
-	upgrade_info_menu.set_effect(node.desciption)
-	upgrade_info_menu.set_research_time(2)
+	upgrade_info_menu.set_cost(meta[next_level]["upgrade_cost"])
+	upgrade_info_menu.set_effect(research_mata_data.get_boost_st(meta[next_level]["boost"]))
+	upgrade_info_menu.set_research_time(meta[next_level]["research_time"])
 	upgrade_info_menu.render_node()
 	upgrade_info_menu.visible = true
 	

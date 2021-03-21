@@ -3,7 +3,7 @@ extends TextureButton
 onready var time_label = $Counter/Value
 
 export var id = "default"
-export var cooldown = 0.0
+export var cooldown = 1.0
 export var counter_text = ""
 export var texture_path = "res://assets/icons/click.png"
 export var desciption = ""

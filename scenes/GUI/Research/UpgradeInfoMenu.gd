@@ -40,3 +40,7 @@ func _on_UpgradeButton_button_pressed():
 
 func _on_PopupToolbar_close_button_pressed():
 	emit_signal("close_button_pressed")
+
+func _on_UpgradeButton_time_out():
+	set_cur_level(upgrade_info_panel.level+1)
+	upgrade_info_panel.render_node()
