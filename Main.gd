@@ -1,10 +1,8 @@
 extends Node
 
-# Declare member variables here. Examples:
 export var fire_rate = 2.0
 export var coins = 200
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	$HUD/FireButtonRight.call("set_cooldown", fire_rate)
 	$HUD/FireButtonLeft.call("set_cooldown", fire_rate)

@@ -51,13 +51,20 @@ func render_node():
 	$UpgradeButton.visible = true
 	upgrade_info_panel.render_node()
 
-func upgrade(node_id, cur_level):
+func render_upgrade():
+	var cur_level = Research.get_level(research_id)
 	var next_level = cur_level + 1
-	var meta = Research_Meta.get_meta(node_id)
+	var max_level = Research_Meta.get_meta_max_level(research_id)
+	var meta = Research_Meta.get_meta_level(research_id, next_level)
 	set_cur_level(cur_level)
-	set_cost(meta[next_level]["upgrade_cost"])
-	set_effect(Research_Meta.get_boost_st(meta[next_level]["boost"]))
-	set_research_time(meta[next_level]["research_time"])
+	set_max_level(max_level)
+	
+	if cur_level >= max_level:
+		hide_upgrade_button()
+	else:
+		set_cost(meta["upgrade_cost"])
+		set_effect(Research_Meta.get_boost_st(meta["boost"]))
+		set_research_time(meta["research_time"])
 	upgrade_info_panel.render_node()
 	
 func _on_UpgradeButton_button_pressed():
@@ -70,4 +77,5 @@ func _on_PopupToolbar_close_button_pressed():
 func _on_UpgradeButton_time_out(id):
 	$UpgradeButton.id = research_id
 	emit_signal("upgrade_button_time_out", id)
-
+	if self.visible:
+		render_upgrade()

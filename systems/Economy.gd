@@ -5,7 +5,7 @@ Implementation of a simple Economy System that manages player economy.
 """
 
 var economy = {
-	"coins": 100,
+	"coins": 10000,
 	"wood": 0,
 	"stone": 0,
 	"gem": 0,

@@ -47,23 +47,6 @@ func _on_BarMenu_research_button_pressed():
 
 func _on_UpgradePopupMenu_close_pressed():
 	$ResearchPopupMenu.visible = false
-
-func _on_UpgradePopupMenu_armor_upgrade_pressed(cost):
-	if minus_coins(cost):
-		stats.set_health(stats.health+1)
-
-func _on_UpgradePopupMenu_fire_upgrade_pressed(cost):
-	if minus_coins(cost):
-		stats.set_damage(stats.damage+1)
-
-func _on_UpgradePopupMenu_speed_upgrade_pressed(cost):
-	if minus_coins(cost):
-		stats.set_speed(stats.speed+10)
-
-func _on_UpgradePopupMenu_visibility_upgrade_pressed(cost):
-	if minus_coins(cost):
-		pass
-		#TODO: implement visibility
 		
 func _on_ResearchPopupMenu_research_item_upgraded(id):
 	Research.upgrade(id)
