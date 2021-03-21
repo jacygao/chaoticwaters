@@ -15,7 +15,6 @@ func _ready():
 
 func set_id(id):
 	research_id = id
-	$UpgradeButton.id = research_id
 
 func set_cur_level(lvl):
 	upgrade_info_panel.set_cur_level(lvl)
@@ -62,11 +61,13 @@ func upgrade(node_id, cur_level):
 	upgrade_info_panel.render_node()
 	
 func _on_UpgradeButton_button_pressed():
+	$UpgradeButton.id = research_id
 	emit_signal("upgrade_button_pressed", research_id)
 
 func _on_PopupToolbar_close_button_pressed():
 	emit_signal("close_button_pressed")
 
 func _on_UpgradeButton_time_out(id):
+	$UpgradeButton.id = research_id
 	emit_signal("upgrade_button_time_out", id)
 
