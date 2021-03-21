@@ -23,7 +23,7 @@ func show_message(level, message):
 	var color = Color(0, 0, 0, 1)
 	match level:
 		message_level_info:
-			color = Color(0, 0, 0, 1)
+			color = Color(0, 1, 0, 1)
 		message_level_warn:
 			color = Color(1, .19, .19, 1)
 			
@@ -67,6 +67,7 @@ func _on_UpgradePopupMenu_visibility_upgrade_pressed(cost):
 		
 func _on_ResearchPopupMenu_research_item_upgraded(id):
 	Research.upgrade(id)
+	show_message(message_level_info, "%s upgrade completed" % id)
 
 func _on_ResearchPopupMenu_research_item_upgrad_started(id):
 	var new_level = Research.get_level(id)+1

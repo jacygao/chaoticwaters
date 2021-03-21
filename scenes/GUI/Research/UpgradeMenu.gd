@@ -1,6 +1,7 @@
 extends Panel
 
 onready var upgrade_info_menu = get_node("UpgradeInfoMenu")
+var is_upgrading = false
 
 signal close_pressed
 signal research_item_upgraded(id)
@@ -28,11 +29,12 @@ func _on_PopupToolbar_close_button_pressed():
 func open_upgrade_info_menu(node, meta_key):
 	var cur_level = Research.get_level(meta_key)
 	var max_level = Research_Meta.get_meta_max_level(meta_key)
-	upgrade_info_menu.set_id(meta_key)
 	upgrade_info_menu.set_cur_level(cur_level)
 	upgrade_info_menu.set_max_level(max_level)
 	upgrade_info_menu.set_icon_path(node.texture_path)
-
+	if !is_upgrading:
+		upgrade_info_menu.set_id(meta_key)
+		
 	if cur_level >= max_level:
 		upgrade_info_menu.render_node()
 		upgrade_info_menu.hide_upgrade_button()
@@ -44,19 +46,27 @@ func open_upgrade_info_menu(node, meta_key):
 		upgrade_info_menu.set_cost(upgrade_cost)
 		upgrade_info_menu.set_effect(Research_Meta.get_boost_st(level_meta["boost"]))
 		upgrade_info_menu.set_research_time(level_meta["research_time"])
+		
+		if !is_upgrading:
+			upgrade_info_menu.set_button_cooldown(level_meta["research_time"])
+			
 		upgrade_info_menu.render_node()
+		
 		if !Economy.is_insufficient(upgrade_cost):
 			upgrade_info_menu.set_cost_insufficent()
 			upgrade_info_menu.hide_upgrade_button()
 		else:
 			upgrade_info_menu.set_cost_sufficent()
+			
 	upgrade_info_menu.visible = true
 	
 func _on_UpgradeInfoMenu_close_button_pressed():
 	upgrade_info_menu.visible = false
 
 func _on_UpgradeInfoMenu_upgrade_button_time_out(id):
+	is_upgrading = false
 	emit_signal("research_item_upgraded", id)
 
 func _on_UpgradeInfoMenu_upgrade_button_pressed(id):
+	is_upgrading = true
 	emit_signal("research_item_upgrad_started", id)

@@ -31,8 +31,10 @@ func set_cost(val):
 	
 func set_research_time(t):
 	upgrade_info_panel.set_research_time(t)
-	$UpgradeButton.set_cooldown(t)
 
+func set_button_cooldown(t):
+	$UpgradeButton.set_cooldown(t)
+	
 func hide_upgrade_button():
 	$UpgradeButton.visible = false
 
