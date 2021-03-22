@@ -1,8 +1,7 @@
 extends Boat
 
 export var team = 2
- # How fast the player will move (pixels/sec)
-export var speed = 100
+
 # A target has entered visible range of the NPC boat
 export var is_target_seen = false
 

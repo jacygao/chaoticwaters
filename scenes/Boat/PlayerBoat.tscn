@@ -17,11 +17,6 @@ animations = [ {
 "name": "hp_green",
 "speed": 2.0
 }, {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "hp_yellow",
-"speed": 2.0
-}, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
 "name": "hp_red",
@@ -31,6 +26,11 @@ animations = [ {
 "loop": true,
 "name": "hp_0",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "hp_yellow",
+"speed": 2.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -41,6 +41,7 @@ height = 68.201
 collision_layer = 2147483655
 collision_mask = 7
 script = ExtResource( 1 )
+fire_damage = 8
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )

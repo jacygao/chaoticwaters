@@ -2,15 +2,10 @@ extends Boat
 
 export var team = 1
 
- # How fast the player will move (pixels/sec).
-export var default_speed = 100
-var speed = default_speed
-
 export (float) var default_acceleration = 1
 var acceleration = default_acceleration
 
 var static_velocity = Vector2()
-var isAnchorOn = false
 var angle = 0
 
 # Setting cannon gun related attributes.
@@ -123,15 +118,6 @@ func fire_animate(gun):
 	cannon_ball_ins.init((pos-position).angle(), fire_damage, fire_max_range)
 	gun.get_node("CannonGunFireSmoke").set_emitting(true)
 	get_parent().add_child(cannon_ball_ins)
-
-func anchor_on():
-	speed = 0
-	rotation_speed = 0
-	isAnchorOn = true
-	
-func anchor_off():
-	rotation_speed = default_rotation_speed
-	isAnchorOn = false
 	
 func hit(damage):
 	durability -= damage

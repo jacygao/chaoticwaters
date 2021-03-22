@@ -18,11 +18,6 @@ animations = [ {
 "name": "hp_green",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 10 ) ],
-"loop": true,
-"name": "hp_yellow",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 7 ) ],
 "loop": true,
 "name": "hp_red",
@@ -31,6 +26,11 @@ animations = [ {
 "frames": [ ExtResource( 9 ) ],
 "loop": true,
 "name": "hp_0",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "hp_yellow",
 "speed": 5.0
 } ]
 
@@ -72,8 +72,6 @@ rotation = 3.14159
 rotation = -1.5708
 
 [node name="HealthDisplay" parent="." instance=ExtResource( 5 )]
-
-[node name="Navigation2D" type="Navigation2D" parent="."]
 
 [node name="VisionCircle" type="Area2D" parent="."]
 
