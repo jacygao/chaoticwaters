@@ -4,22 +4,23 @@
 [ext_resource path="res://fonts/AkayaTelivigala-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://assets/dialog/triangular-arrow.png" type="Texture" id=3]
 [ext_resource path="res://scenes/Dialog/DialogBox.gd" type="Script" id=4]
-[ext_resource path="res://scenes/DialogIdicator.tres" type="Animation" id=5]
+[ext_resource path="res://scenes/Dialog/DialogIdicator.tres" type="Animation" id=5]
 [ext_resource path="res://assets/portaits/portait-1.png" type="Texture" id=6]
-[ext_resource path="res://scenes/Dialog/DialogPortait.gd" type="Script" id=7]
-
-[sub_resource type="DynamicFont" id=1]
-size = 30
-font_data = ExtResource( 2 )
+[ext_resource path="res://scenes/Dialog/DialogUI.gd" type="Script" id=8]
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
 atlas = ExtResource( 6 )
 region = Rect2( 0, 381, 300, 380 )
 
+[sub_resource type="DynamicFont" id=1]
+size = 30
+font_data = ExtResource( 2 )
+
 [node name="DialogUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -41,6 +42,17 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="DialogPortait" type="Control" parent="DialogBox"]
+margin_top = -425.0
+margin_right = 300.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="DialogBox/DialogPortait"]
+position = Vector2( 150, 235 )
+texture = SubResource( 2 )
 
 [node name="TextureRect" type="TextureRect" parent="DialogBox"]
 anchor_top = 1.0
@@ -68,7 +80,7 @@ __meta__ = {
 }
 
 [node name="Indicator" type="Sprite" parent="DialogBox"]
-position = Vector2( 970, 146.368 )
+position = Vector2( 970, 147.747 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 
@@ -77,16 +89,5 @@ autoplay = "idle"
 anims/idle = ExtResource( 5 )
 
 [node name="Tween" type="Tween" parent="DialogBox"]
-
-[node name="DialogPortait" type="Control" parent="."]
-margin_right = 300.0
-margin_bottom = 425.0
-script = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Sprite" type="Sprite" parent="DialogPortait"]
-position = Vector2( 150, 235 )
-texture = SubResource( 2 )
+[connection signal="dialog_is_finished" from="DialogBox" to="." method="_on_DialogBox_dialog_is_finished"]
 [connection signal="tween_completed" from="DialogBox/Tween" to="DialogBox" method="_on_Tween_tween_completed"]
