@@ -5,23 +5,22 @@ signal dialog_is_finished
 # making it a dictionary for extendability
 export var conversation = [
 	{
-
 		"is_player_speaking": false,
 		"name": "sailor",
 		"portrait_file_name": "portait-2-4.png",
-		"text": "Captain, pirate ship spotted at 3 o'clock. Please give order!",
+		"text": "Test Dialog page 1",
 	},
 	{
 		"is_player_speaking": true,
 		"name": "captain",
 		"portrait_file_name": "portait-1-2.png",
-		"text": "Fire.",
+		"text": "Test Dialog page 2",
 	},
 	{
 		"is_player_speaking": false,
 		"name": "sailor",
 		"portrait_file_name": "portait-2-4.png",
-		"text": "Yes sir!",
+		"text": "Test Dialog page 3",
 	},
 ]
 
@@ -40,8 +39,11 @@ func _process(_delta):
 		if Input.is_action_just_pressed("ui_touch"):
 			load_dialog()
 
-func set_dialog(dialog):
+func open_dialog(dialog):
 	conversation = dialog
+	dialog_index = 0
+	render_node()
+	visible = true
 
 func render_node():
 	load_dialog()
@@ -66,8 +68,8 @@ func load_dialog():
 
 func close_dialog():
 	emit_signal("dialog_is_finished")
-
-func _on_Tween_tween_completed(object, key):
+	
+func _on_Tween_tween_completed(_object, _key):
 	show_indicator = true
 	$Indicator/Animation.play()
 

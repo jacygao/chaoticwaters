@@ -9,6 +9,7 @@ onready var message_panel = $MessagePanel
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	economy.set_coins(Economy.get_coins())
+	$DialogUI.new_dialog("game_start")
 
 func update_coins(coins):
 	economy.set_coins(Economy.get_coins())
