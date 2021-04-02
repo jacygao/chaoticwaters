@@ -5,27 +5,27 @@ signal dialog_is_finished
 # making it a dictionary for extendability
 export var conversation = [
 	{
+
 		"is_player_speaking": false,
 		"name": "sailor",
-		"portrait_file_name": "portait-2.png",
+		"portrait_file_name": "portait-2-4.png",
 		"text": "Captain, pirate ship spotted at 3 o'clock. Please give order!",
 	},
 	{
 		"is_player_speaking": true,
 		"name": "captain",
-		"portrait_file_name": "portait-1.png",
+		"portrait_file_name": "portait-1-2.png",
 		"text": "Fire.",
 	},
 	{
 		"is_player_speaking": false,
 		"name": "sailor",
-		"portrait_file_name": "portait-2.png",
+		"portrait_file_name": "portait-2-4.png",
 		"text": "Yes sir!",
 	},
 ]
 
 export var is_player_speaking = true
-
 var dialog_index = 0
 var show_indicator = false
 var portrait_path_prefix = "res://assets/portaits/"
