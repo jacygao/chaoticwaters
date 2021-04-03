@@ -9,6 +9,7 @@ onready var healthbar = $HealthBar
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	hide()
+	# FIXME: set the max value by parent node instead of loading from parent node
 	if get_parent() and get_parent().get("max_durability"):
 		healthbar.max_value = get_parent().max_durability
 
