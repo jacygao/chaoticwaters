@@ -1,18 +1,21 @@
 class_name Boat
 extends KinematicBody2D
 
-export var default_speed = 100
+export var default_speed = 50
 var speed = default_speed
 
 # How fast boat turns
-export (float) var default_rotation_speed = 1
+export (float) var default_rotation_speed = .5
 var rotation_speed = default_rotation_speed
+
 # The default health
 export var max_durability = 10
 var durability = max_durability
+
 # The strength of the fire
 export var fire_damage = 1
 # The range of the fire
+
 export var fire_max_range = 300
 
 var isAnchorOn = false
@@ -49,3 +52,18 @@ func anchor_on():
 func anchor_off():
 	rotation_speed = default_rotation_speed
 	isAnchorOn = false
+
+func navigate():
+	pass
+
+func display_health():
+	pass
+	
+func fire():
+	pass
+	
+func repair():
+	pass
+	
+func damage():
+	pass

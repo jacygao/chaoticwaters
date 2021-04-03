@@ -13,14 +13,14 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "hp_yellow",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
 "name": "hp_green",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 7 ) ],
-"loop": true,
-"name": "hp_red",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 9 ) ],
@@ -28,9 +28,9 @@ animations = [ {
 "name": "hp_0",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 10 ) ],
+"frames": [ ExtResource( 7 ) ],
 "loop": true,
-"name": "hp_yellow",
+"name": "hp_red",
 "speed": 5.0
 } ]
 

@@ -12,25 +12,25 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "hp_yellow",
+"speed": 2.0
+}, {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "hp_green",
 "speed": 2.0
-}, {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "hp_red",
-"speed": 5.0
 }, {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
 "name": "hp_0",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ) ],
+"frames": [ ExtResource( 4 ) ],
 "loop": true,
-"name": "hp_yellow",
-"speed": 2.0
+"name": "hp_red",
+"speed": 5.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -49,10 +49,6 @@ animation = "hp_green"
 
 [node name="Body" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
-
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
-smoothing_enabled = true
 
 [node name="Fire" parent="." instance=ExtResource( 14 )]
 
