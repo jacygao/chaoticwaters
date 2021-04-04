@@ -30,6 +30,7 @@ Research="*res://systems/Research.gd"
 Economy="*res://systems/Economy.gd"
 Statistic="*res://systems/Statistic.gd"
 Research_Meta="*res://meta/Research.gd"
+Dialog_Meta="*res://meta/Dialog.gd"
 
 [input]
 
