@@ -31,6 +31,7 @@ export var fire_rate = 2.0
 # speed sets to 0 when true
 var isAnchorOn = false
 
+var static_velocity = Vector2()
 var angle = 0
 
 # navigation control variables
@@ -40,6 +41,9 @@ var velocity = Vector2()
 
 var target_direction = Vector2()
 var target_rotation = 0
+
+var rotating = false
+var last_x = 0
 
 var smoke = preload("res://scenes/Boat/Smoke.tscn")
 var cannon_ball = preload("res://scenes/CannonBall/CannonBall.tscn")
@@ -109,6 +113,8 @@ func _physics_process(delta):
 			speed = default_speed
 		
 	velocity = Vector2(speed, 0).rotated(cur_rotation)
+	if speed > 0:
+		static_velocity = velocity
 	
 	var target_angle = target_direction.angle_to(velocity)
 	var rotate_velocity = 1
@@ -155,7 +161,7 @@ func hit(damage):
 	durability -= damage
 	$Fire.set_emitting(true)
 	$HealthDisplay.update_healthbar(durability)
-	print(id, " boat is hit, current durability: ", durability)
+	print("Player boat is hit, current durability: ", durability)
 
 func sink():
 	speed = 0

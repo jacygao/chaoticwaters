@@ -17,6 +17,9 @@ func _unhandled_input(event):
 			target = $Boat.get_global_mouse_position()
 			$Boat.set_target(target)
 			
+func _input_event(event):
+	print(event)
+
 func anchor_on():
 	$Boat.anchor_on()
 
