@@ -178,3 +178,12 @@ func repair():
 	elif durability > max_durability:
 		durability = max_durability
 		update_durability()
+
+func _unhandled_input(event):
+	if event.is_action_pressed('ui_touch'):
+		var space_state = get_world_2d().direct_space_state
+		var result = space_state.intersect_point( get_global_mouse_position(), 32, [], 1, true, true )
+		print(result)
+		
+func _on_PlayerBoat_input_event(viewport, event, shape_idx):
+	print(event)

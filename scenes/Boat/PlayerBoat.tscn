@@ -64,3 +64,4 @@ rotation = 3.14159
 rotation = -1.5708
 
 [node name="HealthDisplay" parent="." instance=ExtResource( 15 )]
+[connection signal="input_event" from="." to="." method="_on_PlayerBoat_input_event"]
