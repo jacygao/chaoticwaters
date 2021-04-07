@@ -7,6 +7,7 @@ func _ready():
 	$HUD/FireButtonRight.call("set_cooldown", fire_rate)
 	$HUD/FireButtonLeft.call("set_cooldown", fire_rate)
 	update_coins(coins)
+	$ObjectPopupControl.close()
 	
 func _on_AnchorButton_anchor_on():
 	$PlayerBoat.call("anchor_on")
@@ -56,3 +57,6 @@ func _on_BoatDisappearTimer_timeout():
 
 func _on_NPCBoat_sinking():
 	$BoatDisappearTimer.start()
+
+func _on_NPCBoat_is_clicked(pos):
+	$ObjectPopupControl.open(pos)

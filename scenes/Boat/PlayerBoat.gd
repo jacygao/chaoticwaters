@@ -49,6 +49,7 @@ var smoke = preload("res://scenes/Boat/Smoke.tscn")
 var cannon_ball = preload("res://scenes/CannonBall/CannonBall.tscn")
 
 signal is_sinking
+signal is_clicked
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -103,7 +104,7 @@ func _process(_delta):
 	angle = angle_tidy(rad2deg(cur_rotation))
 	animate_health_bar()
 	animate(angle)
-	$AnimatedSprite.play()
+	$AnimatedBoatSprite.play()
 		
 func _physics_process(delta):
 	if !isAnchorOn:
@@ -130,17 +131,17 @@ func _physics_process(delta):
 
 # Controls ship movement animation
 func animate(ta):
-	$AnimatedSprite.scale = Vector2(1, 1)
+	$AnimatedBoatSprite.scale = Vector2(1, 1)
 	rotation_degrees = ta - 90
 		
 func animate_health_bar():
-	$AnimatedSprite.animation = "hp_green"
+	$AnimatedBoatSprite.animation = "hp_green"
 	if durability < max_durability * 0.7:
-		$AnimatedSprite.animation = "hp_yellow"
+		$AnimatedBoatSprite.animation = "hp_yellow"
 	if durability < max_durability * 0.35:
-		$AnimatedSprite.animation = "hp_red"
+		$AnimatedBoatSprite.animation = "hp_red"
 	if durability <= 0:
-		$AnimatedSprite.animation = "hp_0"
+		$AnimatedBoatSprite.animation = "hp_0"
 		
 func fire_animate_left():
 	fire_animate($CannonGunLeft/CannonGunAngle)
@@ -179,11 +180,9 @@ func repair():
 		durability = max_durability
 		update_durability()
 
-func _unhandled_input(event):
-	if event.is_action_pressed('ui_touch'):
-		var space_state = get_world_2d().direct_space_state
-		var result = space_state.intersect_point( get_global_mouse_position(), 32, [], 1, true, true )
-		print(result)
-		
+func _on_AnimatedBoatSprite_clicked():
+	emit_signal("is_clicked")
+
 func _on_PlayerBoat_input_event(viewport, event, shape_idx):
-	print(event)
+	if event.is_action_pressed('ui_touch'):
+		emit_signal("is_clicked")

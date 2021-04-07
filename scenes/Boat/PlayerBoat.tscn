@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/Boat/PlayerBoat.gd" type="Script" id=1]
 [ext_resource path="res://assets/ships/ship (1).png" type="Texture" id=2]
@@ -12,11 +12,6 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "hp_yellow",
-"speed": 2.0
-}, {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "hp_green",
@@ -31,21 +26,30 @@ animations = [ {
 "loop": true,
 "name": "hp_red",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "hp_yellow",
+"speed": 2.0
 } ]
+
+[sub_resource type="GDScript" id=3]
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 22.2869
 height = 68.201
 
 [node name="PlayerBoat" type="KinematicBody2D"]
+input_pickable = true
 collision_layer = 2147483655
 collision_mask = 7
 script = ExtResource( 1 )
 fire_damage = 8
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedBoatSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "hp_green"
+script = SubResource( 3 )
 
 [node name="Body" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )

@@ -8,6 +8,7 @@ export var is_target_seen = false
 var object_type = "ship"
 
 signal sinking
+signal is_clicked(pos)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -130,3 +131,7 @@ func repair():
 	elif durability > max_durability:
 		durability = max_durability
 		update_durability()
+		
+func _on_NPCBoat_input_event(viewport, event, shape_idx):
+	if event.is_action_pressed('ui_touch'):
+		emit_signal("is_clicked", get_global_mouse_position())

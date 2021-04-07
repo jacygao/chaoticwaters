@@ -1,11 +1,11 @@
 class_name Boat
 extends KinematicBody2D
 
-export var default_speed = 50
+export var default_speed = 0
 var speed = default_speed
 
 # How fast boat turns
-export (float) var default_rotation_speed = .5
+export (float) var default_rotation_speed = 0
 var rotation_speed = default_rotation_speed
 
 # The default health
