@@ -1,13 +1,14 @@
 extends Control
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+var dialog_key = ""
 
 func new_dialog(key):
-	var dialog = Dialog_Meta.load_dialog(key)
-	$DialogBox.open_dialog(dialog)
-	visible = true
+	if !Dialog.has_played(key):
+		dialog_key = key
+		var dialog = Dialog_Meta.load_dialog(dialog_key)
+		$DialogBox.open_dialog(dialog)
+		visible = true
 
 func _on_DialogBox_dialog_is_finished():
+	Dialog.save(dialog_key)
 	visible = false
