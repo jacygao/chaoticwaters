@@ -8,12 +8,12 @@ export var is_target_seen = false
 var object_type = "ship"
 
 signal sinking
-signal is_clicked(pos)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$CannonGunRight.rotation_degrees = -90
 	$CannonGunLeft.rotation_degrees = 90
+	$ObjectPopupControl.close()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -134,4 +134,5 @@ func repair():
 		
 func _on_NPCBoat_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed('ui_touch'):
-		emit_signal("is_clicked", get_global_mouse_position())
+		$ObjectPopupControl.open(position)
+		get_tree().set_input_as_handled()

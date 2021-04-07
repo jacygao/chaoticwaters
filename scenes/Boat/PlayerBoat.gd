@@ -107,26 +107,7 @@ func _process(_delta):
 	$AnimatedBoatSprite.play()
 		
 func _physics_process(delta):
-	if !isAnchorOn:
-		if speed < default_speed:
-			speed += acceleration
-		if speed > default_speed:
-			speed = default_speed
-		
-	velocity = Vector2(speed, 0).rotated(cur_rotation)
-	if speed > 0:
-		static_velocity = velocity
 	
-	var target_angle = target_direction.angle_to(velocity)
-	var rotate_velocity = 1
-	if abs(target_angle) < 1:
-		rotate_velocity = abs(target_angle)
-	if target_angle < 0:
-		rotation_dir = rotate_velocity
-	elif target_angle > 0:
-		rotation_dir = -1 * rotate_velocity
-	
-	cur_rotation += rotation_dir * rotation_speed * delta
 	move_and_slide(velocity)
 
 # Controls ship movement animation
