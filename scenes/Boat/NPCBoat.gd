@@ -8,6 +8,7 @@ export var is_target_seen = false
 var object_type = "ship"
 
 signal sinking
+signal is_attacked(node)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -136,3 +137,6 @@ func _on_NPCBoat_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed('ui_touch'):
 		$ObjectPopupControl.open(position)
 		get_tree().set_input_as_handled()
+
+func _on_ObjectPopupControl_is_attacked():
+	emit_signal("is_attacked", self)

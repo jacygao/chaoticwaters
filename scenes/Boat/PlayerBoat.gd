@@ -48,10 +48,16 @@ var last_x = 0
 var smoke = preload("res://scenes/Boat/Smoke.tscn")
 var cannon_ball = preload("res://scenes/CannonBall/CannonBall.tscn")
 
+# v2
+var target_node = null
+
+enum {IDLE, MOVING, ATTACKING}
+var player_state = IDLE
+
 signal is_sinking
 signal is_clicked
 
-# Called when the node enters the scene tree for the first time.
+# Called when the node enters the scene tree for thes first time.
 func _ready():
 	$CannonGunRight.rotation_degrees = -90
 	$CannonGunLeft.rotation_degrees = 90
@@ -69,6 +75,16 @@ func team():
 func set_target(val):
 	target_direction = val - position
 
+func set_state(s):
+	player_state = s
+
+func set_state_attacking(target):
+	player_state = ATTACKING
+	target_node = target
+	
+func set_default_state():
+	player_state = IDLE
+	
 # ensures the angle is netween -179 and 180 degrees
 func angle_tidy(a):
 	if a > 180:
@@ -107,8 +123,16 @@ func _process(_delta):
 	$AnimatedBoatSprite.play()
 		
 func _physics_process(delta):
-	
-	move_and_slide(velocity)
+	match player_state:
+		IDLE:
+			pass
+		MOVING:
+			pass
+		ATTACKING:
+			var pos = target_node.global_position
+			velocity = position.direction_to(pos) * speed
+			if position.distance_to(pos) > 10:
+				velocity = move_and_slide(velocity)
 
 # Controls ship movement animation
 func animate(ta):

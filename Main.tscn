@@ -76,5 +76,6 @@ wait_time = 10.0
 [connection signal="anchor_on" from="HUD/AnchorButton" to="." method="_on_AnchorButton_anchor_on"]
 [connection signal="city_entered" from="CityStockholm" to="." method="_on_CityStockholm_city_entered"]
 [connection signal="city_exited" from="CityStockholm" to="." method="_on_CityStockholm_city_exited"]
+[connection signal="is_attacked" from="NPCBoat" to="Player" method="_on_NPCBoat_is_attacked"]
 [connection signal="sinking" from="NPCBoat" to="." method="_on_NPCBoat_sinking"]
 [connection signal="timeout" from="BoatDisappearTimer" to="." method="_on_BoatDisappearTimer_timeout"]

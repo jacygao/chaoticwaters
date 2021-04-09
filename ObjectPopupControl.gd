@@ -1,5 +1,7 @@
 extends Node2D
 
+signal is_attacked
+
 func _ready():
 	close()
 
@@ -13,4 +15,8 @@ func open(pos):
 	$ObjectPopupPanel.popup()
 	
 func close():
-	visible = false
+	$ObjectPopupPanel.hide()
+
+func _on_ObjectPopupPanel_attack_pirate_pressed():
+	emit_signal("is_attacked")
+	close()

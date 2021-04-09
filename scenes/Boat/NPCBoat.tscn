@@ -94,3 +94,4 @@ visible = false
 [connection signal="fire" from="CannonGunRight" to="." method="_on_CannonGunRight_fire"]
 [connection signal="body_entered" from="VisionCircle" to="." method="_on_VisionCircle_body_entered"]
 [connection signal="body_exited" from="TargetCircle" to="." method="_on_TargetCircle_body_exited"]
+[connection signal="is_attacked" from="ObjectPopupControl" to="." method="_on_ObjectPopupControl_is_attacked"]

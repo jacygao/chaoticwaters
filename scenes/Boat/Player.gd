@@ -27,3 +27,5 @@ func anchor_off():
 func _on_Boat_is_clicked():
 	print("clicked")
 
+func _on_NPCBoat_is_attacked(node):
+	$Boat.set_state_attacking(node)
