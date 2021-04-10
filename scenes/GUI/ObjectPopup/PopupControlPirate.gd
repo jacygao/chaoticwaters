@@ -17,6 +17,6 @@ func open(pos):
 func close():
 	$ObjectPopupPanel.hide()
 
-func _on_ObjectPopupPanel_attack_pirate_pressed():
+func _on_PiratePopupPanel_attack_button_pressed():
 	emit_signal("is_attacked")
 	close()

@@ -1,17 +1,15 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/Boat/PlayerBoat.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/GUI/ObjectPopup/PopupControlPirate.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Boat/Pirate.gd" type="Script" id=3]
 
 [node name="Pirate" type="Node2D"]
+script = ExtResource( 3 )
 
-[node name="PlayerBoat" parent="." instance=ExtResource( 1 )]
-team = 1
-id = "player_boat_1"
+[node name="Boat" parent="." instance=ExtResource( 1 )]
 boat_sprite_path = "res://scenes/Boat/Sprites/PirateBoat.tres"
-default_speed = 50
-default_acceleration = 1.0
-default_rotation_speed = 1.0
-max_durability = 10
-fire_max_range = 300
-fire_blind_range = 100
-fire_rate = 2.0
+
+[node name="PopupControlPirate" parent="." instance=ExtResource( 2 )]
+[connection signal="input_event" from="Boat" to="." method="_on_PlayerBoat_input_event"]
+[connection signal="is_attacked" from="PopupControlPirate" to="." method="_on_PopupControlPirate_is_attacked"]

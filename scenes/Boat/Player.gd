@@ -5,7 +5,7 @@ var screen_size
 # Add this variable to hold the clicked position.
 var target = Vector2()
 
-var mouse_entered = false
+signal enter_pressed
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,8 +24,10 @@ func anchor_on():
 func anchor_off():
 	$Boat.anchor_off()
 
-func _on_Boat_is_clicked():
-	print("clicked")
+func _on_PopupControlPlayer_enter_pressed():
+	emit_signal("enter_pressed")
 
-func _on_NPCBoat_is_attacked(node):
-	$Boat.set_state_attacking(node)
+func _on_Boat_input_event(viewport, event, shape_idx):
+	if event.is_action_pressed('ui_touch'):
+		$PopupControlPlayer.open($Boat.get_global_position())
+		get_tree().set_input_as_handled()

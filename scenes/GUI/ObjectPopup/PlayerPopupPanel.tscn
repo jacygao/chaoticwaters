@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/GUI/ObjectPopup/PlayerPopupPanel.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Widget/Statistic/StatisticItem.tscn" type="PackedScene" id=2]
+[ext_resource path="res://fonts/AkayaTelivigala-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/portaits/portait-1-2.png" type="Texture" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 3 )
+
+[node name="PlayerPopupPanel" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 75, 105 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -50.0
+margin_right = 200.0
+margin_bottom = 40.0
+custom_fonts/font = SubResource( 1 )
+text = "Captain xxx"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerEnterButton" type="Button" parent="."]
+modulate = Color( 0, 0.647059, 1, 1 )
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -150.0
+margin_top = -50.0
+margin_right = -10.0
+margin_bottom = -10.0
+custom_fonts/font = SubResource( 2 )
+text = "ENTER"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatsPanel" type="PanelContainer" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 150.0
+margin_top = 40.0
+margin_right = 325.0
+margin_bottom = 140.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatisticItem" parent="StatsPanel" instance=ExtResource( 2 )]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 168.0
+margin_bottom = 93.0
+label = "Power"
+text = 10000
+font_color = Color( 1, 1, 1, 1 )
+[connection signal="pressed" from="PlayerEnterButton" to="." method="_on_PlayerEnterButton_pressed"]
