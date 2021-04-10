@@ -4,6 +4,8 @@ export var team = 1
 
 export var id = "player_boat_1"
 
+export (String) var boat_sprite_path = "res://scenes/Boat/Sprites/RoyalBoat.tres"
+
 # navigation speed
 export var default_speed = 50
 var speed = default_speed
@@ -61,6 +63,7 @@ signal is_clicked
 func _ready():
 	$CannonGunRight.rotation_degrees = -90
 	$CannonGunLeft.rotation_degrees = 90
+	$AnimatedBoatSprite.set_sprite_frames(load(boat_sprite_path))
 	
 # Meta Getters
 func type():

@@ -1,0 +1,29 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=2]
+
+[ext_resource path="res://assets/ships/ship (8).png" type="Texture" id=1]
+[ext_resource path="res://assets/ships/ship (14).png" type="Texture" id=2]
+[ext_resource path="res://assets/ships/ship (20).png" type="Texture" id=3]
+[ext_resource path="res://assets/ships/ship (2).png" type="Texture" id=4]
+
+[resource]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "hp_green",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "hp_0",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "hp_red",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "hp_yellow",
+"speed": 5.0
+} ]
