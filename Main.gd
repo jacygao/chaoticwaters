@@ -59,3 +59,7 @@ func _on_NPCBoat_sinking():
 
 func _on_NPCBoat_is_clicked(pos):
 	$ObjectPopupControl.open(pos)
+
+# An attack button is pressed, moving player boat towards target.
+func _on_Pirate_attack_pressed(node):
+	$Player.attacking(node)

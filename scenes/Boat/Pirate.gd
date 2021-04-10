@@ -1,6 +1,6 @@
 extends Node2D
 
-signal attack_pressed
+signal attack_pressed(node)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,4 +12,4 @@ func _on_PlayerBoat_input_event(viewport, event, shape_idx):
 		get_tree().set_input_as_handled()
 
 func _on_PopupControlPirate_is_attacked():
-	emit_signal("attack_pressed")
+	emit_signal("attack_pressed", $Boat)

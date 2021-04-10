@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://scenes/Boat/PlayerBoat.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Boat/Boat.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Boat/Player.gd" type="Script" id=2]
 [ext_resource path="res://scenes/GUI/ObjectPopup/PopupControlPlayer.tscn" type="PackedScene" id=3]
 

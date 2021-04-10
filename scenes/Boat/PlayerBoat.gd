@@ -53,7 +53,7 @@ var cannon_ball = preload("res://scenes/CannonBall/CannonBall.tscn")
 # v2
 var target_node = null
 
-enum {IDLE, MOVING, ATTACKING}
+enum {IDLE, MOVING, ATTACKING, BATTLING}
 var player_state = IDLE
 
 signal is_sinking
@@ -75,6 +75,9 @@ func id():
 func team():
 	return team
 
+func state():
+	return player_state
+
 func set_target(val):
 	target_direction = val - position
 
@@ -84,6 +87,10 @@ func set_state(s):
 func set_state_attacking(target):
 	player_state = ATTACKING
 	target_node = target
+	
+func set_state_battling():
+	player_state = BATTLING
+	print("battle has started")
 	
 func set_default_state():
 	player_state = IDLE
@@ -136,7 +143,9 @@ func _physics_process(delta):
 			velocity = position.direction_to(pos) * speed
 			if position.distance_to(pos) > 10:
 				velocity = move_and_slide(velocity)
-
+		BATTLING:
+			pass
+		
 # Controls ship movement animation
 func animate(ta):
 	$AnimatedBoatSprite.scale = Vector2(1, 1)
@@ -191,3 +200,7 @@ func repair():
 func _on_AnimatedBoatSprite_clicked():
 	emit_signal("is_clicked")
 
+func _on_CollisionDetector_body_entered(body):
+	if state() == ATTACKING || body.state() == ATTACKING:
+		# battle starts
+		set_state_battling()
