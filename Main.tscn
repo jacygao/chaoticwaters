@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/Boat/PlayerBoat.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/GUI/Button/BaseButton.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scenes/GUI/Button/AnchorButton.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/Dialog/DialogUI.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/Boat/Player.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/Boat/Pirate.tscn" type="PackedScene" id=11]
 
 [node name="Main" type="Node"]
 script = ExtResource( 7 )
@@ -61,11 +62,15 @@ team = 2
 [node name="Player" parent="." instance=ExtResource( 10 )]
 position = Vector2( 650.439, -22.2655 )
 
+[node name="Pirate" parent="." instance=ExtResource( 11 )]
+position = Vector2( 1031.66, -24.9452 )
+
 [node name="PlayerBoat" parent="." instance=ExtResource( 1 )]
 visible = false
 position = Vector2( 487.405, -72.1558 )
 
 [node name="NPCBoat" parent="." instance=ExtResource( 4 )]
+visible = false
 position = Vector2( 1016.44, -21.8526 )
 
 [node name="BoatDisappearTimer" type="Timer" parent="."]

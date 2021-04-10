@@ -58,12 +58,14 @@ var player_state = IDLE
 
 signal is_sinking
 signal is_clicked
+signal is_attacked(node)
 
 # Called when the node enters the scene tree for thes first time.
 func _ready():
 	$CannonGunRight.rotation_degrees = -90
 	$CannonGunLeft.rotation_degrees = 90
 	$AnimatedBoatSprite.set_sprite_frames(load(boat_sprite_path))
+	$ObjectPopupControl.close()
 	
 # Meta Getters
 func type():
@@ -193,4 +195,8 @@ func _on_AnimatedBoatSprite_clicked():
 
 func _on_PlayerBoat_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed('ui_touch'):
-		emit_signal("is_clicked")
+		$ObjectPopupControl.open(get_global_position())
+		get_tree().set_input_as_handled()
+
+func _on_ObjectPopupControl_is_attacked():
+	emit_signal("is_attacked", self)
