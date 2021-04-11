@@ -8,6 +8,7 @@
 script = ExtResource( 1 )
 
 [node name="ObjectPopupPanel" parent="." instance=ExtResource( 3 )]
+visible = true
 
 [node name="PlayerPopupPanel" parent="ObjectPopupPanel" instance=ExtResource( 2 )]
 [connection signal="enter_button_pressed" from="ObjectPopupPanel/PlayerPopupPanel" to="." method="_on_PlayerPopupPanel_enter_button_pressed"]

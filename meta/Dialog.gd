@@ -25,6 +25,14 @@ var dialog = {
 			"text": "Yes captain!",
 		},
 	],
+	"first_victory": [
+		{
+			"is_player_speaking": false,
+			"name": "sailor",
+			"portrait_file_name": "portait-2-4.png",
+			"text": "Good job captain! The enemy boat is sinking. Let's loot the boat before it is under the ocean.",
+		},
+	]
 }
 
 func load_dialog(key):

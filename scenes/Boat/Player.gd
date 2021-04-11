@@ -4,6 +4,7 @@ extends Node
 var screen_size
 
 signal enter_pressed
+signal battle_victory(node)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,3 +27,6 @@ func _on_Boat_input_event(viewport, event, shape_idx):
 # player boat is attacking an enemy boat
 func attacking(node):
 	$Boat.set_state_attacking(node)
+
+func _on_Boat_battle_victory(node):
+	emit_signal("battle_victory", node)

@@ -57,3 +57,6 @@ func _on_NPCBoat_is_clicked(pos):
 # An attack button is pressed, moving player boat towards target.
 func _on_Pirate_attack_pressed(node):
 	$Player.attacking(node)
+
+func _on_Player_battle_victory(node):
+	$HUD/DialogUI.new_dialog("first_victory")

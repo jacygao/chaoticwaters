@@ -57,6 +57,7 @@ enum {IDLE, MOVING, ATTACKING, ATTACKED, BATTLING, SINKING, FLEEING}
 var player_state = IDLE
 
 signal is_sinking
+signal battle_victory(node)
 
 # Called when the node enters the scene tree for thes first time.
 func _ready():
@@ -172,6 +173,7 @@ func attack_animate(delta):
 func battle_animate(delta):
 	if target_node.state() == SINKING:
 		set_state(IDLE)
+		emit_signal("battle_victory", target_node)
 	else:
 		move_and_rotate_animate(delta)
 

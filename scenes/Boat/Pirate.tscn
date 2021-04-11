@@ -9,14 +9,14 @@ script = ExtResource( 3 )
 
 [node name="Boat" parent="." instance=ExtResource( 1 )]
 team = 2
-id = "pirate_boat_1"
+id = "pirate_boat_tutorial"
 boat_sprite_path = "res://scenes/Boat/Sprites/PirateBoat.tres"
-max_durability = 2
+max_durability = 5
 
 [node name="PopupControlPirate" parent="." instance=ExtResource( 2 )]
 
 [node name="SinkTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 30.0
 one_shot = true
 [connection signal="input_event" from="Boat" to="." method="_on_PlayerBoat_input_event"]
 [connection signal="is_sinking" from="Boat" to="." method="_on_Boat_is_sinking"]

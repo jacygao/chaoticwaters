@@ -17,6 +17,9 @@ func open(pos):
 func close():
 	$ObjectPopupPanel.hide()
 
+func get_popup_size():
+	return $ObjectPopupPanel.rect_size
+
 func _on_PiratePopupPanel_attack_button_pressed():
 	emit_signal("is_attacked")
 	close()
