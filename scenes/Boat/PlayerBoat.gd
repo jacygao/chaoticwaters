@@ -7,7 +7,7 @@ export var id = "player_boat_1"
 export (String) var boat_sprite_path = "res://scenes/Boat/Sprites/RoyalBoat.tres"
 
 # navigation speed
-export var default_speed = 50
+export var default_speed = 100
 var speed = default_speed
 
 # acceleration speed
@@ -53,7 +53,7 @@ var cannon_ball = preload("res://scenes/CannonBall/CannonBall.tscn")
 # v2
 var target_node = null
 
-enum {IDLE, MOVING, ATTACKING, BATTLING}
+enum {IDLE, MOVING, ATTACKING, ATTACKED, BATTLING}
 var player_state = IDLE
 
 signal is_sinking
@@ -84,12 +84,16 @@ func set_target(val):
 func set_state(s):
 	player_state = s
 
+func set_state_attacked():
+	player_state = ATTACKED
+
 func set_state_attacking(target):
 	player_state = ATTACKING
 	target_node = target
 	
-func set_state_battling():
+func set_state_battling(node):
 	player_state = BATTLING
+	target_node = node
 	print("battle has started")
 	
 func set_default_state():
@@ -144,13 +148,39 @@ func _physics_process(delta):
 			if position.distance_to(pos) > 10:
 				velocity = move_and_slide(velocity)
 		BATTLING:
-			pass
+			battle_animate(delta)
 		
 # Controls ship movement animation
 func animate(ta):
 	$AnimatedBoatSprite.scale = Vector2(1, 1)
 	rotation_degrees = ta - 90
-		
+
+# Activates when boat is in battle
+func battle_animate(delta):
+	rotate_animate(delta)
+
+func rotate_animate(delta):
+	if cur_rotation > 2*PI:
+		cur_rotation-=2*PI
+	if cur_rotation < -2*PI:
+		cur_rotation+=2*PI
+	velocity = Vector2(speed, 0).rotated(cur_rotation)
+	var targetPos = target_node.get_global_position()
+	
+	var target_direction = targetPos - get_global_position()
+	print(rad2deg(target_direction.angle_to(velocity)))
+	var target_angle = rad2deg(target_direction.angle_to(velocity)) + 90
+	
+	var rotate_velocity = 1
+	if abs(target_angle) < 1:
+		rotate_velocity = abs(target_angle)
+	if target_angle < 0:
+		rotation_dir = rotate_velocity
+	elif target_angle > 0:
+		rotation_dir = -1 * rotate_velocity
+	cur_rotation += rotation_dir * rotation_speed * delta
+	move_and_slide(velocity)
+
 func animate_health_bar():
 	$AnimatedBoatSprite.animation = "hp_green"
 	if durability < max_durability * 0.7:
@@ -201,6 +231,7 @@ func _on_AnimatedBoatSprite_clicked():
 	emit_signal("is_clicked")
 
 func _on_CollisionDetector_body_entered(body):
-	if state() == ATTACKING || body.state() == ATTACKING:
-		# battle starts
-		set_state_battling()
+	if body.has_method("type") && body.type() == "ship":
+		if state() == ATTACKING || state() == ATTACKED:
+			# battle starts
+			set_state_battling(body)

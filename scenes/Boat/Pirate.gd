@@ -12,4 +12,5 @@ func _on_PlayerBoat_input_event(viewport, event, shape_idx):
 		get_tree().set_input_as_handled()
 
 func _on_PopupControlPirate_is_attacked():
+	$Boat.set_state_attacked()
 	emit_signal("attack_pressed", $Boat)
