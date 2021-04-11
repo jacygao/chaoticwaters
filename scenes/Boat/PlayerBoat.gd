@@ -152,7 +152,9 @@ func _physics_process(delta):
 		BATTLING:
 			speed = default_speed * .1
 			battle_animate(delta)
-		
+		SINKING:
+			pass
+			
 # Controls ship movement animation
 func animate(ta):
 	$AnimatedBoatSprite.scale = Vector2(1, 1)
@@ -214,9 +216,9 @@ func fire_animate_right():
 # Fires an animated cannon ball at a given vector position
 func fire_animate(gun):
 	var cannon_ball_ins = cannon_ball.instance()
-	var pos = gun.get_position()
-	cannon_ball_ins.position = pos
-	cannon_ball_ins.init((gun.position - position).angle(), fire_damage, fire_max_range)
+	var angle = (target_node.get_global_position() - get_global_position()).angle()
+	cannon_ball_ins.position = gun.get_global_position()
+	cannon_ball_ins.init(angle, fire_damage, fire_max_range)
 	gun.get_node("CannonGunFireSmoke").set_emitting(true)
 	get_parent().get_parent().add_child(cannon_ball_ins)
 	
