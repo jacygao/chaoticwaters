@@ -14,7 +14,7 @@ func _ready():
 		healthbar.max_value = get_parent().max_durability
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	global_rotation = 0
 
 func update_healthbar(value):

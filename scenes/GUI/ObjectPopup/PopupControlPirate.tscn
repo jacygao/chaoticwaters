@@ -8,7 +8,6 @@
 script = ExtResource( 1 )
 
 [node name="ObjectPopupPanel" parent="." instance=ExtResource( 2 )]
-visible = true
 
 [node name="PiratePopupPanel" parent="ObjectPopupPanel" instance=ExtResource( 3 )]
 [connection signal="attack_button_pressed" from="ObjectPopupPanel/PiratePopupPanel" to="." method="_on_PiratePopupPanel_attack_button_pressed"]

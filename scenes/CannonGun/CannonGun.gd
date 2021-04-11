@@ -18,7 +18,7 @@ func _ready():
 	$Reloading.wait_time = fire_interval
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if is_colliding():
 		var collider = get_collider()
 		if collider != null && collider.get_class() == "KinematicBody2D":

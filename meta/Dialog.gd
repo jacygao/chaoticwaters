@@ -22,7 +22,7 @@ var dialog = {
 			"is_player_speaking": false,
 			"name": "sailor",
 			"portrait_file_name": "portait-2-4.png",
-			"text": "Yes sir!",
+			"text": "Yes captain!",
 		},
 	],
 }

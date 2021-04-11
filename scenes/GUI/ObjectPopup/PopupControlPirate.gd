@@ -11,8 +11,8 @@ func _process(delta):
 
 # pos - a Vector2D defining the popup position.
 func open(pos):
-	$ObjectPopupPanel.set_global_position(pos)
 	$ObjectPopupPanel.popup()
+	$ObjectPopupPanel.set_global_position(pos)
 	
 func close():
 	$ObjectPopupPanel.hide()

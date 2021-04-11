@@ -4,7 +4,7 @@ export var team = 1
 
 export var id = "player_boat_1"
 
-export (String) var boat_sprite_path = "res://scenes/Boat/Sprites/RoyalBoat.tres"
+export (String) var boat_sprite_path = "res://scenes/Boat/Sprites/PlainBoat.tres"
 
 # navigation speed
 export var default_speed = 100
@@ -20,7 +20,7 @@ var rotation_speed = default_rotation_speed
 
 # default health
 export var max_durability = 10
-var durability = max_durability
+var durability = 0
 
 # Setting cannon gun related attributes.
 # These values are now in the CannonGun nodes as well but 
@@ -57,13 +57,14 @@ enum {IDLE, MOVING, ATTACKING, ATTACKED, BATTLING}
 var player_state = IDLE
 
 signal is_sinking
-signal is_clicked
 
 # Called when the node enters the scene tree for thes first time.
 func _ready():
 	$CannonGunRight.rotation_degrees = -90
 	$CannonGunLeft.rotation_degrees = 90
 	$AnimatedBoatSprite.set_sprite_frames(load(boat_sprite_path))
+	
+	durability = max_durability
 	
 # Meta Getters
 func type():
@@ -77,9 +78,6 @@ func team():
 
 func state():
 	return player_state
-
-func set_target(val):
-	target_direction = val - position
 
 func set_state(s):
 	player_state = s
@@ -148,6 +146,7 @@ func _physics_process(delta):
 			if position.distance_to(pos) > 10:
 				velocity = move_and_slide(velocity)
 		BATTLING:
+			speed = default_speed * .5
 			battle_animate(delta)
 		
 # Controls ship movement animation
@@ -168,7 +167,6 @@ func rotate_animate(delta):
 	var targetPos = target_node.get_global_position()
 	
 	var target_direction = targetPos - get_global_position()
-	print(rad2deg(target_direction.angle_to(velocity)))
 	var target_angle = rad2deg(target_direction.angle_to(velocity)) + 90
 	
 	var rotate_velocity = 1
@@ -191,19 +189,23 @@ func animate_health_bar():
 		$AnimatedBoatSprite.animation = "hp_0"
 		
 func fire_animate_left():
-	fire_animate($CannonGunLeft/CannonGunAngle)
+	if player_state == BATTLING:
+		fire_animate($CannonGunLeft/CannonGunAngle)
 		
 func fire_animate_right():
-	fire_animate($CannonGunRight/CannonGunAngle)
+	if player_state == BATTLING:
+		fire_animate($CannonGunRight/CannonGunAngle)
 	
 # Fires an animated cannon ball at a given vector position
 func fire_animate(gun):
 	var cannon_ball_ins = cannon_ball.instance()
-	var pos = gun.get_node("CannonGunPosition").get_global_position()
+	var pos = gun.get_position()
 	cannon_ball_ins.position = pos
-	cannon_ball_ins.init((pos-position).angle(), fire_damage, fire_max_range)
+	print(id())
+	print(rad2deg((target_node.position - pos).angle()))
+	cannon_ball_ins.init((target_node.position - pos).angle(), fire_damage, fire_max_range)
 	gun.get_node("CannonGunFireSmoke").set_emitting(true)
-	get_parent().add_child(cannon_ball_ins)
+	get_parent().get_parent().add_child(cannon_ball_ins)
 	
 func hit(damage):
 	durability -= damage
@@ -227,11 +229,15 @@ func repair():
 		durability = max_durability
 		update_durability()
 
-func _on_AnimatedBoatSprite_clicked():
-	emit_signal("is_clicked")
-
 func _on_CollisionDetector_body_entered(body):
-	if body.has_method("type") && body.type() == "ship":
-		if state() == ATTACKING || state() == ATTACKED:
-			# battle starts
-			set_state_battling(body)
+	if body.has_method("id") && body.id() != id():
+		if body.has_method("type") && body.type() == "ship":
+			if state() == ATTACKING || state() == ATTACKED:
+				# battle starts
+				set_state_battling(body)
+
+func _on_CannonGunLeft_fire(target):
+	fire_animate_right()
+
+func _on_CannonGunRight_fire(target):
+	fire_animate_left()

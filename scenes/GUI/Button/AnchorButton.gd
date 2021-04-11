@@ -17,7 +17,6 @@ func _ready():
 #func _process(delta):
 #	pass
 
-
 func _on_AnchorButton_pressed():
 	if is_anchor_on:
 		is_anchor_on = false

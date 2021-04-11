@@ -57,11 +57,11 @@ position = Vector2( 7585.57, -314.648 )
 rotation = 1.5708
 team = 2
 
-[node name="Player" parent="." instance=ExtResource( 10 )]
-position = Vector2( 650.439, -22.2655 )
-
 [node name="Pirate" parent="." instance=ExtResource( 11 )]
-position = Vector2( 1031.66, -24.9452 )
+position = Vector2( 1007.72, -120.699 )
+
+[node name="Player" parent="." instance=ExtResource( 10 )]
+position = Vector2( 776.576, 144.462 )
 
 [node name="BoatDisappearTimer" type="Timer" parent="."]
 wait_time = 10.0

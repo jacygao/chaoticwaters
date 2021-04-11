@@ -8,6 +8,7 @@
 script = ExtResource( 2 )
 
 [node name="Boat" parent="." instance=ExtResource( 1 )]
+boat_sprite_path = "res://scenes/Boat/Sprites/RoyalBoat.tres"
 
 [node name="Camera2D" type="Camera2D" parent="Boat"]
 current = true
@@ -15,5 +16,4 @@ smoothing_enabled = true
 
 [node name="PopupControlPlayer" parent="." instance=ExtResource( 3 )]
 [connection signal="input_event" from="Boat" to="." method="_on_Boat_input_event"]
-[connection signal="is_clicked" from="Boat" to="." method="_on_Boat_is_clicked"]
 [connection signal="enter_pressed" from="PopupControlPlayer" to="." method="_on_PopupControlPlayer_enter_pressed"]
