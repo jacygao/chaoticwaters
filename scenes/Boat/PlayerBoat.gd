@@ -131,6 +131,8 @@ func _input(event):
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	if player_state == SINKING:
+		return
 	if durability == 0:
 		print("player boat has sunk")
 		sink()
@@ -232,7 +234,8 @@ func sink():
 	speed = 0
 	rotation_speed = 0
 	set_state_sinking()
-
+	emit_signal("is_sinking")
+	
 func update_durability():
 	$HealthDisplay.update_max_health(max_durability)
 	$HealthDisplay.update_healthbar(durability)

@@ -14,5 +14,11 @@ boat_sprite_path = "res://scenes/Boat/Sprites/PirateBoat.tres"
 max_durability = 2
 
 [node name="PopupControlPirate" parent="." instance=ExtResource( 2 )]
+
+[node name="SinkTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
 [connection signal="input_event" from="Boat" to="." method="_on_PlayerBoat_input_event"]
+[connection signal="is_sinking" from="Boat" to="." method="_on_Boat_is_sinking"]
 [connection signal="is_attacked" from="PopupControlPirate" to="." method="_on_PopupControlPirate_is_attacked"]
+[connection signal="timeout" from="SinkTimer" to="." method="_on_SinkTimer_timeout"]

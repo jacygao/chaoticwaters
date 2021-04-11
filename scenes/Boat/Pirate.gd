@@ -14,3 +14,11 @@ func _on_PlayerBoat_input_event(viewport, event, shape_idx):
 func _on_PopupControlPirate_is_attacked():
 	$Boat.set_state_attacked()
 	emit_signal("attack_pressed", $Boat)
+
+func _on_Boat_is_sinking():
+	print("starting timer")
+	$SinkTimer.start()
+
+func _on_SinkTimer_timeout():
+	print("time out triggered")
+	queue_free()
