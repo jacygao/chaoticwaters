@@ -130,7 +130,7 @@ func _process(_delta):
 		# TODO: player boat has sunk.. what now?
 
 	angle = angle_tidy(rad2deg(cur_rotation))
-	animate_health_bar()
+	health_bar_animate()
 	animate(angle)
 	$AnimatedBoatSprite.play()
 		
@@ -139,12 +139,9 @@ func _physics_process(delta):
 		IDLE:
 			pass
 		MOVING:
-			pass
+			move_animate(delta)
 		ATTACKING:
-			var pos = target_node.global_position
-			velocity = position.direction_to(pos) * speed
-			if position.distance_to(pos) > 10:
-				velocity = move_and_slide(velocity)
+			attack_animate(delta)
 		BATTLING:
 			speed = default_speed * .5
 			battle_animate(delta)
@@ -154,11 +151,17 @@ func animate(ta):
 	$AnimatedBoatSprite.scale = Vector2(1, 1)
 	rotation_degrees = ta - 90
 
+func move_animate(delta):
+	pass
+
+func attack_animate(delta):
+	move_and_rotate_animate(delta)
+
 # Activates when boat is in battle
 func battle_animate(delta):
-	rotate_animate(delta)
+	move_and_rotate_animate(delta)
 
-func rotate_animate(delta):
+func move_and_rotate_animate(delta):
 	if cur_rotation > 2*PI:
 		cur_rotation-=2*PI
 	if cur_rotation < -2*PI:
@@ -167,7 +170,9 @@ func rotate_animate(delta):
 	var targetPos = target_node.get_global_position()
 	
 	var target_direction = targetPos - get_global_position()
-	var target_angle = rad2deg(target_direction.angle_to(velocity)) + 90
+	var target_angle = rad2deg(target_direction.angle_to(velocity))
+	if player_state == BATTLING:
+		target_angle+=90
 	
 	var rotate_velocity = 1
 	if abs(target_angle) < 1:
@@ -179,7 +184,7 @@ func rotate_animate(delta):
 	cur_rotation += rotation_dir * rotation_speed * delta
 	move_and_slide(velocity)
 
-func animate_health_bar():
+func health_bar_animate():
 	$AnimatedBoatSprite.animation = "hp_green"
 	if durability < max_durability * 0.7:
 		$AnimatedBoatSprite.animation = "hp_yellow"
