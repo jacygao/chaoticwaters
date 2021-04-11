@@ -20,7 +20,6 @@ func _on_PopupControlPlayer_enter_pressed():
 
 func _on_Boat_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed('ui_touch'):
-		#$PopupControlPlayer.set_global_transform($Boat.get_global_transform_with_canvas())
 		$PopupControlPlayer.open($Boat.get_global_position())
 		get_tree().set_input_as_handled()
 

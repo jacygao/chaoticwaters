@@ -53,7 +53,7 @@ var cannon_ball = preload("res://scenes/CannonBall/CannonBall.tscn")
 # v2
 var target_node = null
 
-enum {IDLE, MOVING, ATTACKING, ATTACKED, BATTLING}
+enum {IDLE, MOVING, ATTACKING, ATTACKED, BATTLING, SINKING, FLEEING}
 var player_state = IDLE
 
 signal is_sinking
@@ -82,20 +82,27 @@ func state():
 func set_state(s):
 	player_state = s
 
+func set_state_idle():
+	anchor_on()
+	set_state(IDLE)
+
 func set_state_attacked():
-	player_state = ATTACKED
+	set_state(ATTACKED)
 
 func set_state_attacking(target):
-	player_state = ATTACKING
+	set_state(ATTACKING)
 	target_node = target
 	
 func set_state_battling(node):
-	player_state = BATTLING
+	set_state(BATTLING)
 	target_node = node
 	print("battle has started")
 	
+func set_state_sinking():
+	set_state(SINKING)
+	
 func set_default_state():
-	player_state = IDLE
+	set_state_idle()
 	
 # ensures the angle is netween -179 and 180 degrees
 func angle_tidy(a):
@@ -143,7 +150,7 @@ func _physics_process(delta):
 		ATTACKING:
 			attack_animate(delta)
 		BATTLING:
-			speed = default_speed * .5
+			speed = default_speed * .1
 			battle_animate(delta)
 		
 # Controls ship movement animation
@@ -159,7 +166,10 @@ func attack_animate(delta):
 
 # Activates when boat is in battle
 func battle_animate(delta):
-	move_and_rotate_animate(delta)
+	if target_node.state() == SINKING:
+		set_state(IDLE)
+	else:
+		move_and_rotate_animate(delta)
 
 func move_and_rotate_animate(delta):
 	if cur_rotation > 2*PI:
@@ -206,9 +216,7 @@ func fire_animate(gun):
 	var cannon_ball_ins = cannon_ball.instance()
 	var pos = gun.get_position()
 	cannon_ball_ins.position = pos
-	print(id())
-	print(rad2deg((target_node.position - pos).angle()))
-	cannon_ball_ins.init((target_node.position - pos).angle(), fire_damage, fire_max_range)
+	cannon_ball_ins.init((gun.position - position).angle(), fire_damage, fire_max_range)
 	gun.get_node("CannonGunFireSmoke").set_emitting(true)
 	get_parent().get_parent().add_child(cannon_ball_ins)
 	
@@ -221,6 +229,7 @@ func hit(damage):
 func sink():
 	speed = 0
 	rotation_speed = 0
+	set_state_sinking()
 
 func update_durability():
 	$HealthDisplay.update_max_health(max_durability)
