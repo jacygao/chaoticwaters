@@ -25,7 +25,7 @@ var durability = 0
 # Setting cannon gun related attributes.
 # These values are now in the CannonGun nodes as well but 
 # they will still need to be set in order to customise
-export var fire_damage = 1
+export (int) var fire_damage = 0
 export var fire_max_range = 300
 export var fire_blind_range = 100
 export var fire_rate = 2.0
@@ -209,21 +209,21 @@ func health_bar_animate():
 	if durability <= 0:
 		$AnimatedBoatSprite.animation = "hp_0"
 		
-func fire_animate_left():
+func fire_animate_left(target):
 	if player_state == BATTLING:
-		fire_animate($CannonGunLeft/CannonGunAngle)
+		fire_animate($CannonGunLeft/CannonGunAngle, target)
 		
-func fire_animate_right():
+func fire_animate_right(target):
 	if player_state == BATTLING:
-		fire_animate($CannonGunRight/CannonGunAngle)
+		fire_animate($CannonGunRight/CannonGunAngle, target)
 	
 # Fires an animated cannon ball at a given vector position
-func fire_animate(gun):
+func fire_animate(gun, target):
 	var cannon_ball_ins = cannon_ball.instance()
-	var angle = (target_node.get_global_position() - get_global_position()).angle()
-	cannon_ball_ins.position = gun.get_global_position()
+	var angle = (target.get_global_position() - get_global_position()).angle()
+	cannon_ball_ins.position = gun.get_node("CannonGunPosition").get_global_position()
 	cannon_ball_ins.init(angle, fire_damage, fire_max_range)
-	gun.get_node("CannonGunFireSmoke").set_emitting(true)
+	gun.show_gun_fire()
 	get_parent().get_parent().add_child(cannon_ball_ins)
 	
 func hit(damage):
@@ -254,11 +254,12 @@ func _on_CollisionDetector_body_entered(body):
 	if body.has_method("id") && body.id() != id():
 		if body.has_method("type") && body.type() == "ship":
 			if state() == ATTACKING || state() == ATTACKED:
+				print(body.id())
 				# battle starts
 				set_state_battling(body)
 
 func _on_CannonGunLeft_fire(target):
-	fire_animate_right()
+	fire_animate_right(target)
 
 func _on_CannonGunRight_fire(target):
-	fire_animate_left()
+	fire_animate_left(target)

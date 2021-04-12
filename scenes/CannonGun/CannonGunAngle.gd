@@ -9,3 +9,6 @@ func _ready():
 
 func get_position():
 	return $CannonGunPosition.get_global_position()
+
+func show_gun_fire():
+	$CannonGunFireSmoke.set_emitting(true)
