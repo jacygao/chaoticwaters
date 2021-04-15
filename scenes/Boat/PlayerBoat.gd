@@ -26,7 +26,7 @@ var durability = 0
 # These values are now in the CannonGun nodes as well but 
 # they will still need to be set in order to customise
 export (int) var fire_damage = 0
-export var fire_max_range = 300
+export var fire_max_range = 400
 export var fire_blind_range = 100
 export var fire_rate = 2.0
 
@@ -135,7 +135,7 @@ func _process(_delta):
 	if player_state == SINKING:
 		return
 	if durability == 0:
-		print("player boat has sunk")
+		print(id(), " boat has sunk")
 		sink()
 		# TODO: player boat has sunk.. what now?
 
@@ -230,7 +230,8 @@ func hit(damage):
 	durability -= damage
 	$Fire.set_emitting(true)
 	$HealthDisplay.update_healthbar(durability)
-	print("Player boat is hit, current durability: ", durability)
+	$DamageController.show_value(damage, true)
+	print(id(), " is hit, current durability: ", durability)
 
 func sink():
 	speed = 0
@@ -259,7 +260,9 @@ func _on_CollisionDetector_body_entered(body):
 				set_state_battling(body)
 
 func _on_CannonGunLeft_fire(target):
+	print("left firing at ", target.id())
 	fire_animate_right(target)
 
 func _on_CannonGunRight_fire(target):
+	print("right firing at ", target.id())
 	fire_animate_left(target)

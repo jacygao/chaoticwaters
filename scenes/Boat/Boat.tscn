@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/Boat/PlayerBoat.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Boat/Sprites/PlainBoat.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://scenes/GUI/FloatingNumbers/DamageController.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/CannonGun/CannonGunAngle.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/CannonGun/CannonGun.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/Boat/Fire.tscn" type="PackedScene" id=14]
@@ -49,6 +50,8 @@ rotation = -1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetector"]
 shape = SubResource( 3 )
+
+[node name="DamageController" parent="." instance=ExtResource( 3 )]
 [connection signal="input_event" from="." to="." method="_on_PlayerBoat_input_event"]
 [connection signal="fire" from="CannonGunLeft" to="." method="_on_CannonGunLeft_fire"]
 [connection signal="fire" from="CannonGunRight" to="." method="_on_CannonGunRight_fire"]

@@ -4,7 +4,7 @@ extends RayCast2D
 const ready = 0
 const reloading = 1
 
-export var fire_blind_range = 100
+export var fire_blind_range = 0
 export var fire_interval = 2
 var fire_state = ready
 
