@@ -153,7 +153,7 @@ func _physics_process(delta):
 		ATTACKING:
 			attack_animate(delta)
 		BATTLING:
-			speed = default_speed * .1
+			speed = default_speed * .5
 			battle_animate(delta)
 		SINKING:
 			pass

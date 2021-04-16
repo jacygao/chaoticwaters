@@ -12,6 +12,7 @@ team = 2
 id = "pirate_boat_tutorial"
 boat_sprite_path = "res://scenes/Boat/Sprites/PirateBoat.tres"
 max_durability = 5
+fire_damage = 1
 
 [node name="PopupControlPirate" parent="." instance=ExtResource( 2 )]
 
