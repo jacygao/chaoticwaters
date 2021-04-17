@@ -21,7 +21,6 @@ signal city_exited
 func _ready():
 	$Outpost/FireRange.shape.radius = fire_range
 	
-	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if !targets.empty():

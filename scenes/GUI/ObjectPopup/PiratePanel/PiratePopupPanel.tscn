@@ -1,18 +1,18 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://fonts/AkayaTelivigala-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scenes/GUI/ObjectPopup/PiratePanel/PiratePopupPanel.gd" type="Script" id=1]
 [ext_resource path="res://assets/portaits/portait-3-4.png" type="Texture" id=2]
-[ext_resource path="res://scenes/GUI/ObjectPopup/PiratePopupPanel.gd" type="Script" id=3]
-[ext_resource path="res://scenes/GUI/ObjectPopup/ObjectPopupButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/GUI/ObjectPopup/ObjectPopupButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://fonts/AkayaTelivigala-Regular.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
-font_data = ExtResource( 1 )
+font_data = ExtResource( 4 )
 
 [node name="PiratePopupPanel" type="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 3 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -34,7 +34,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PirateAttackButton" parent="." instance=ExtResource( 4 )]
+[node name="PirateAttackButton" parent="." instance=ExtResource( 3 )]
 margin_left = -150.0
 margin_top = -50.0
 margin_right = -9.99994

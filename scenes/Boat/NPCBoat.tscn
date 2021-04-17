@@ -7,7 +7,7 @@
 [ext_resource path="res://scenes/Widget/HealthDisplay.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/Boat/Sprites/PirateBoat.tres" type="SpriteFrames" id=6]
 [ext_resource path="res://scenes/Boat/Smoke.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/GUI/ObjectPopup/PopupControlPirate.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/GUI/ObjectPopup/PiratePanel/PopupControlPirate.tscn" type="PackedScene" id=11]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 21.7045
