@@ -79,5 +79,6 @@ wait_time = 10.0
 [connection signal="city_exited" from="CityStockholm" to="." method="_on_CityStockholm_city_exited"]
 [connection signal="battle_victory" from="Player" to="." method="_on_Player_battle_victory"]
 [connection signal="attack_pressed" from="Pirate" to="." method="_on_Pirate_attack_pressed"]
+[connection signal="boat_cleared" from="Pirate" to="." method="_on_Pirate_boat_cleared"]
 [connection signal="sinking_boat_pressed" from="Pirate" to="." method="_on_Pirate_sinking_boat_pressed"]
 [connection signal="timeout" from="BoatDisappearTimer" to="." method="_on_BoatDisappearTimer_timeout"]

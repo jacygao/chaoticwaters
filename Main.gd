@@ -71,3 +71,6 @@ func _on_RewardUI_claim_all(items):
 			var amount = Item_Meta.get_item_amount(item)
 			$HUD.plus_coins(amount)
 			$HUD.render_node()
+
+func _on_Pirate_boat_cleared():
+	$HUD/DialogUI.new_dialog("first_reward")

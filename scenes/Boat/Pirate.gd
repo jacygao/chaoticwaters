@@ -6,6 +6,7 @@ var meta = {}
 
 signal attack_pressed(node)
 signal sinking_boat_pressed(node)
+signal boat_cleared
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -48,4 +49,5 @@ func _on_SinkTimer_timeout():
 	clear_node()
 
 func clear_node():
+	emit_signal("boat_cleared")
 	queue_free()
