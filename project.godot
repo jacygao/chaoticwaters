@@ -32,6 +32,8 @@ Statistic="*res://systems/Statistic.gd"
 Research_Meta="*res://meta/Research.gd"
 Dialog_Meta="*res://meta/Dialog.gd"
 Dialog="*res://systems/Dialog.gd"
+Item_Meta="*res://meta/Item.gd"
+NPC_Meta="*res://meta/NPC.gd"
 
 [input]
 
