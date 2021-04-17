@@ -16,10 +16,6 @@ __meta__ = {
 visible = false
 
 [node name="ObjectPopupButton" parent="." instance=ExtResource( 2 )]
-margin_left = -150.0
-margin_top = -50.0
-margin_right = -9.99994
-margin_bottom = -10.0
 btn_text = "CLAIM ALL"
 btn_color = Color( 0.537255, 0.960784, 0.298039, 1 )
 [connection signal="pressed" from="ObjectPopupButton" to="." method="_on_ObjectPopupButton_pressed"]

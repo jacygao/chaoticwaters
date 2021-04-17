@@ -15,6 +15,7 @@ max_durability = 5
 fire_damage = 1
 
 [node name="PopupControlPirate" parent="." instance=ExtResource( 2 )]
+visible = false
 
 [node name="SinkTimer" type="Timer" parent="."]
 wait_time = 30.0

@@ -1,15 +1,27 @@
 extends Node2D
 
+export var level = 1
+
+var meta = {}
+
 signal attack_pressed(node)
+signal sinking_boat_pressed(node)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	meta = NPC_Meta.get_pirate_boat(level)
+	$Boat.init_node(NPC_Meta.get_stats_damage(meta), NPC_Meta.get_stats_health(meta))
+
+func get_items():
+	return NPC_Meta.get_items(meta)
 
 func _on_PlayerBoat_input_event(viewport, event, shape_idx):
-	if $Boat.state() == $Boat.SINKING:
-		return
 	if event.is_action_pressed('ui_touch'):
+		if $Boat.state() == $Boat.SINKING:
+			# If boat is sinking, display the reward popup for player to loot
+			# Reward popup is controled by the parent node, thus emit signal here.
+			emit_signal("sinking_boat_pressed", self)
+			return
 		# display popup in the most appropriate position.
 		# if popup width is greater that the object position to the edge of viewport,
 		# render popup on the mirror side of its Y axis.
@@ -29,9 +41,11 @@ func _on_PopupControlPirate_is_attacked():
 	emit_signal("attack_pressed", $Boat)
 
 func _on_Boat_is_sinking():
-	print("starting timer")
 	$SinkTimer.start()
 
 func _on_SinkTimer_timeout():
 	print("time out triggered")
+	clear_node()
+
+func clear_node():
 	queue_free()

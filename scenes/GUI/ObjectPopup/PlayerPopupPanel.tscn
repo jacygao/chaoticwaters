@@ -4,12 +4,10 @@
 [ext_resource path="res://scenes/Widget/Statistic/StatisticItem.tscn" type="PackedScene" id=2]
 [ext_resource path="res://fonts/AkayaTelivigala-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/portaits/portait-1-2.png" type="Texture" id=4]
+[ext_resource path="res://scenes/GUI/ObjectPopup/ObjectPopupButton.tscn" type="PackedScene" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
-font_data = ExtResource( 3 )
-
-[sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 3 )
 
 [node name="PlayerPopupPanel" type="Panel"]
@@ -37,21 +35,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayerEnterButton" type="Button" parent="."]
-modulate = Color( 0, 0.647059, 1, 1 )
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="PlayerEnterButton" parent="." instance=ExtResource( 5 )]
 margin_left = -150.0
 margin_top = -50.0
-margin_right = -10.0
+margin_right = -9.99994
 margin_bottom = -10.0
-custom_fonts/font = SubResource( 2 )
-text = "ENTER"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+btn_text = "ENTER"
+btn_color = Color( 0, 0.647059, 1, 1 )
 
 [node name="StatsPanel" type="PanelContainer" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )

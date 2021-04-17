@@ -9,7 +9,7 @@ onready var message_panel = $MessagePanel
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	economy.set_coins(Economy.get_coins())
-	#$DialogUI.new_dialog("game_start")
+	$DialogUI.new_dialog("game_start")
 
 func update_coins(coins):
 	economy.set_coins(Economy.get_coins())
@@ -19,6 +19,10 @@ func minus_coins(coins):
 		show_message(message_level_warn, "insufficient funds")
 		return false
 	return true
+	
+func plus_coins(coins):
+	if Economy.add_coins(coins):
+		economy.plus_coins(coins)
 	
 func show_message(level, message):
 	var color = Color(0, 0, 0, 1)

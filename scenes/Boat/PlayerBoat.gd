@@ -66,7 +66,12 @@ func _ready():
 	$AnimatedBoatSprite.set_sprite_frames(load(boat_sprite_path))
 	
 	durability = max_durability
-	
+
+func init_node(damage, health):
+	fire_damage = damage
+	max_durability = health
+	durability = max_durability
+
 # Meta Getters
 func type():
 	return "ship"
@@ -260,9 +265,7 @@ func _on_CollisionDetector_body_entered(body):
 				set_state_battling(body)
 
 func _on_CannonGunLeft_fire(target):
-	print("left firing at ", target.id())
 	fire_animate_right(target)
 
 func _on_CannonGunRight_fire(target):
-	print("right firing at ", target.id())
 	fire_animate_left(target)

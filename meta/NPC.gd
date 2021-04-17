@@ -5,18 +5,27 @@ extends Node
 """
 
 var meta = {
-	"boat:pirate": {
+	"boat_pirate": {
 		1: {
 			"level": 1,
 			"stats": {
 				"damage": 1,
 				"health": 5,
 			},
-			"items": {
-				"rifle": 2,
-				"sword": 5,
-			},
-			"coins": 1000,
+			"items": [
+				{
+					"name": "coin",
+					"amount": 1000,
+				},
+				{
+					"name": "rifle",
+					"amount": 2,
+				},
+				{
+					"name": "sword",
+					"amount": 5,
+				},
+			],
 		},
 		2: {
 			"level": 2,
@@ -24,19 +33,36 @@ var meta = {
 				"damage": 2,
 				"health": 10,
 			},
-			"items": {
-				"rifle": 4,
-				"sword": 10,
-			},
-			"coins": 2000,
+			"items": [
+				{
+					"name": "coin",
+					"amount": 1000,
+				},
+				{
+					"name": "rifle",
+					"amount": 4,
+				},
+				{
+					"name": "sword",
+					"amount": 10,
+				},
+			],
+			"coin": 2000,
 		},
 	}
 }
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
 
+func get_pirate_boat(level):
+	return meta["boat_pirate"][level]
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func get_stats_damage(boat):
+	return boat["stats"]["damage"]
+
+func get_stats_health(boat):
+	return boat["stats"]["health"]
+
+func get_items(boat):
+	return boat["items"]
+
+func is_item_coins(item):
+	return 

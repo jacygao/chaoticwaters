@@ -5,6 +5,11 @@ extends Node
 """
 
 var meta = {
+	"coin": {
+		"name": "coin",
+		"image": "coins.png",
+		"value": 1,
+	},
 	"rifle": {
 		"name": "rifle",
 		"image": "winchester-rifle.png",
@@ -31,3 +36,9 @@ func get_item_name(item):
 	if item.has("name"):
 		return item["name"]
 	return {}
+
+func is_item_coin(item):
+	return item["name"] == "coin"
+
+func get_item_amount(item):
+	return item["amount"]

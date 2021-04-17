@@ -30,3 +30,8 @@ func deduct_coins(amount):
 	var new_coins = get_coins() - amount
 	set_coins(new_coins)
 	return true
+
+func add_coins(amount):
+	var new_coins = get_coins() + amount
+	set_coins(new_coins)
+	return true

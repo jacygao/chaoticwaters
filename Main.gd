@@ -60,3 +60,14 @@ func _on_Pirate_attack_pressed(node):
 
 func _on_Player_battle_victory(node):
 	$HUD/DialogUI.new_dialog("first_victory")
+
+func _on_Pirate_sinking_boat_pressed(node):
+	$HUD/RewardUI.open(node)
+
+func _on_RewardUI_claim_all(items):
+	print(items)
+	for item in items:
+		if Item_Meta.is_item_coin(item):
+			var amount = Item_Meta.get_item_amount(item)
+			$HUD.plus_coins(amount)
+			$HUD.render_node()
