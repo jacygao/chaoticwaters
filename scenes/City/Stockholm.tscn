@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/GUI/ObjectPopup/CityPanel/PopupControlCity.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/City/City.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/City/Stockholm.gd" type="Script" id=3]
+[ext_resource path="res://scenes/GUI/ObjectPopup/CityPanel/PopupControlCity.gd" type="Script" id=4]
+
+[node name="Stockholm" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="City" parent="." instance=ExtResource( 2 )]
+input_pickable = true
+
+[node name="PopupControlCity" parent="." instance=ExtResource( 1 )]
+visible = false
+script = ExtResource( 4 )
+[connection signal="input_event" from="City" to="." method="_on_City_input_event"]

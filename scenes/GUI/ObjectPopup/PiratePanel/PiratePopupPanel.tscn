@@ -35,10 +35,6 @@ __meta__ = {
 }
 
 [node name="PirateAttackButton" parent="." instance=ExtResource( 3 )]
-margin_left = -150.0
-margin_top = -50.0
-margin_right = -9.99994
-margin_bottom = -10.0
 btn_text = "ATTACK"
 btn_color = Color( 1, 0, 0, 1 )
 [connection signal="pressed" from="PirateAttackButton" to="." method="_on_PirateAttackButton_pressed"]

@@ -6,13 +6,13 @@
 [ext_resource path="res://scenes/CannonGun/CannonGun.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/CannonGun/CannonGunAngle.tscn" type="PackedScene" id=6]
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 80, 80 )
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 162.047, 80 )
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=2]
 radius = 500.0
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=3]
 radius = 250.0
 
 [node name="City" type="StaticBody2D"]
@@ -41,18 +41,18 @@ position = Vector2( 0, -100 )
 rotation = -1.5708
 
 [node name="Body" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="Outpost" type="Area2D" parent="."]
 gravity = 0.0
 
 [node name="FireRange" type="CollisionShape2D" parent="Outpost"]
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="Dock" type="Area2D" parent="."]
 
 [node name="DockArea" type="CollisionShape2D" parent="Dock"]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 one_way_collision = true
 
 [node name="BodyRepairTimer" type="Timer" parent="."]
