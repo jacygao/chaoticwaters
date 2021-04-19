@@ -14,7 +14,7 @@ var friendly_targets = null
 
 var cannon_ball = preload("res://scenes/CannonBall/CannonBall.tscn")
 
-signal city_entered
+signal city_entered(collider)
 signal city_exited
 
 # Called when the node enters the scene tree for the first time.
@@ -69,7 +69,7 @@ func _on_Dock_body_entered(body):
 	if body.has_method("type"):
 		if body.type() == "ship" && body.team() == team():
 			friendly_targets = body
-			emit_signal("city_entered")
+			emit_signal("city_entered", body)
 
 func _on_Dock_body_exited(body):
 	if body.has_method("type"):

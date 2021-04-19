@@ -10,6 +10,9 @@ signal battle_victory(node)
 func _ready():
 	screen_size = $Boat/Camera2D.position
 			
+func is_player():
+	return true
+			
 func anchor_on():
 	$Boat.anchor_on()
 
@@ -30,3 +33,9 @@ func attacking(node):
 
 func _on_Boat_battle_victory(node):
 	emit_signal("battle_victory", node)
+
+func moving_to(node):
+	$Boat.set_state_moving(node)
+
+func idle():
+	$Boat.set_default_state()

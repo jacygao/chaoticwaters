@@ -74,3 +74,10 @@ func _on_RewardUI_claim_all(items):
 
 func _on_Pirate_boat_cleared():
 	$HUD/DialogUI.new_dialog("first_reward")
+
+func _on_Stockholm_enter_pressed(node):
+	$Player.moving_to(node)
+
+func _on_Stockholm_city_entered(node):
+	if node.team() == 1:
+		$Player.idle()

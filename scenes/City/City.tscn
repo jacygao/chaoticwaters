@@ -13,7 +13,7 @@ extents = Vector2( 162.047, 80 )
 radius = 500.0
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 250.0
+radius = 294.541
 
 [node name="City" type="StaticBody2D"]
 collision_layer = 3

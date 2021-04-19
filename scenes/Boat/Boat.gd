@@ -32,10 +32,6 @@ var velocity = Vector2()
 func _ready():
 	pass # Replace with function body.
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
 # ensures the angle is netween -179 and 180 degrees
 func angle_tidy(a):
 	if a > 180:

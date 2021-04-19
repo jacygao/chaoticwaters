@@ -3,12 +3,10 @@ extends Node2D
 onready var popup_controller = $PopupControlCity
 onready var control_node = $City
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+signal enter_pressed(node)
+signal city_entered(node)
 
 func _on_City_input_event(viewport, event, shape_idx):
-	print("clicked")
 	if event.is_action_pressed('ui_touch'):
 		# display popup in the most appropriate position.
 		# if popup width is greater that the object position to the edge of viewport,
@@ -22,3 +20,9 @@ func _on_City_input_event(viewport, event, shape_idx):
 		popup_controller.open(pos)
 			
 		get_tree().set_input_as_handled()
+
+func _on_PopupControlCity_enter_pressed(node):
+	emit_signal("enter_pressed", node)
+
+func _on_City_city_entered(node):
+	emit_signal("city_entered", node)

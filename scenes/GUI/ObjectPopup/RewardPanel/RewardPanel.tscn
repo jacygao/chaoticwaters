@@ -17,5 +17,5 @@ visible = false
 
 [node name="ObjectPopupButton" parent="." instance=ExtResource( 2 )]
 btn_text = "CLAIM ALL"
-btn_color = Color( 0.647059, 1, 1, 1 )
+btn_color = Color( 0.529412, 0.960784, 0.372549, 1 )
 [connection signal="pressed" from="ObjectPopupButton" to="." method="_on_ObjectPopupButton_pressed"]

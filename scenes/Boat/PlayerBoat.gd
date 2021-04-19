@@ -91,6 +91,11 @@ func set_state(s):
 func set_state_idle():
 	anchor_on()
 	set_state(IDLE)
+	target_node = null
+
+func set_state_moving(target):
+	target_node = target
+	set_state(MOVING)
 
 func set_state_attacked():
 	set_state(ATTACKED)
@@ -169,7 +174,10 @@ func animate(ta):
 	rotation_degrees = ta - 90
 
 func move_animate(delta):
-	pass
+	if target_node != null:
+		move_and_rotate_animate(delta)
+	else:
+		set_default_state()
 
 func attack_animate(delta):
 	move_and_rotate_animate(delta)
@@ -179,6 +187,7 @@ func battle_animate(delta):
 	if target_node.state() == SINKING:
 		set_state(IDLE)
 		emit_signal("battle_victory", target_node)
+		target_node = null
 	else:
 		move_and_rotate_animate(delta)
 
@@ -260,7 +269,6 @@ func _on_CollisionDetector_body_entered(body):
 	if body.has_method("id") && body.id() != id():
 		if body.has_method("type") && body.type() == "ship":
 			if state() == ATTACKING || state() == ATTACKED:
-				print(body.id())
 				# battle starts
 				set_state_battling(body)
 
