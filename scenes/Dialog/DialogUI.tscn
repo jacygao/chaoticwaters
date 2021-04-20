@@ -75,7 +75,7 @@ __meta__ = {
 }
 
 [node name="Indicator" type="Sprite" parent="DialogBox"]
-position = Vector2( 970, 147.747 )
+position = Vector2( 970, 145 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 

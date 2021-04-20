@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/GUI/ObjectPopup/RewardPanel/RewardPanel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/GUI/ObjectPopup/ObjectPopupPanel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/GUI/ObjectPopup/RewardPanel/PopupControlReward.gd" type="Script" id=3]
+[ext_resource path="res://scenes/GUI/TutorialUI.tscn" type="PackedScene" id=4]
 
 [node name="PopupControlReward" type="Node2D"]
 script = ExtResource( 3 )
@@ -21,4 +22,7 @@ margin_bottom = 125.0
 [node name="RewardPanel" parent="ObjectPopupPanel" instance=ExtResource( 1 )]
 margin_right = 3.05176e-05
 margin_bottom = 1.52588e-05
+
+[node name="TutorialUI" parent="ObjectPopupPanel" instance=ExtResource( 4 )]
+position = Vector2( 408.708, 258.801 )
 [connection signal="claim_all_pressed" from="ObjectPopupPanel/RewardPanel" to="." method="_on_RewardPanel_claim_all_pressed"]

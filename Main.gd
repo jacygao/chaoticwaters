@@ -56,12 +56,15 @@ func _on_NPCBoat_is_clicked(pos):
 
 # An attack button is pressed, moving player boat towards target.
 func _on_Pirate_attack_pressed(node):
+	reset_tutorial()
 	$Player.attacking(node)
 
 func _on_Player_battle_victory(node):
 	$HUD/DialogUI.new_dialog("first_victory")
 
 func _on_Pirate_sinking_boat_pressed(node):
+	reset_tutorial()
+	$HUD/RewardUI.show_tutorial()
 	$HUD/RewardUI.open(node)
 
 func _on_RewardUI_claim_all(items):
@@ -81,3 +84,21 @@ func _on_Stockholm_enter_pressed(node):
 func _on_Stockholm_city_entered(node):
 	if node.team() == 1:
 		$Player.idle()
+
+func _on_DialogUI_dialog_played(key):
+	if key == "game_start":
+		$Pirate.show_tutorial()
+	if key == "first_victory":
+		var pos = $Pirate.get_global_transform_with_canvas().origin
+		pos.x -= 80
+		pos.y -= 40
+		$Pirate.show_tutorial()
+		
+func _on_Pirate_body_pressed(node):
+	print("pressed")
+	reset_tutorial()
+	$Pirate.show_popup_tutorial()
+
+func reset_tutorial():
+	$Pirate.hide_tutorial()
+	$Pirate.hide_popup_tutorial()

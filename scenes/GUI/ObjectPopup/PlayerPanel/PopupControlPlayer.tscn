@@ -4,7 +4,6 @@
 [ext_resource path="res://scenes/GUI/ObjectPopup/PlayerPanel/PlayerPopupPanel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/GUI/ObjectPopup/ObjectPopupPanel.tscn" type="PackedScene" id=3]
 
-
 [node name="PopupControlPlayer" type="Node2D"]
 script = ExtResource( 1 )
 

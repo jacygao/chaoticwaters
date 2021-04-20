@@ -1,19 +1,19 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://assets/backgrounds/medieval-port-0.jpg" type="Texture" id=1]
-[ext_resource path="res://assets/city/places/imperial-crown.png" type="Texture" id=2]
-[ext_resource path="res://assets/city/places/beer-stein.png" type="Texture" id=3]
-[ext_resource path="res://assets/city/places/shop.png" type="Texture" id=4]
-[ext_resource path="res://assets/city/places/bed-lamp.png" type="Texture" id=5]
-[ext_resource path="res://assets/city/places/stone-crafting.png" type="Texture" id=6]
-[ext_resource path="res://fonts/AkayaTelivigala-Regular.ttf" type="DynamicFontData" id=7]
-[ext_resource path="res://scenes/City/StatsWidget.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/City/StatsWidget.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/city/places/shop.png" type="Texture" id=2]
+[ext_resource path="res://assets/city/places/imperial-crown.png" type="Texture" id=3]
+[ext_resource path="res://assets/backgrounds/medieval-port-0.jpg" type="Texture" id=4]
+[ext_resource path="res://assets/city/places/beer-stein.png" type="Texture" id=5]
+[ext_resource path="res://assets/city/places/bed-lamp.png" type="Texture" id=6]
+[ext_resource path="res://assets/city/places/stone-crafting.png" type="Texture" id=7]
+[ext_resource path="res://fonts/AkayaTelivigala-Regular.ttf" type="DynamicFontData" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
 outline_size = 1
 use_filter = true
-font_data = ExtResource( 7 )
+font_data = ExtResource( 8 )
 
 [node name="CityHUD" type="CanvasLayer"]
 
@@ -27,7 +27,7 @@ __meta__ = {
 [node name="medieval-port-0" type="Sprite" parent="Background"]
 position = Vector2( 512.947, 197.543 )
 scale = Vector2( 0.858627, 0.858627 )
-texture = ExtResource( 1 )
+texture = ExtResource( 4 )
 
 [node name="Control" type="Container" parent="."]
 anchor_right = 1.0
@@ -43,7 +43,7 @@ anchor_right = 0.5
 margin_left = -56.0
 margin_top = 20.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-icon = ExtResource( 2 )
+icon = ExtResource( 3 )
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -56,7 +56,7 @@ margin_left = -330.0
 margin_top = 165.0
 margin_right = -218.0
 margin_bottom = 271.0
-icon = ExtResource( 3 )
+icon = ExtResource( 5 )
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -69,7 +69,7 @@ margin_left = -330.0
 margin_top = 315.0
 margin_right = -365.583
 margin_bottom = 419.687
-icon = ExtResource( 4 )
+icon = ExtResource( 2 )
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -82,7 +82,7 @@ margin_left = -330.0
 margin_top = 465.0
 margin_right = -365.583
 margin_bottom = 574.529
-icon = ExtResource( 5 )
+icon = ExtResource( 6 )
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -94,7 +94,7 @@ anchor_right = 0.5
 margin_left = 220.0
 margin_top = 165.52
 margin_bottom = 271.52
-icon = ExtResource( 6 )
+icon = ExtResource( 7 )
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -124,19 +124,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Population" parent="InfoPanel" instance=ExtResource( 8 )]
+[node name="Population" parent="InfoPanel" instance=ExtResource( 1 )]
 margin_top = 70.0
 margin_bottom = 115.0
 title = "Population"
 number = "134294"
 
-[node name="Economy" parent="InfoPanel" instance=ExtResource( 8 )]
+[node name="Economy" parent="InfoPanel" instance=ExtResource( 1 )]
 margin_top = 110.0
 margin_bottom = 155.0
 title = "Economy"
 number = "1880"
 
-[node name="Defense" parent="InfoPanel" instance=ExtResource( 8 )]
+[node name="Defense" parent="InfoPanel" instance=ExtResource( 1 )]
 margin_top = 150.0
 margin_bottom = 195.0
 title = "Defense"

@@ -12,18 +12,6 @@ var dialog = {
 			"portrait_file_name": "portait-2-4.png",
 			"text": "Captain, pirate ship spotted at 3 o'clock. Please give order!",
 		},
-		{
-			"is_player_speaking": true,
-			"name": "captain",
-			"portrait_file_name": "portait-1-2.png",
-			"text": "Fire.",
-		},
-		{
-			"is_player_speaking": false,
-			"name": "sailor",
-			"portrait_file_name": "portait-2-4.png",
-			"text": "Yes captain!",
-		},
 	],
 	"first_victory": [
 		{

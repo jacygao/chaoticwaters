@@ -19,3 +19,9 @@ func _on_RewardPanel_claim_all_pressed():
 	reward_node.clear_node()
 	emit_signal("claim_all", reward_items)
 	close()
+
+func show_tutorial():
+	$ObjectPopupPanel/TutorialUI.open()
+	
+func hide_tutorial():
+	$ObjectPopupPanel/TutorialUI.close()

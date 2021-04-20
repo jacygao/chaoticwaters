@@ -2,6 +2,8 @@ extends Control
 
 var dialog_key = ""
 
+signal dialog_played(key)
+
 func new_dialog(key):
 	if !Dialog.has_played(key):
 		dialog_key = key
@@ -12,3 +14,4 @@ func new_dialog(key):
 func _on_DialogBox_dialog_is_finished():
 	Dialog.save(dialog_key)
 	visible = false
+	emit_signal("dialog_played", dialog_key)

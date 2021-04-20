@@ -1,10 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/GUI/ObjectPopup/PiratePanel/PopupControlPirate.gd" type="Script" id=1]
 [ext_resource path="res://scenes/GUI/ObjectPopup/ObjectPopupPanel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/GUI/ObjectPopup/PiratePanel/PiratePopupPanel.tscn" type="PackedScene" id=3]
-
-
+[ext_resource path="res://scenes/GUI/TutorialUI.tscn" type="PackedScene" id=4]
 
 [node name="PopupControlPirate" type="Node2D"]
 script = ExtResource( 1 )
@@ -13,4 +12,7 @@ script = ExtResource( 1 )
 visible = true
 
 [node name="PiratePopupPanel" parent="ObjectPopupPanel" instance=ExtResource( 3 )]
+
+[node name="TutorialUI" parent="ObjectPopupPanel" instance=ExtResource( 4 )]
+position = Vector2( 361.585, 210.224 )
 [connection signal="attack_button_pressed" from="ObjectPopupPanel/PiratePopupPanel" to="." method="_on_PiratePopupPanel_attack_button_pressed"]
