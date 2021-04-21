@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/CityHUD/StatsWidget.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/city/places/shop.png" type="Texture" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://fonts/AkayaTelivigala-Regular.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://scenes/CityHUD/CityHUD.gd" type="Script" id=9]
 [ext_resource path="res://scenes/CityHUD/CityPanel.gd" type="Script" id=10]
+[ext_resource path="res://scenes/CityHUD/PalacePanel.gd" type="Script" id=11]
+[ext_resource path="res://scenes/Dialog/DialogUI.tscn" type="PackedScene" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -158,9 +160,11 @@ __meta__ = {
 }
 
 [node name="PalacePanel" type="Panel" parent="."]
+visible = false
 self_modulate = Color( 1, 1, 1, 0.196078 )
 margin_right = 724.0
 margin_bottom = 600.0
+script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -193,9 +197,16 @@ text = "Leave"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="DialogUI" parent="." instance=ExtResource( 12 )]
+visible = false
 [connection signal="pressed" from="CityPanel" to="." method="_on_CityPanel_pressed"]
 [connection signal="pressed" from="CityPanel/Palace" to="CityPanel" method="_on_Palace_pressed"]
 [connection signal="pressed" from="CityPanel/Bar" to="CityPanel" method="_on_Bar_pressed"]
 [connection signal="pressed" from="CityPanel/Shop" to="CityPanel" method="_on_Shop_pressed"]
 [connection signal="pressed" from="CityPanel/Hotel" to="CityPanel" method="_on_Hotel_pressed"]
 [connection signal="pressed" from="CityPanel/Shipyard" to="CityPanel" method="_on_Shipyard_pressed"]
+[connection signal="invest" from="PalacePanel" to="." method="_on_PalacePanel_invest"]
+[connection signal="leave" from="PalacePanel" to="." method="_on_PalacePanel_leave"]
+[connection signal="pressed" from="PalacePanel/InvestButton" to="PalacePanel" method="_on_InvestButton_pressed"]
+[connection signal="pressed" from="PalacePanel/LeaveButton" to="PalacePanel" method="_on_LeaveButton_pressed"]

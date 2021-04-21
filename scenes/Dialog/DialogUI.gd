@@ -12,6 +12,7 @@ func new_dialog(key):
 		visible = true
 
 func _on_DialogBox_dialog_is_finished():
-	Dialog.save(dialog_key)
+	if Dialog_Meta.is_once(dialog_key):
+		Dialog.save(dialog_key)
 	visible = false
 	emit_signal("dialog_played", dialog_key)

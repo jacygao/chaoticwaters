@@ -95,6 +95,7 @@ func set_state_idle():
 
 func set_state_moving(target):
 	target_node = target
+	speed = default_speed
 	set_state(MOVING)
 
 func set_state_attacked():

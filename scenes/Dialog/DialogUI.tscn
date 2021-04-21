@@ -5,8 +5,9 @@
 [ext_resource path="res://assets/dialog/triangular-arrow.png" type="Texture" id=3]
 [ext_resource path="res://scenes/Dialog/DialogBox.gd" type="Script" id=4]
 [ext_resource path="res://scenes/Dialog/DialogIdicator.tres" type="Animation" id=5]
-[ext_resource path="res://assets/portaits/portait-1-2.png" type="Texture" id=6]
+[ext_resource path="res://assets/portaits/portrait-1-2.png" type="Texture" id=6]
 [ext_resource path="res://scenes/Dialog/DialogUI.gd" type="Script" id=8]
+
 
 [sub_resource type="DynamicFont" id=1]
 size = 30

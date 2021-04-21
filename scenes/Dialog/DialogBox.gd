@@ -9,18 +9,21 @@ export var conversation = [
 		"name": "sailor",
 		"portrait_file_name": "portait-2-4.png",
 		"text": "Test Dialog page 1",
+		"once": true,
 	},
 	{
 		"is_player_speaking": true,
 		"name": "captain",
 		"portrait_file_name": "portait-1-2.png",
 		"text": "Test Dialog page 2",
+		"once": true,
 	},
 	{
 		"is_player_speaking": false,
 		"name": "sailor",
 		"portrait_file_name": "portait-2-4.png",
 		"text": "Test Dialog page 3",
+		"once": true,
 	},
 ]
 
