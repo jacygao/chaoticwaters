@@ -84,6 +84,7 @@ func _on_Stockholm_enter_pressed(node):
 func _on_Stockholm_city_entered(node):
 	if node.team() == 1:
 		$Player.idle()
+	get_tree().change_scene("res://scenes/CityHUD/CityHUD.tscn")
 
 func _on_DialogUI_dialog_played(key):
 	if key == "game_start":

@@ -1,0 +1,201 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://scenes/CityHUD/StatsWidget.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/city/places/shop.png" type="Texture" id=2]
+[ext_resource path="res://assets/city/places/imperial-crown.png" type="Texture" id=3]
+[ext_resource path="res://assets/backgrounds/medieval-port-0.jpg" type="Texture" id=4]
+[ext_resource path="res://assets/city/places/beer-stein.png" type="Texture" id=5]
+[ext_resource path="res://assets/city/places/bed-lamp.png" type="Texture" id=6]
+[ext_resource path="res://assets/city/places/stone-crafting.png" type="Texture" id=7]
+[ext_resource path="res://fonts/AkayaTelivigala-Regular.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://scenes/CityHUD/CityHUD.gd" type="Script" id=9]
+[ext_resource path="res://scenes/CityHUD/CityPanel.gd" type="Script" id=10]
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+outline_size = 1
+use_filter = true
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 25
+use_filter = true
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 25
+use_filter = true
+font_data = ExtResource( 8 )
+
+[node name="CityHUD" type="CanvasLayer"]
+script = ExtResource( 9 )
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="medieval-port-0" type="Sprite" parent="Background"]
+position = Vector2( 511.533, 222.999 )
+scale = Vector2( 0.858627, 0.858627 )
+texture = ExtResource( 4 )
+
+[node name="InfoPanel" type="Panel" parent="."]
+modulate = Color( 1, 1, 1, 0.588235 )
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -299.0
+margin_right = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="InfoPanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -63.0
+margin_top = 10.0
+margin_right = 63.0
+margin_bottom = 37.0
+custom_fonts/font = SubResource( 1 )
+text = "Stockholm"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Population" parent="InfoPanel" instance=ExtResource( 1 )]
+margin_top = 70.0
+margin_bottom = 115.0
+title = "Population"
+number = "134294"
+
+[node name="Economy" parent="InfoPanel" instance=ExtResource( 1 )]
+margin_top = 110.0
+margin_bottom = 155.0
+title = "Economy"
+number = "1880"
+
+[node name="Defense" parent="InfoPanel" instance=ExtResource( 1 )]
+margin_top = 150.0
+margin_bottom = 195.0
+title = "Defense"
+number = "2000"
+
+[node name="CityPanel" type="Panel" parent="."]
+self_modulate = Color( 1, 1, 1, 0.196078 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -300.0
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Palace" type="Button" parent="CityPanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -56.0
+margin_top = 20.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+icon = ExtResource( 3 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar" type="Button" parent="CityPanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -330.0
+margin_top = 165.0
+margin_right = -218.0
+margin_bottom = 271.0
+icon = ExtResource( 5 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Shop" type="Button" parent="CityPanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -330.0
+margin_top = 315.0
+margin_right = -365.583
+margin_bottom = 419.687
+icon = ExtResource( 2 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hotel" type="Button" parent="CityPanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -330.0
+margin_top = 465.0
+margin_right = -365.583
+margin_bottom = 574.529
+icon = ExtResource( 6 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Shipyard" type="Button" parent="CityPanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 220.0
+margin_top = 165.52
+margin_bottom = 271.52
+icon = ExtResource( 7 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PalacePanel" type="Panel" parent="."]
+self_modulate = Color( 1, 1, 1, 0.196078 )
+margin_right = 724.0
+margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InvestButton" type="Button" parent="PalacePanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -70.0
+margin_top = -60.0
+margin_right = 70.0
+margin_bottom = -20.0
+custom_fonts/font = SubResource( 2 )
+text = "Invest"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeaveButton" type="Button" parent="PalacePanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -70.0
+margin_right = 70.0
+margin_bottom = 40.0
+custom_fonts/font = SubResource( 3 )
+text = "Leave"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="CityPanel" to="." method="_on_CityPanel_pressed"]
+[connection signal="pressed" from="CityPanel/Palace" to="CityPanel" method="_on_Palace_pressed"]
+[connection signal="pressed" from="CityPanel/Bar" to="CityPanel" method="_on_Bar_pressed"]
+[connection signal="pressed" from="CityPanel/Shop" to="CityPanel" method="_on_Shop_pressed"]
+[connection signal="pressed" from="CityPanel/Hotel" to="CityPanel" method="_on_Hotel_pressed"]
+[connection signal="pressed" from="CityPanel/Shipyard" to="CityPanel" method="_on_Shipyard_pressed"]
