@@ -26,12 +26,12 @@ config/icon="res://assets/gui/icon.png"
 
 [autoload]
 
-Research="*res://systems/Research.gd"
-Economy="*res://systems/Economy.gd"
-Statistic="*res://systems/Statistic.gd"
+Research="*res://save/Research.gd"
+Economy="*res://save/Economy.gd"
+Statistic="*res://save/Statistic.gd"
 Research_Meta="*res://meta/Research.gd"
 Dialog_Meta="*res://meta/Dialog.gd"
-Dialog="*res://systems/Dialog.gd"
+Dialog="*res://save/Dialog.gd"
 Item_Meta="*res://meta/Item.gd"
 NPC_Meta="*res://meta/NPC.gd"
 Env="*res://env/Env.gd"
