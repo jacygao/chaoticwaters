@@ -39,7 +39,18 @@ var dialog = {
 				"is_player_speaking": false,
 				"name": "pirate",
 				"portrait_file_name": "portrait-2-2.png",
-				"text": "Captain, our ship took some damage during the battle and the crew are exausted. We should sail towards Stockholm to get some rest and repair the ship.",
+				"text": "Captain, our ship took some damage during the battle and the crew is exausted. We should sail towards Stockholm to get some rest and repair the ship.",
+			},
+		],
+		"once": true,
+	},
+	"first_city_visit": {
+		"dialog": [
+			{
+				"is_player_speaking": false,
+				"name": "pirate",
+				"portrait_file_name": "portrait-2-2.png",
+				"text": "Captain, the crew is exausted, let's get some rest in a hotel.",
 			},
 		],
 		"once": true,

@@ -4,8 +4,8 @@ enum {PALACE, BAR, SHOP, HOTEL, SHIPYARD}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	reset()
-	$CityPanel.visible = true
+	default()
+	$DialogUI.new_dialog("first_city_visit")
 
 func _on_CityPanel_pressed(btn):
 	reset()
@@ -17,10 +17,15 @@ func _on_CityPanel_pressed(btn):
 		SHOP:
 			pass
 		HOTEL:
+			$TutorialUI.close()
 			$DialogUI.new_dialog("city_hotel")
 			$HotelPanel.visible = true
 		SHIPYARD:
 			pass
+
+func default():
+	reset()
+	$CityPanel.visible = true
 
 func reset():
 	$CityPanel.visible = false
@@ -31,8 +36,7 @@ func reset():
 	Palace
 """
 func _on_PalacePanel_leave():
-	reset()
-	$CityPanel.visible = true
+	default()
 
 func _on_PalacePanel_invest():
 	reset()
@@ -46,3 +50,10 @@ func _on_HotelPanel_one_night():
 
 func _on_HotelPanel_recover_all():
 	pass # Replace with function body.
+
+func _on_HotelPanel_leave():
+	default()
+
+func _on_DialogUI_dialog_played(key):
+	if key == "first_city_visit":
+		$TutorialUI.open()
