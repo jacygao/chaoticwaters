@@ -55,6 +55,17 @@ var dialog = {
 		],
 		"once": false,
 	},
+	"city_hotel": {
+		"dialog": [
+			{
+				"is_player_speaking": false,
+				"name": "girl",
+				"portrait_file_name": "portrait-5-4.png",
+				"text": "Need a room?",
+			},
+		],
+		"once": false,
+	},
 }
 
 func load_dialog(key):
