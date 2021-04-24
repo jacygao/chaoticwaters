@@ -30,5 +30,5 @@ text = 100
 
 [node name="Fatigue" parent="." instance=ExtResource( 1 )]
 margin_top = 80.0
-margin_bottom = 25.0
+margin_bottom = 98.0
 label = "fatigue"

@@ -55,5 +55,18 @@ func _on_HotelPanel_leave():
 	default()
 
 func _on_DialogUI_dialog_played(key):
-	if key == "first_city_visit":
-		$TutorialUI.open()
+	match key:
+		"first_city_visit":
+			$TutorialUI.set_pos(tutorial_position_offset($CityPanel/Hotel))
+			$TutorialUI.open()
+		"city_hotel":
+			$TutorialUI.set_pos(tutorial_position_offset($HotelPanel/OneNightButton))
+			$TutorialUI.open()
+		
+func tutorial_position_offset(node):
+	var pos = node.get_position()
+	var size = node.get_size()
+	
+	pos.x = pos.x + size.x/2 + 40
+	pos.y = pos.y + size.y/2 + 40
+	return pos

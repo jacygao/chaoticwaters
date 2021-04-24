@@ -3,8 +3,6 @@
 [ext_resource path="res://assets/gui/click.png" type="Texture" id=1]
 [ext_resource path="res://scenes/GUI/TutorialUI.gd" type="Script" id=2]
 
-
-
 [sub_resource type="Animation" id=1]
 resource_name = "IDLE"
 length = 2.0

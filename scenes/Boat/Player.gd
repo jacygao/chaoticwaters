@@ -9,7 +9,7 @@ signal battle_victory(node)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = $Boat/Camera2D.position
-			
+
 func is_player():
 	return true
 			
@@ -39,3 +39,12 @@ func moving_to(node):
 
 func idle():
 	$Boat.set_default_state()
+
+func _on_Boat_state_changed(state):
+	if state == $Boat.IDLE:
+		$FatigueTimer.stop()
+	else:
+		$FatigueTimer.start()
+	
+func _on_FatigueTimer_timeout():
+	Statistic.add_fatigue(1)

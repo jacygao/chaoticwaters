@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/CityHUD/StatsWidget.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/city/places/shop.png" type="Texture" id=2]
@@ -14,6 +14,8 @@
 [ext_resource path="res://scenes/Dialog/DialogUI.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/CityHUD/HotelPanel.gd" type="Script" id=13]
 [ext_resource path="res://scenes/GUI/TutorialUI.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/Widget/Economy/EconomyWidget.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scenes/Widget/Statistic/StatisticPanel.tscn" type="PackedScene" id=16]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -49,10 +51,12 @@ texture = ExtResource( 4 )
 [node name="InfoPanel" type="Panel" parent="."]
 modulate = Color( 1, 1, 1, 0.588235 )
 anchor_left = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -299.0
-margin_right = 1.0
+anchor_bottom = 0.5
+margin_left = -300.0
+margin_top = -300.0
+margin_bottom = 300.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -61,7 +65,7 @@ __meta__ = {
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -63.0
-margin_top = 10.0
+margin_top = 30.0
 margin_right = 63.0
 margin_bottom = 37.0
 custom_fonts/font = SubResource( 1 )
@@ -90,9 +94,11 @@ number = "2000"
 
 [node name="CityPanel" type="Panel" parent="."]
 self_modulate = Color( 1, 1, 1, 0.196078 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = -300.0
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -300.0
+margin_right = 724.0
+margin_bottom = 300.0
 script = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -114,9 +120,9 @@ __meta__ = {
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -330.0
-margin_top = 165.0
+margin_top = 150.0
 margin_right = -218.0
-margin_bottom = 271.0
+margin_bottom = 256.0
 icon = ExtResource( 5 )
 flat = true
 __meta__ = {
@@ -127,9 +133,9 @@ __meta__ = {
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -330.0
-margin_top = 315.0
-margin_right = -365.583
-margin_bottom = 419.687
+margin_top = 300.0
+margin_right = -218.0
+margin_bottom = 406.0
 icon = ExtResource( 2 )
 flat = true
 __meta__ = {
@@ -140,9 +146,9 @@ __meta__ = {
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -330.0
-margin_top = 465.0
-margin_right = -365.583
-margin_bottom = 574.529
+margin_top = 450.0
+margin_right = -218.0
+margin_bottom = 559.529
 icon = ExtResource( 6 )
 flat = true
 __meta__ = {
@@ -153,8 +159,9 @@ __meta__ = {
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = 220.0
-margin_top = 165.52
-margin_bottom = 271.52
+margin_top = 150.0
+margin_right = 332.0
+margin_bottom = 256.0
 icon = ExtResource( 7 )
 flat = true
 __meta__ = {
@@ -164,8 +171,11 @@ __meta__ = {
 [node name="PalacePanel" type="Panel" parent="."]
 visible = false
 self_modulate = Color( 1, 1, 1, 0.196078 )
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -300.0
 margin_right = 724.0
-margin_bottom = 600.0
+margin_bottom = 300.0
 script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -203,8 +213,11 @@ __meta__ = {
 [node name="HotelPanel" type="Panel" parent="."]
 visible = false
 self_modulate = Color( 1, 1, 1, 0.196078 )
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -300.0
 margin_right = 724.0
-margin_bottom = 600.0
+margin_bottom = 300.0
 script = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -259,7 +272,11 @@ __meta__ = {
 visible = false
 
 [node name="TutorialUI" parent="." instance=ExtResource( 14 )]
-position = Vector2( 127.399, 562.157 )
+
+[node name="EconomyWidget" parent="." instance=ExtResource( 15 )]
+
+[node name="StatisticPanel" parent="." instance=ExtResource( 16 )]
+margin_bottom = 123.0
 [connection signal="pressed" from="CityPanel" to="." method="_on_CityPanel_pressed"]
 [connection signal="pressed" from="CityPanel/Palace" to="CityPanel" method="_on_Palace_pressed"]
 [connection signal="pressed" from="CityPanel/Bar" to="CityPanel" method="_on_Bar_pressed"]

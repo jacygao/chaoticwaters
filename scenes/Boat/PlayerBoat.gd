@@ -58,6 +58,7 @@ var player_state = IDLE
 
 signal is_sinking
 signal battle_victory(node)
+signal state_changed(state)
 
 # Called when the node enters the scene tree for thes first time.
 func _ready():
@@ -87,6 +88,7 @@ func state():
 
 func set_state(s):
 	player_state = s
+	emit_signal("state_changed", s)
 
 func set_state_idle():
 	anchor_on()
