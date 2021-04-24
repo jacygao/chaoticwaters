@@ -3,8 +3,12 @@ extends Node2D
 onready var popup_controller = $PopupControlCity
 onready var control_node = $City
 
+signal body_pressed(popup_node)
 signal enter_pressed(node)
 signal city_entered(node)
+
+func _ready():
+	show_tutorial()
 
 func _on_City_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed('ui_touch'):
@@ -18,7 +22,7 @@ func _on_City_input_event(viewport, event, shape_idx):
 			pos.y -= popup_controller.get_popup_size().y
 			
 		popup_controller.open(pos)
-			
+		emit_signal("body_pressed", $PopupControlCity)
 		get_tree().set_input_as_handled()
 
 func _on_PopupControlCity_enter_pressed(node):
@@ -26,3 +30,18 @@ func _on_PopupControlCity_enter_pressed(node):
 
 func _on_City_city_entered(node):
 	emit_signal("city_entered", node)
+
+func show_tutorial():
+	# adjust tutorial to be at the most appropriate spot
+	$TutorialUI.position = $City.position + Vector2(60, 40)
+	$TutorialUI.open()
+	
+func hide_tutorial():
+	$TutorialUI.close()
+
+func show_popup_tutorial():
+	# adjust tutorial to be at the most appropriate spot
+	$PopupControlCity.show_tutorial()
+	
+func hide_popup_tutorial():
+	$PopupControlCity.hide_tutorial()

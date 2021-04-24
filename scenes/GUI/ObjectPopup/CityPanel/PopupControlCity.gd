@@ -16,3 +16,10 @@ func get_popup_size():
 func _on_CityPanel_enter_pressed():
 	emit_signal("enter_pressed", self)
 	close()
+
+func show_tutorial():
+	$ObjectPopupPanel/TutorialUI.set_pos(Utils.tutorial_position_offset($ObjectPopupPanel/CityPanel.get_node("ObjectPopupButton")))
+	$ObjectPopupPanel/TutorialUI.open()
+	
+func hide_tutorial():
+	$ObjectPopupPanel/TutorialUI.close()
