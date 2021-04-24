@@ -3,6 +3,7 @@ extends Panel
 export var damage = 1
 export var health = 10
 export var speed = 100
+export var fatigue = 0
 
 func _ready():
 	update_text()
@@ -18,6 +19,10 @@ func set_health(v):
 func set_speed(v):
 	speed = v
 	$Speed.set_text(speed)
+
+func set_fatigue(v):
+	fatigue = v
+	$Fatigue.set_text(fatigue)
 
 func update_text():
 	$Damage.set_text(damage)
