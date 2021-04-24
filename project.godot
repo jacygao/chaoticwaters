@@ -35,6 +35,7 @@ Dialog="*res://save/Dialog.gd"
 Item_Meta="*res://meta/Item.gd"
 NPC_Meta="*res://meta/NPC.gd"
 Env="*res://env/Env.gd"
+Utils="*res://env/Utils.gd"
 
 [input]
 

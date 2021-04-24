@@ -21,7 +21,9 @@ func _on_CityPanel_pressed(btn):
 			$DialogUI.new_dialog("city_hotel")
 			$HotelPanel.visible = true
 		SHIPYARD:
-			pass
+			$TutorialUI.close()
+			$DialogUI.new_dialog("city_shipyard")
+			$ShipyardPanel.visible = true
 
 func default():
 	reset()
@@ -31,6 +33,7 @@ func reset():
 	$CityPanel.visible = false
 	$PalacePanel.visible = false
 	$HotelPanel.visible = false
+	$ShipyardPanel.visible = false
 
 """
 	Palace
@@ -46,27 +49,28 @@ func _on_PalacePanel_invest():
 	Hotel
 """
 func _on_HotelPanel_one_night():
-	pass # Replace with function body.
-
+	# TODO: make it configurable
+	Statistic.subtract_fatigue(5)
+	default()
+	$TutorialUI.close()
+	$DialogUI.new_dialog("first_shipyard_visit")
+		
 func _on_HotelPanel_recover_all():
-	pass # Replace with function body.
-
+	Statistic.reset_fatigue()
+	$TutorialUI.close()
+	default()
+	
 func _on_HotelPanel_leave():
 	default()
 
 func _on_DialogUI_dialog_played(key):
 	match key:
 		"first_city_visit":
-			$TutorialUI.set_pos(tutorial_position_offset($CityPanel/Hotel))
+			$TutorialUI.set_pos(Utils.tutorial_position_offset($CityPanel/Hotel))
 			$TutorialUI.open()
 		"city_hotel":
-			$TutorialUI.set_pos(tutorial_position_offset($HotelPanel/OneNightButton))
+			$TutorialUI.set_pos(Utils.tutorial_position_offset($HotelPanel/OneNightButton))
 			$TutorialUI.open()
-		
-func tutorial_position_offset(node):
-	var pos = node.get_position()
-	var size = node.get_size()
-	
-	pos.x = pos.x + size.x/2 + 40
-	pos.y = pos.y + size.y/2 + 40
-	return pos
+		"first_shipyard_visit":
+			$TutorialUI.set_pos(Utils.tutorial_position_offset($CityPanel/Shipyard))
+			$TutorialUI.open()

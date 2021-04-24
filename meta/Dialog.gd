@@ -55,6 +55,23 @@ var dialog = {
 		],
 		"once": true,
 	},
+	"first_shipyard_visit": {
+		"dialog": [
+			{
+				"is_player_speaking": false,
+				"name": "pirate",
+				"portrait_file_name": "portrait-2-3.png",
+				"text": "Captain, the crew had a great nap and look energized!",
+			},
+			{
+				"is_player_speaking": false,
+				"name": "pirate",
+				"portrait_file_name": "portrait-2-2.png",
+				"text": "The next thing to do is repairing the ship. Let's go and speak to the Shipyard owner.",
+			},
+		],
+		"once": true,
+	},
 	"city_investment": {
 		"dialog": [
 			{
@@ -73,6 +90,17 @@ var dialog = {
 				"name": "girl",
 				"portrait_file_name": "portrait-5-4.png",
 				"text": "Need a room?",
+			},
+		],
+		"once": false,
+	},
+	"city_shipyard": {
+		"dialog": [
+			{
+				"is_player_speaking": false,
+				"name": "owner",
+				"portrait_file_name": "portrait-6-2.png",
+				"text": "How can I help you?",
 			},
 		],
 		"once": false,

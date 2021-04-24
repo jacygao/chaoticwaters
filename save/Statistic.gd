@@ -8,6 +8,7 @@ Statistics are calculated via a number of factors such as ship level, researches
 
 var statistic = {
 	"damage": 1,
+	"max_health": 10,
 	"health": 10,
 	"speed": 100,
 	"fatigue": 0,
@@ -22,6 +23,15 @@ func get_damage(stats):
 func get_health(stats):
 	return stats["health"]
 
+func subtract_health(v):
+	if statistic["health"] < v:
+		statistic["health"] = 0
+	else:
+		statistic["health"] = statistic["health"] - v
+
+func reset_health():
+	statistic["health"] = statistic["max_health"]
+		
 func get_speed(stats):
 	return stats["speed"]
 
@@ -37,6 +47,12 @@ func add_fatigue(v):
 	statistic["fatigue"] = statistic["fatigue"] + v
 	if statistic["fatigue"] > 100:
 		statistic["fatigue"] = 100
-		
+
+func subtract_fatigue(v):
+	if statistic["fatigue"] < v:
+		statistic["fatigue"] = 0
+	else:
+		statistic["fatigue"] = statistic["fatigue"] - v
+
 func reset_fatigue():
 	statistic["fatigue"] = 0

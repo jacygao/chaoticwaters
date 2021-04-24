@@ -4,16 +4,8 @@ export var fire_rate = 2.0
 export var coins = 200
 
 func _ready():
-	$HUD/FireButtonRight.call("set_cooldown", fire_rate)
-	$HUD/FireButtonLeft.call("set_cooldown", fire_rate)
 	update_coins(coins)
 	
-func _on_AnchorButton_anchor_on():
-	$Player.call("anchor_on")
-
-func _on_AnchorButton_anchor_off():
-	$Player.call("anchor_off")
-
 func _on_CityStockholm_city_entered():
 	pass
 
@@ -56,14 +48,14 @@ func _on_NPCBoat_is_clicked(pos):
 
 # An attack button is pressed, moving player boat towards target.
 func _on_Pirate_attack_pressed(node):
-	reset_tutorial()
+	$Pirate.hide_popup_tutorial()
 	$Player.attacking(node)
 
 func _on_Player_battle_victory(node):
 	$HUD/DialogUI.new_dialog("first_victory")
 
 func _on_Pirate_sinking_boat_pressed(node):
-	reset_tutorial()
+	$Pirate.hide_tutorial()
 	$HUD/RewardUI.show_tutorial()
 	$HUD/RewardUI.open(node)
 
@@ -79,6 +71,7 @@ func _on_Pirate_boat_cleared():
 	$HUD/DialogUI.new_dialog("first_reward")
 
 func _on_Stockholm_enter_pressed(node):
+	$Stockholm.hide_popup_tutorial()
 	$Player.moving_to(node)
 
 func _on_Stockholm_city_entered(node):
@@ -94,12 +87,31 @@ func _on_DialogUI_dialog_played(key):
 		pos.x -= 80
 		pos.y -= 40
 		$Pirate.show_tutorial()
+	if key == "first_reward":
+		$HUD/TutorialUI.set_pos(Utils.tutorial_position_offset($HUD.get_node("WorldViewButton")))
+		$HUD/TutorialUI.open()
 		
 func _on_Pirate_body_pressed(node):
-	print("pressed")
-	reset_tutorial()
+	$Pirate.hide_tutorial()
 	$Pirate.show_popup_tutorial()
 
 func reset_tutorial():
-	$Pirate.hide_tutorial()
-	$Pirate.hide_popup_tutorial()
+	pass
+	
+func _on_HUD_ancher_on():
+	$Player.call("anchor_on")
+
+func _on_HUD_ancher_off():
+	$Player.call("anchor_off")
+
+func _on_HUD_world_view_on():
+	$HUD/TutorialUI.close()
+	$Stockholm.show_tutorial()
+	$Player.set_world_view()
+
+func _on_HUD_world_view_off():
+	$Player.set_boat_view()
+
+func _on_Stockholm_body_pressed(popup_node):
+	$Stockholm.hide_tutorial()
+	$Stockholm.show_popup_tutorial()
