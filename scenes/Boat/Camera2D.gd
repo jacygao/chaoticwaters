@@ -39,3 +39,9 @@ func _unhandled_input(event):
 		_set_zoom_level(_zoom_level - zoom_factor)
 	if event.is_action_pressed("zoom_out"):
 		_set_zoom_level(_zoom_level + zoom_factor)
+
+func zoom_max():
+	_set_zoom_level(2)
+	
+func zoom_default():
+	_set_zoom_level(1)

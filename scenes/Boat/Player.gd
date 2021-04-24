@@ -48,3 +48,12 @@ func _on_Boat_state_changed(state):
 	
 func _on_FatigueTimer_timeout():
 	Statistic.add_fatigue(1)
+
+func _on_Boat_is_hit(damage):
+	Statistic.subtract_health(damage)
+
+func set_world_view():
+	$Boat/Camera2D.zoom_max()
+
+func set_boat_view():
+	$Boat/Camera2D.zoom_default()

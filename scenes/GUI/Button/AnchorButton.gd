@@ -12,11 +12,6 @@ signal anchor_off
 func _ready():
 	self.texture_normal = anchor_off
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
 func _on_AnchorButton_pressed():
 	if is_anchor_on:
 		is_anchor_on = false

@@ -59,6 +59,7 @@ var player_state = IDLE
 signal is_sinking
 signal battle_victory(node)
 signal state_changed(state)
+signal is_hit(damage)
 
 # Called when the node enters the scene tree for thes first time.
 func _ready():
@@ -248,7 +249,7 @@ func hit(damage):
 	$Fire.set_emitting(true)
 	$HealthDisplay.update_healthbar(durability)
 	$DamageController.show_value(damage, true)
-	print(id(), " is hit, current durability: ", durability)
+	emit_signal("is_hit", damage)
 
 func sink():
 	speed = 0
