@@ -35,6 +35,18 @@ func reset():
 	$HotelPanel.visible = false
 	$ShipyardPanel.visible = false
 
+func _on_DialogUI_dialog_played(key):
+	match key:
+		"first_city_visit":
+			$TutorialUI.set_pos(Utils.tutorial_position_offset($CityPanel/Hotel))
+			$TutorialUI.open()
+		"city_hotel":
+			$TutorialUI.set_pos(Utils.tutorial_position_offset($HotelPanel/OneNightButton))
+			$TutorialUI.open()
+		"first_shipyard_visit":
+			$TutorialUI.set_pos(Utils.tutorial_position_offset($CityPanel/Shipyard))
+			$TutorialUI.open()
+
 """
 	Palace
 """
@@ -63,14 +75,12 @@ func _on_HotelPanel_recover_all():
 func _on_HotelPanel_leave():
 	default()
 
-func _on_DialogUI_dialog_played(key):
-	match key:
-		"first_city_visit":
-			$TutorialUI.set_pos(Utils.tutorial_position_offset($CityPanel/Hotel))
-			$TutorialUI.open()
-		"city_hotel":
-			$TutorialUI.set_pos(Utils.tutorial_position_offset($HotelPanel/OneNightButton))
-			$TutorialUI.open()
-		"first_shipyard_visit":
-			$TutorialUI.set_pos(Utils.tutorial_position_offset($CityPanel/Shipyard))
-			$TutorialUI.open()
+"""
+	Shipyard
+"""
+
+func _on_ShipyardPanel_repair():
+	Statistic.reset_health()
+
+func _on_ShipyardPanel_leave():
+	default()
