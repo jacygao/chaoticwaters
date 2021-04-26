@@ -1,16 +1,20 @@
 extends Node
 
+"""
+	Inventory stores a list of items with key as the name of the item and value as the amount.
+"""
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var inventory = {}
 
+# store takes an array of items.
+# each item must be in a key value format with 
+# key being the name of the item and value as the amount.
+# Sample item data: {"name": "rifle", "amount": 2}
+func store(items):
+	for item in items:
+		if !inventory.has(item["name"]):
+			inventory[item["name"]] = 0
+		inventory[item["name"]] += item["amount"]
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func get_all():
+	return inventory
