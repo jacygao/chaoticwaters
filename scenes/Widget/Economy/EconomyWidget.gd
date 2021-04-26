@@ -7,6 +7,10 @@ func _ready():
 	$Icon.texture = load(icon_path)
 	render_text(number)
 
+func _process(_delta):
+	number = Economy.get_coins()
+	render_text(number)
+	
 func update_number(num):
 	number = num
 	render_text(number)

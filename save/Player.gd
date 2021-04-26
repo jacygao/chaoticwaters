@@ -9,6 +9,7 @@ extends Node
 """
 
 var player = {
+	"name": "Laurien Plesger",
 	"tutorial_on": true,
 	"occupation": {},
 }
@@ -17,7 +18,12 @@ func set_tutorial_off():
 	player["tutorial_on"] = false
 
 func occupy(city, rate):
-	if player["occupation"].has(city):
-		player["occupation"] += rate
-	else:
-		player["occupation"] = rate
+	print(player)
+	if !player["occupation"].has(city):
+		player["occupation"][city] = 0
+	player["occupation"][city] += rate
+
+func get_city_occupation(city):
+	if !player["occupation"].has(city):
+		return 0
+	return player["occupation"][city]

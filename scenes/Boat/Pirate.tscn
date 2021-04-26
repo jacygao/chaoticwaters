@@ -26,5 +26,6 @@ one_shot = true
 position = Vector2( 38.8913, 37.7008 )
 [connection signal="input_event" from="Boat" to="." method="_on_PlayerBoat_input_event"]
 [connection signal="is_sinking" from="Boat" to="." method="_on_Boat_is_sinking"]
+[connection signal="state_changed" from="Boat" to="." method="_on_Boat_state_changed"]
 [connection signal="is_attacked" from="PopupControlPirate" to="." method="_on_PopupControlPirate_is_attacked"]
 [connection signal="timeout" from="SinkTimer" to="." method="_on_SinkTimer_timeout"]

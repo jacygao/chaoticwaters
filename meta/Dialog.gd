@@ -59,15 +59,44 @@ var dialog = {
 		"dialog": [
 			{
 				"is_player_speaking": false,
-				"name": "pirate",
+				"name": "sailor",
 				"portrait_file_name": "portrait-2-3.png",
 				"text": "Captain, the crew had a great nap and look energized!",
 			},
 			{
 				"is_player_speaking": false,
-				"name": "pirate",
+				"name": "sailor",
 				"portrait_file_name": "portrait-2-2.png",
 				"text": "The next thing to do is repairing the ship. Let's go and speak to the Shipyard owner.",
+			},
+		],
+		"once": true,
+	},
+	"first_occupation": {
+		"dialog": [
+			{
+				"is_player_speaking": false,
+				"name": "sailor",
+				"portrait_file_name": "portrait-2-2.png",
+				"text": "Captain, there will be much stronger enemies coming after us. To be prepared, we must grow our power.",
+			},
+			{
+				"is_player_speaking": false,
+				"name": "sailor",
+				"portrait_file_name": "portrait-2-2.png",
+				"text": "The first step to a strong navy is to build a strong wealth.",
+			},
+			{
+				"is_player_speaking": false,
+				"name": "sailor",
+				"portrait_file_name": "portrait-2-2.png",
+				"text": "Coins can be made via trading goods between cities.",
+			},
+			{
+				"is_player_speaking": false,
+				"name": "sailor",
+				"portrait_file_name": "portrait-2-2.png",
+				"text": "But before we can make any trade, we must have occupied the city.",
 			},
 		],
 		"once": true,
@@ -79,6 +108,17 @@ var dialog = {
 				"name": "governer",
 				"portrait_file_name": "portrait-4-1.png",
 				"text": "Oh, I heard you want to make an investment on the city defence?",
+			},
+		],
+		"once": false,
+	},
+	"after_city_investment": {
+		"dialog": [
+			{
+				"is_player_speaking": false,
+				"name": "governer",
+				"portrait_file_name": "portrait-4-3.png",
+				"text": "Very Ambitious. I respect that.",
 			},
 		],
 		"once": false,

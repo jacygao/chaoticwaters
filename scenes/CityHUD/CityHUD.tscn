@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scenes/CityHUD/StatsWidget.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/city/places/shop.png" type="Texture" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://scenes/Widget/Economy/EconomyWidget.tscn" type="PackedScene" id=15]
 [ext_resource path="res://scenes/Widget/Statistic/StatisticPanel.tscn" type="PackedScene" id=16]
 [ext_resource path="res://scenes/CityHUD/ShipyardPanel.gd" type="Script" id=17]
+[ext_resource path="res://scenes/CityHUD/InfoPanel.gd" type="Script" id=18]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -58,6 +59,7 @@ anchor_bottom = 0.5
 margin_left = -300.0
 margin_top = -300.0
 margin_bottom = 300.0
+script = ExtResource( 18 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -92,6 +94,38 @@ margin_top = 150.0
 margin_bottom = 195.0
 title = "Defense"
 number = "2000"
+
+[node name="ForcePanel" type="Panel" parent="InfoPanel"]
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -378.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PowerTitle" type="Label" parent="InfoPanel/ForcePanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -37.5
+margin_right = 37.5
+margin_bottom = 37.0
+custom_fonts/font = SubResource( 1 )
+text = "Forces"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Power1" parent="InfoPanel/ForcePanel" instance=ExtResource( 1 )]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -120.0
+margin_top = 40.0
+margin_right = 120.0
+margin_bottom = 85.0
+title = "Leo Linderoth"
+number = "20%"
 
 [node name="CityPanel" type="Panel" parent="."]
 self_modulate = Color( 1, 1, 1, 0.196078 )
@@ -170,7 +204,6 @@ __meta__ = {
 }
 
 [node name="PalacePanel" type="Panel" parent="."]
-visible = false
 self_modulate = Color( 1, 1, 1, 0.196078 )
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -188,11 +221,26 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -70.0
-margin_top = -60.0
+margin_top = -80.0
 margin_right = 70.0
-margin_bottom = -20.0
+margin_bottom = -40.0
 custom_fonts/font = SubResource( 2 )
-text = "Invest"
+text = "Invest x 1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InvestButton10" type="Button" parent="PalacePanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -70.0
+margin_top = -20.0
+margin_right = 70.0
+margin_bottom = 20.0
+custom_fonts/font = SubResource( 2 )
+text = "Invest x 10"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -203,8 +251,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -70.0
+margin_top = 40.0
 margin_right = 70.0
-margin_bottom = 40.0
+margin_bottom = 80.0
 custom_fonts/font = SubResource( 3 )
 text = "Leave"
 __meta__ = {
@@ -270,6 +319,7 @@ __meta__ = {
 }
 
 [node name="ShipyardPanel" type="Panel" parent="."]
+visible = false
 self_modulate = Color( 1, 1, 1, 0.196078 )
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -342,8 +392,10 @@ margin_bottom = 123.0
 [connection signal="pressed" from="CityPanel/Hotel" to="CityPanel" method="_on_Hotel_pressed"]
 [connection signal="pressed" from="CityPanel/Shipyard" to="CityPanel" method="_on_Shipyard_pressed"]
 [connection signal="invest" from="PalacePanel" to="." method="_on_PalacePanel_invest"]
+[connection signal="invest_10" from="PalacePanel" to="." method="_on_PalacePanel_invest_10"]
 [connection signal="leave" from="PalacePanel" to="." method="_on_PalacePanel_leave"]
 [connection signal="pressed" from="PalacePanel/InvestButton" to="PalacePanel" method="_on_InvestButton_pressed"]
+[connection signal="pressed" from="PalacePanel/InvestButton10" to="PalacePanel" method="_on_InvestButton10_pressed"]
 [connection signal="pressed" from="PalacePanel/LeaveButton" to="PalacePanel" method="_on_LeaveButton_pressed"]
 [connection signal="leave" from="HotelPanel" to="." method="_on_HotelPanel_leave"]
 [connection signal="one_night" from="HotelPanel" to="." method="_on_HotelPanel_one_night"]
