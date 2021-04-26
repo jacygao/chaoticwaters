@@ -72,3 +72,9 @@ func _on_SinkTimer_timeout():
 func clear_node():
 	emit_signal("boat_cleared")
 	queue_free()
+
+func _on_Boat_state_changed(state):
+	if state == $Boat.BATTLING:
+		$PopupControlPirate/ObjectPopupPanel/PiratePopupPanel/PirateAttackButton.disabled = true
+	else:
+		$PopupControlPirate/ObjectPopupPanel/PiratePopupPanel/PirateAttackButton.disabled = false
