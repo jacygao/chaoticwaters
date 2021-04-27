@@ -37,6 +37,7 @@ NPC_Meta="*res://meta/NPC.gd"
 Env="*res://env/Env.gd"
 Utils="*res://env/Utils.gd"
 Player="*res://save/Player.gd"
+City="*res://save/City.gd"
 
 [input]
 
