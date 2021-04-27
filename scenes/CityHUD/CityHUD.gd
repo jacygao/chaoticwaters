@@ -1,7 +1,11 @@
 extends CanvasLayer
 
 export var city_name = "Stockholm"
-export var economy = 1880
+
+var population = 134567
+var economy = 1880
+var defence = 2000
+var forces = {}
 
 var stats_widget = preload("res://scenes/CityHUD/StatsWidget.tscn")
 
@@ -9,12 +13,24 @@ enum {PALACE, BAR, SHOP, HOTEL, SHIPYARD}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	init()
+	render_node()
 	default()
 	$DialogUI.new_dialog("first_city_visit")
 
-func init():
+func render_node():
+	var city_data = City.get_city(city_name)
+	population = City.get_population(city_data)
+	economy = City.get_economy(city_data)
+	defence = City.get_defence(city_data)
+	forces = City.get_forces(city_data)
+	print(forces)
+	render_info_panel()
+	
+func render_info_panel():
+	$InfoPanel.set_population(population)
 	$InfoPanel.set_economy(economy)
+	$InfoPanel.set_defence(defence)
+	$InfoPanel.set_forces(forces)
 
 func _on_CityPanel_pressed(btn):
 	reset()
@@ -77,17 +93,16 @@ func _on_PalacePanel_leave():
 
 func _on_PalacePanel_invest():
 	$TutorialUI.close()
-	Player.occupy(city_name, 1)
-	Economy.deduct_coins(economy)
-	$DialogUI.new_dialog("after_city_investment")
+	if Economy.deduct_coins(economy):
+		City.occupy(city_name, Player.get_name(), 1)
+		render_node()
+		$DialogUI.new_dialog("after_city_investment")
 
 func _on_PalacePanel_invest_10():
-	Player.occupy(city_name, 10)
-	$DialogUI.new_dialog("after_city_investment")
-	
-func render_force_panel():
-	#TODO: rendering city forces dynamically
-	pass
+	if Economy.deduct_coins(economy * 10):
+		City.occupy(city_name, Player.get_name(), 10)
+		render_node()
+		$DialogUI.new_dialog("after_city_investment")
 		
 """
 	Hotel

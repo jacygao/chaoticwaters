@@ -6,7 +6,7 @@ var city = {
 		"economy": 1880,
 		"defence": 2000,
 		"forces": {
-			"leo_linderroth": 20,
+			"Leo Linderroth": 20,
 		}
 	}
 }
@@ -19,3 +19,15 @@ func occupy(city_name, force_name, rate):
 
 func get_city(city_name):
 	return city[city_name]
+
+func get_population(city_data):
+	return city_data["population"]
+
+func get_economy(city_data):
+	return city_data["economy"]
+	
+func get_defence(city_data):
+	return city_data["defence"]
+
+func get_forces(city_data):
+	return city_data["forces"]

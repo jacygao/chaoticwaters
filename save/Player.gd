@@ -27,3 +27,6 @@ func get_city_occupation(city):
 	if !player["occupation"].has(city):
 		return 0
 	return player["occupation"][city]
+
+func get_name():
+	return player["name"]
