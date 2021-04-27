@@ -42,7 +42,9 @@ func _on_CityPanel_pressed(btn):
 		BAR:
 			pass
 		SHOP:
-			pass
+			$TutorialUI.close()
+			$DialogUI.new_dialog("city_shop")
+			#$HotelPanel.visible = true
 		HOTEL:
 			$TutorialUI.close()
 			$DialogUI.new_dialog("city_hotel")
@@ -83,8 +85,12 @@ func _on_DialogUI_dialog_played(key):
 			$TutorialUI.set_pos(Utils.tutorial_position_offset($PalacePanel/InvestButton))
 			$TutorialUI.open()
 		"after_city_investment":
-			$TutorialUI.close()
 			default()
+			$TutorialUI.close()
+			$DialogUI.new_dialog("first_trade")
+		"first_trade":
+			$TutorialUI.set_pos(Utils.tutorial_position_offset($CityPanel/Shop))
+			$TutorialUI.open()
 """
 	Palace
 """
@@ -125,7 +131,6 @@ func _on_HotelPanel_leave():
 """
 	Shipyard
 """
-
 func _on_ShipyardPanel_repair():
 	Statistic.reset_health()
 	default()

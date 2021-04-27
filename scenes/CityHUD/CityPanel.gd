@@ -11,7 +11,7 @@ func _on_Bar_pressed():
 	emit_signal("pressed", get_parent().BAR)
 
 func _on_Shop_pressed():
-	emit_signal("pressed", get_parent().SHIPYARD)
+	emit_signal("pressed", get_parent().SHOP)
 
 func _on_Hotel_pressed():
 	emit_signal("pressed", get_parent().HOTEL)

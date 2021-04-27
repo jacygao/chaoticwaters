@@ -90,13 +90,24 @@ var dialog = {
 				"is_player_speaking": false,
 				"name": "sailor",
 				"portrait_file_name": "portrait-2-2.png",
-				"text": "Coins can be made via trading goods between cities.",
+				"text": "Coins are the most important resource and can be made via trading goods between cities.",
 			},
 			{
 				"is_player_speaking": false,
 				"name": "sailor",
 				"portrait_file_name": "portrait-2-2.png",
 				"text": "But before we can make any trade, we must have occupied the city.",
+			},
+		],
+		"once": true,
+	},
+	"first_trade": {
+		"dialog": [
+			{
+				"is_player_speaking": false,
+				"name": "sailor",
+				"portrait_file_name": "portrait-2-3.png",
+				"text": "Captain, we have been officially given the green light to trade in this city. Let's visit the Exchange Center and sell the loot from the battle earlier on.",
 			},
 		],
 		"once": true,
@@ -141,6 +152,17 @@ var dialog = {
 				"name": "owner",
 				"portrait_file_name": "portrait-6-2.png",
 				"text": "How can I help you?",
+			},
+		],
+		"once": false,
+	},
+	"city_shop": {
+		"dialog": [
+			{
+				"is_player_speaking": false,
+				"name": "owner",
+				"portrait_file_name": "portrait-7-3.png",
+				"text": "Oh foreigners! You must be intereted in these locally made fabric!",
 			},
 		],
 		"once": false,
