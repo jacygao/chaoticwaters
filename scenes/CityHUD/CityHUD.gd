@@ -44,7 +44,7 @@ func _on_CityPanel_pressed(btn):
 		SHOP:
 			$TutorialUI.close()
 			$DialogUI.new_dialog("city_shop")
-			#$HotelPanel.visible = true
+			$ShopPanel.visible = true
 		HOTEL:
 			$TutorialUI.close()
 			$DialogUI.new_dialog("city_hotel")
@@ -63,6 +63,7 @@ func reset():
 	$PalacePanel.visible = false
 	$HotelPanel.visible = false
 	$ShipyardPanel.visible = false
+	$ShopPanel.visible = false
 
 func _on_DialogUI_dialog_played(key):
 	match key:
