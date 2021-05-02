@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://fonts/AkayaTelivigala-Regular.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://assets/products/bar_bronze_2.png" type="Texture" id=2]
-[ext_resource path="res://assets/products/fish.png" type="Texture" id=3]
-[ext_resource path="res://assets/products/bread.png" type="Texture" id=4]
-[ext_resource path="res://assets/products/scimitar_iron.png" type="Texture" id=5]
+[ext_resource path="res://assets/items/bronze.png" type="Texture" id=2]
+[ext_resource path="res://scenes/CityHUD/TradeProductWidget.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/items/bread.png" type="Texture" id=4]
+[ext_resource path="res://assets/items/weapon.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -74,9 +74,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Fish" type="Sprite" parent="Container"]
-position = Vector2( 50, 50 )
-texture = ExtResource( 3 )
+[node name="TradeProductWidget" parent="Container" instance=ExtResource( 3 )]
+price = 400
 
 [node name="Bread" type="Sprite" parent="Container"]
 position = Vector2( 170, 50 )
