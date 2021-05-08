@@ -7,8 +7,6 @@ var economy = 1880
 var defence = 2000
 var forces = {}
 
-var stats_widget = preload("res://scenes/CityHUD/StatsWidget.tscn")
-
 enum {PALACE, BAR, SHOP, HOTEL, SHIPYARD}
 
 # Called when the node enters the scene tree for the first time.

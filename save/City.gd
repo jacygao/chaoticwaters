@@ -5,6 +5,7 @@ var city = {
 		"population": 134000,
 		"economy": 1880,
 		"defence": 2000,
+		"products": ["fish", "bread"],
 		"forces": {
 			"Leo Linderroth": 20,
 		}

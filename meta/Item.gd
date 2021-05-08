@@ -57,6 +57,11 @@ func get_image(item:Dictionary):
 		return item["image"]
 	return ""
 
+func get_value(item:Dictionary):
+	if item.has("value"):
+		return item["value"]
+	return 0
+
 func get_item_name(item):
 	if item.has("name"):
 		return item["name"]

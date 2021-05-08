@@ -8,7 +8,6 @@ func new_dialog(key):
 	if !Dialog.has_played(key):
 		dialog_key = key
 		var dialog = Dialog_Meta.load_dialog(dialog_key)
-		print(dialog)
 		$DialogBox.open_dialog(dialog)
 		visible = true
 

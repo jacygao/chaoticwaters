@@ -54,6 +54,7 @@ func render_node():
 	
 func load_dialog():
 	show_indicator = false
+	print("test ", dialog_index)
 	if dialog_index < conversation.size():
 		set_is_player_speaking(conversation[dialog_index].is_player_speaking)
 		set_portrait_path("%s%s" % [portrait_path_prefix, conversation[dialog_index].portrait_file_name])
@@ -70,6 +71,8 @@ func load_dialog():
 	dialog_index+=1
 
 func close_dialog():
+	dialog_index = 0
+	visible = false
 	emit_signal("dialog_is_finished")
 	
 func _on_Tween_tween_completed(_object, _key):
