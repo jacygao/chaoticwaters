@@ -6,6 +6,7 @@ var population = 134567
 var economy = 1880
 var defence = 2000
 var forces = {}
+var products = []
 
 enum {PALACE, BAR, SHOP, HOTEL, SHIPYARD}
 
@@ -21,7 +22,7 @@ func render_node():
 	economy = City.get_economy(city_data)
 	defence = City.get_defence(city_data)
 	forces = City.get_forces(city_data)
-	print(forces)
+	products = City.get_products(city_data)
 	render_info_panel()
 	
 func render_info_panel():
@@ -147,6 +148,9 @@ func _on_ShipyardPanel_leave():
 	Shop
 """
 func enter_shop():
+	var inventory_items = Inventory.get_all()
+	$TradePanel.render_sell_container(inventory_items.keys())
+	$TradePanel.render_buy_container(products)
 	$TradePanel.visible = true
 
 func _on_ShopPanel_trade():

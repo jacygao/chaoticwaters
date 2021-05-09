@@ -91,11 +91,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ObjectPopupButton" parent="." instance=ExtResource( 7 )]
-btn_text = "CONFIRM"
-
 [node name="TradeInfoContainer" parent="." instance=ExtResource( 2 )]
 margin_top = 110.0
 margin_bottom = -218.0
+
+[node name="ObjectPopupButton" parent="." instance=ExtResource( 7 )]
+btn_text = "CONFIRM"
+[connection signal="product_selected" from="TradeGoodsContainer" to="." method="_on_TradeGoodsContainer_product_selected"]
 [connection signal="product_selected" from="TradeProductContainer" to="." method="_on_TradeProductContainer_product_selected"]
 [connection signal="deal" from="TradeInfoContainer" to="." method="_on_TradeInfoContainer_deal"]

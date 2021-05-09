@@ -1,19 +1,24 @@
 extends Container
 
 var product_widget = preload("res://scenes/CityHUD/TradeProductWidget.tscn")
-var products = ["fish", "bread", "weapon", "bronze"]
+var products = []
 
 signal product_selected(pid, cost)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	render_products()
+	render_products(products)
+
+func set_products(ps):
+	products = ps
 
 # example of products: ["fish", "bread"]
-func render_products():
+func render_products(ps):
+	set_products(ps)
+	
 	var count = 0
 	var margin = 20
-	for product in products:
+	for product in ps:
 		var node = product_widget.instance()
 		node.product_id = product
 		node.set_position(Vector2(count*(margin+node.rect_size.x), 0))

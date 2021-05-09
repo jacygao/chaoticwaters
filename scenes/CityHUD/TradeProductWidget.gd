@@ -25,7 +25,4 @@ func render_node():
 	$QuantityTag.text = String(quantity)
 
 func _on_Button_pressed():
-	if quantity > 0:
-		quantity-=1
-		emit_signal("pressed", product_id, price)
-		render_node()
+	emit_signal("pressed", product_id, price)

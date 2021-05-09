@@ -5,7 +5,7 @@ var city = {
 		"population": 134000,
 		"economy": 1880,
 		"defence": 2000,
-		"products": ["fish", "bread"],
+		"products": ["fish", "bread", "weapon", "bronze"],
 		"forces": {
 			"Leo Linderroth": 20,
 		}
@@ -32,3 +32,6 @@ func get_defence(city_data):
 
 func get_forces(city_data):
 	return city_data["forces"]
+
+func get_products(city_data):
+	return city_data["products"]
