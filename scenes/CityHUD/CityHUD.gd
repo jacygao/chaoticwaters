@@ -148,8 +148,7 @@ func _on_ShipyardPanel_leave():
 	Shop
 """
 func enter_shop():
-	var inventory_items = Inventory.get_all()
-	$TradePanel.render_sell_container(inventory_items.keys())
+	$TradePanel.render_sell_container(Inventory.get_all().keys())
 	$TradePanel.render_buy_container(products)
 	$TradePanel.visible = true
 
@@ -159,6 +158,10 @@ func _on_ShopPanel_trade():
 func _on_TradePanel_buy(id, price):
 	if !Economy.deduct_coins(price):
 		pass
-
+	Inventory.store_one_id(id)
+	$TradePanel.render_sell_container(Inventory.get_all().keys())
+	
 func _on_TradePanel_sell(id, price):
 	Economy.add_coins(price)
+	Inventory.remove_one_id(id)
+	$TradePanel.render_sell_container(Inventory.get_all().keys())

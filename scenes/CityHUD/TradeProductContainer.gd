@@ -14,6 +14,9 @@ func set_products(ps):
 
 # example of products: ["fish", "bread"]
 func render_products(ps):
+	for child in get_children():
+		child.queue_free()
+		
 	set_products(ps)
 	
 	var count = 0
