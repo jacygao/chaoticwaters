@@ -22,3 +22,4 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+btn_color = Color( 0.529412, 0.960784, 0.372549, 1 )

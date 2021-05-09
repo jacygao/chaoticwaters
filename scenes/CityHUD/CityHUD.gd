@@ -62,6 +62,7 @@ func reset():
 	$HotelPanel.visible = false
 	$ShipyardPanel.visible = false
 	$ShopPanel.visible = false
+	$TradePanel.visible = false
 
 func _on_DialogUI_dialog_played(key):
 	match key:
@@ -89,6 +90,9 @@ func _on_DialogUI_dialog_played(key):
 			$DialogUI.new_dialog("first_trade")
 		"first_trade":
 			$TutorialUI.set_pos(Utils.tutorial_position_offset($CityPanel/Shop))
+			$TutorialUI.open()
+		"city_shop":
+			$TutorialUI.set_pos(Utils.tutorial_position_offset($ShopPanel/TradeButton))
 			$TutorialUI.open()
 """
 	Palace
@@ -138,3 +142,19 @@ func _on_ShipyardPanel_repair():
 	
 func _on_ShipyardPanel_leave():
 	default()
+
+"""
+	Shop
+"""
+func enter_shop():
+	$TradePanel.visible = true
+
+func _on_ShopPanel_trade():
+	enter_shop()
+
+func _on_TradePanel_buy(id, price):
+	if !Economy.deduct_coins(price):
+		pass
+
+func _on_TradePanel_sell(id, price):
+	Economy.add_coins(price)

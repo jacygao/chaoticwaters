@@ -54,7 +54,6 @@ func render_node():
 	
 func load_dialog():
 	show_indicator = false
-	print("test ", dialog_index)
 	if dialog_index < conversation.size():
 		set_is_player_speaking(conversation[dialog_index].is_player_speaking)
 		set_portrait_path("%s%s" % [portrait_path_prefix, conversation[dialog_index].portrait_file_name])

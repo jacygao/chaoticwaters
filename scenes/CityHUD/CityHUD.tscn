@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://scenes/CityHUD/StatsWidget.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/city/places/shop.png" type="Texture" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://scenes/CityHUD/InfoPanel.gd" type="Script" id=18]
 [ext_resource path="res://scenes/CityHUD/ForcePanel.gd" type="Script" id=19]
 [ext_resource path="res://scenes/CityHUD/ShopPanel.gd" type="Script" id=20]
+[ext_resource path="res://scenes/CityHUD/TradePanel.tscn" type="PackedScene" id=21]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -432,10 +433,13 @@ visible = false
 
 [node name="TutorialUI" parent="." instance=ExtResource( 14 )]
 
-[node name="EconomyWidget" parent="." instance=ExtResource( 15 )]
-
 [node name="StatisticPanel" parent="." instance=ExtResource( 16 )]
 margin_bottom = 123.0
+
+[node name="TradePanel" parent="." instance=ExtResource( 21 )]
+visible = false
+
+[node name="EconomyWidget" parent="." instance=ExtResource( 15 )]
 [connection signal="pressed" from="CityPanel" to="." method="_on_CityPanel_pressed"]
 [connection signal="pressed" from="CityPanel/Palace" to="CityPanel" method="_on_Palace_pressed"]
 [connection signal="pressed" from="CityPanel/Bar" to="CityPanel" method="_on_Bar_pressed"]
@@ -460,7 +464,10 @@ margin_bottom = 123.0
 [connection signal="pressed" from="ShipyardPanel/AlterButton" to="ShipyardPanel" method="_on_AlterButton_pressed"]
 [connection signal="pressed" from="ShipyardPanel/LeaveButton" to="ShipyardPanel" method="_on_LeaveButton_pressed"]
 [connection signal="leave" from="ShopPanel" to="." method="_on_ShipyardPanel_leave"]
+[connection signal="trade" from="ShopPanel" to="." method="_on_ShopPanel_trade"]
 [connection signal="pressed" from="ShopPanel/TradeButton" to="ShopPanel" method="_on_TradeButton_pressed"]
 [connection signal="pressed" from="ShopPanel/InvestButton" to="ShopPanel" method="_on_InvestButton_pressed"]
 [connection signal="pressed" from="ShopPanel/LeaveButton" to="ShopPanel" method="_on_LeaveButton_pressed"]
 [connection signal="dialog_played" from="DialogUI" to="." method="_on_DialogUI_dialog_played"]
+[connection signal="buy" from="TradePanel" to="." method="_on_TradePanel_buy"]
+[connection signal="sell" from="TradePanel" to="." method="_on_TradePanel_sell"]

@@ -18,9 +18,11 @@ func set_coins(val):
 	economy["coins"] = val
 
 func is_insufficient(amount):
+	print("insufficient coints: ", amount)
 	return amount <= get_coins()
 
 func deduct_coins(amount):
+	print("deducting coin: ", amount)
 	if !is_insufficient(amount):
 		return false
 	var new_coins = get_coins() - amount
@@ -28,6 +30,7 @@ func deduct_coins(amount):
 	return true
 
 func add_coins(amount):
+	print("adding coin: ", amount)
 	var new_coins = get_coins() + amount
 	set_coins(new_coins)
 	return true

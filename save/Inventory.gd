@@ -12,9 +12,13 @@ var inventory = {}
 # Sample item data: {"name": "rifle", "amount": 2}
 func store(items):
 	for item in items:
-		if !inventory.has(item["name"]):
+		store_one(item)
+
+func store_one(item):
+	print("storing item: ", item)
+	if !inventory.has(item["name"]):
 			inventory[item["name"]] = 0
-		inventory[item["name"]] += item["amount"]
+	inventory[item["name"]] += item["amount"]
 
 func get_all():
 	return inventory

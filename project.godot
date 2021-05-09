@@ -38,6 +38,7 @@ Env="*res://env/Env.gd"
 Utils="*res://env/Utils.gd"
 Player="*res://save/Player.gd"
 City="*res://save/City.gd"
+Inventory="*res://save/Inventory.gd"
 
 [input]
 

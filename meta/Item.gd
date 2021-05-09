@@ -6,42 +6,42 @@ extends Node
 
 var meta = {
 	"coin": {
-		"name": "coin",
+		"name": "Coin",
 		"image": "coins.png",
 		"value": 1,
 	},
 	"rifle": {
-		"name": "rifle",
+		"name": "Rifle",
 		"image": "winchester-rifle.png",
 		"value": 1200,
 	},
 	"sword": {
-		"name": "sword",
+		"name": "Sword",
 		"image": "sword-array.png",
 		"value": 700,
 	},
 	"fish": {
-		"name": "fish",
+		"name": "Fish",
 		"image": "fish.png",
 		"value": 120,
 	},
 	"bread": {
-		"name": "bread",
+		"name": "Bread",
 		"image": "bread.png",
 		"value": 180,
 	},
 	"wood": {
-		"name": "wood",
+		"name": "Wood",
 		"image": "wood.png",
 		"value": 600,
 	},
 	"weapon": {
-		"name": "weapon",
+		"name": "Weapon",
 		"image": "weapon.png",
 		"value": 800,
 	},
 	"bronze": {
-		"name": "bronze",
+		"name": "Bronze",
 		"image": "bronze.png",
 		"value": 1200,
 	},
