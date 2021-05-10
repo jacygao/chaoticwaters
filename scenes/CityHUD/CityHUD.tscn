@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scenes/CityHUD/StatsWidget.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/city/places/shop.png" type="Texture" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://scenes/CityHUD/ForcePanel.gd" type="Script" id=19]
 [ext_resource path="res://scenes/CityHUD/ShopPanel.gd" type="Script" id=20]
 [ext_resource path="res://scenes/CityHUD/TradePanel.tscn" type="PackedScene" id=21]
+[ext_resource path="res://assets/city/places/dock.png" type="Texture" id=22]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -198,7 +199,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Dock" type="Button" parent="CityPanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 220.0
+margin_top = 300.0
+margin_right = 332.0
+margin_bottom = 256.0
+icon = ExtResource( 22 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="PalacePanel" type="Panel" parent="."]
+visible = false
 self_modulate = Color( 1, 1, 1, 0.196078 )
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -372,6 +387,7 @@ __meta__ = {
 }
 
 [node name="ShopPanel" type="Panel" parent="."]
+visible = false
 self_modulate = Color( 1, 1, 1, 0.196078 )
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -428,6 +444,48 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="DockPanel" type="Panel" parent="."]
+self_modulate = Color( 1, 1, 1, 0.196078 )
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -300.0
+margin_right = 724.0
+margin_bottom = 300.0
+script = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DepartButton" type="Button" parent="DockPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -70.0
+margin_top = -50.0
+margin_right = 70.0
+margin_bottom = -10.0
+custom_fonts/font = SubResource( 2 )
+text = "Depart"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeaveButton" type="Button" parent="DockPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -70.0
+margin_top = 10.0
+margin_right = 70.0
+margin_bottom = 50.0
+custom_fonts/font = SubResource( 3 )
+text = "Leave"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="DialogUI" parent="." instance=ExtResource( 12 )]
 visible = false
 
@@ -446,6 +504,7 @@ visible = false
 [connection signal="pressed" from="CityPanel/Shop" to="CityPanel" method="_on_Shop_pressed"]
 [connection signal="pressed" from="CityPanel/Hotel" to="CityPanel" method="_on_Hotel_pressed"]
 [connection signal="pressed" from="CityPanel/Shipyard" to="CityPanel" method="_on_Shipyard_pressed"]
+[connection signal="pressed" from="CityPanel/Dock" to="CityPanel" method="_on_Dock_pressed"]
 [connection signal="invest" from="PalacePanel" to="." method="_on_PalacePanel_invest"]
 [connection signal="invest_10" from="PalacePanel" to="." method="_on_PalacePanel_invest_10"]
 [connection signal="leave" from="PalacePanel" to="." method="_on_PalacePanel_leave"]
@@ -464,10 +523,12 @@ visible = false
 [connection signal="pressed" from="ShipyardPanel/AlterButton" to="ShipyardPanel" method="_on_AlterButton_pressed"]
 [connection signal="pressed" from="ShipyardPanel/LeaveButton" to="ShipyardPanel" method="_on_LeaveButton_pressed"]
 [connection signal="leave" from="ShopPanel" to="." method="_on_ShipyardPanel_leave"]
-[connection signal="trade" from="ShopPanel" to="." method="_on_ShopPanel_trade"]
 [connection signal="pressed" from="ShopPanel/TradeButton" to="ShopPanel" method="_on_TradeButton_pressed"]
 [connection signal="pressed" from="ShopPanel/InvestButton" to="ShopPanel" method="_on_InvestButton_pressed"]
 [connection signal="pressed" from="ShopPanel/LeaveButton" to="ShopPanel" method="_on_LeaveButton_pressed"]
+[connection signal="leave" from="DockPanel" to="." method="_on_DockPanel_leave"]
+[connection signal="pressed" from="DockPanel/DepartButton" to="DockPanel" method="_on_DepartButton_pressed"]
+[connection signal="pressed" from="DockPanel/LeaveButton" to="DockPanel" method="_on_LeaveButton_pressed"]
 [connection signal="dialog_played" from="DialogUI" to="." method="_on_DialogUI_dialog_played"]
 [connection signal="buy" from="TradePanel" to="." method="_on_TradePanel_buy"]
 [connection signal="confirm" from="TradePanel" to="." method="_on_TradePanel_confirm"]

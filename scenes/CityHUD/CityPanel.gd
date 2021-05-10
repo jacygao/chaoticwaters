@@ -18,3 +18,6 @@ func _on_Hotel_pressed():
 
 func _on_Shipyard_pressed():
 	emit_signal("pressed", get_parent().SHIPYARD)
+
+func _on_Dock_pressed():
+	emit_signal("pressed", get_parent().DOCK)

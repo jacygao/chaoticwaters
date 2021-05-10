@@ -8,7 +8,7 @@ var defence = 2000
 var forces = {}
 var products = {}
 
-enum {PALACE, BAR, SHOP, HOTEL, SHIPYARD}
+enum {PALACE, BAR, SHOP, HOTEL, SHIPYARD, DOCK}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -52,7 +52,9 @@ func _on_CityPanel_pressed(btn):
 			$TutorialUI.close()
 			$DialogUI.new_dialog("city_shipyard")
 			$ShipyardPanel.visible = true
-
+		DOCK:
+			pass
+			
 func default():
 	reset()
 	$CityPanel.visible = true
@@ -191,3 +193,9 @@ func _on_TradePanel_sell_all():
 			Economy.add_coins(price)
 			Inventory.remove_one_id(key)
 	render_sell_items()
+
+"""
+	Dock
+"""
+func _on_DockPanel_leave():
+	default()
