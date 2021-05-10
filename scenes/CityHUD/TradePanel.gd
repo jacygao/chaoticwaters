@@ -2,6 +2,8 @@ extends Panel
 
 signal buy(id, price)
 signal sell(id, price)
+signal sell_all
+signal confirm
 
 func _ready():
 	$TradeInfoContainer.visible = false
@@ -39,3 +41,9 @@ func _on_TradeInfoContainer_deal(mode, id, price):
 		emit_signal("buy", id, price)
 	if mode == "SELL":
 		emit_signal("sell", id, price)
+
+func _on_ObjectPopupButton_pressed():
+	emit_signal("confirm")
+
+func _on_SellAllButton_pressed():
+	emit_signal("sell_all")

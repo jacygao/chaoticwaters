@@ -165,3 +165,17 @@ func _on_TradePanel_sell(id, price):
 	Economy.add_coins(price)
 	Inventory.remove_one_id(id)
 	$TradePanel.render_sell_container(Inventory.get_all().keys())
+
+func _on_TradePanel_confirm():
+	default()
+	$TutorialUI.close()
+
+func _on_TradePanel_sell_all():
+	var items = Inventory.get_all()
+	var keys = items.keys()
+	for key in keys:
+		var price = Item_Meta.get_value(Item_Meta.get(key))
+		for i in items[key]:
+			Economy.add_coins(price)
+			Inventory.remove_one_id(key)
+	$TradePanel.render_sell_container({})

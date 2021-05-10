@@ -95,8 +95,16 @@ __meta__ = {
 margin_top = 110.0
 margin_bottom = -218.0
 
-[node name="ObjectPopupButton" parent="." instance=ExtResource( 7 )]
-btn_text = "CONFIRM"
+[node name="LeaveButton" parent="." instance=ExtResource( 7 )]
+btn_text = "LEAVE"
+
+[node name="SellAllButton" parent="." instance=ExtResource( 7 )]
+margin_left = -304.0
+margin_right = -164.0
+btn_text = "SELL ALL"
+btn_color = Color( 0, 0.647059, 1, 1 )
 [connection signal="product_selected" from="TradeGoodsContainer" to="." method="_on_TradeGoodsContainer_product_selected"]
 [connection signal="product_selected" from="TradeProductContainer" to="." method="_on_TradeProductContainer_product_selected"]
 [connection signal="deal" from="TradeInfoContainer" to="." method="_on_TradeInfoContainer_deal"]
+[connection signal="pressed" from="LeaveButton" to="." method="_on_ObjectPopupButton_pressed"]
+[connection signal="pressed" from="SellAllButton" to="." method="_on_SellAllButton_pressed"]

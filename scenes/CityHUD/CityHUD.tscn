@@ -470,4 +470,6 @@ visible = false
 [connection signal="pressed" from="ShopPanel/LeaveButton" to="ShopPanel" method="_on_LeaveButton_pressed"]
 [connection signal="dialog_played" from="DialogUI" to="." method="_on_DialogUI_dialog_played"]
 [connection signal="buy" from="TradePanel" to="." method="_on_TradePanel_buy"]
+[connection signal="confirm" from="TradePanel" to="." method="_on_TradePanel_confirm"]
 [connection signal="sell" from="TradePanel" to="." method="_on_TradePanel_sell"]
+[connection signal="sell_all" from="TradePanel" to="." method="_on_TradePanel_sell_all"]
