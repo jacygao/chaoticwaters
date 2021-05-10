@@ -1,7 +1,7 @@
 extends Container
 
 var product_widget = preload("res://scenes/CityHUD/TradeProductWidget.tscn")
-var products = []
+var products = {}
 
 signal product_selected(pid, cost)
 
@@ -12,8 +12,8 @@ func _ready():
 func set_products(ps):
 	products = ps
 
-# example of products: ["fish", "bread"]
-func render_products(ps):
+# example of products: {"fish":1, "bread":2}
+func render_products(ps:Dictionary):
 	for child in get_children():
 		child.queue_free()
 		
@@ -21,9 +21,10 @@ func render_products(ps):
 	
 	var count = 0
 	var margin = 20
-	for product in ps:
+	for product in ps.keys():
 		var node = product_widget.instance()
 		node.product_id = product
+		node.quantity = ps[product]
 		node.set_position(Vector2(count*(margin+node.rect_size.x), 0))
 		node.connect("pressed", self, "_on_product_pressed")
 		add_child(node)

@@ -5,7 +5,12 @@ var city = {
 		"population": 134000,
 		"economy": 1880,
 		"defence": 2000,
-		"products": ["fish", "bread", "weapon", "bronze"],
+		"products": {
+			"fish":2, 
+			"bread":2, 
+			"weapon":1, 
+			"bronze":1,
+		},
 		"forces": {
 			"Leo Linderroth": 20,
 		}
@@ -33,5 +38,11 @@ func get_defence(city_data):
 func get_forces(city_data):
 	return city_data["forces"]
 
-func get_products(city_data):
-	return city_data["products"]
+func get_products(city_name:String):
+	return city[city_name]["products"]
+	
+func sold_product(city_name, pid):
+	if city[city_name]["products"][pid] > 0:
+		city[city_name]["products"][pid] -= 1
+		return true
+	return false

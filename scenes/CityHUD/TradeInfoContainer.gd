@@ -38,12 +38,17 @@ func render_node(p_id, image, p_name, cost, quantity, btn_text, btn_color:Color)
 	$Sprite.texture = load(image)
 	$Container/ProductName.text = "Product: "+p_name
 	$Container/ProductCost.text = "Price: "+String(cost)
-	$Container/ProductQuantity.text = "Stock: "+String(quantity)
+	render_quantity(quantity)
 	
 func render_button(text, color:Color):
 	$ObjectPopupButton.set_text(text)
 	$ObjectPopupButton.set_color(color)
 	$ObjectPopupButton.render_node()
 
+func render_quantity(num):
+	node_quantity = num
+	$Container/ProductQuantity.text = "Stock: "+String(node_quantity)
+
 func _on_ObjectPopupButton_pressed():
-	emit_signal("deal", button_text, node_id, node_cost)
+	if node_quantity > 0:
+		emit_signal("deal", button_text, node_id, node_cost)

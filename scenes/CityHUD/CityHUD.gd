@@ -6,7 +6,7 @@ var population = 134567
 var economy = 1880
 var defence = 2000
 var forces = {}
-var products = []
+var products = {}
 
 enum {PALACE, BAR, SHOP, HOTEL, SHIPYARD}
 
@@ -22,7 +22,7 @@ func render_node():
 	economy = City.get_economy(city_data)
 	defence = City.get_defence(city_data)
 	forces = City.get_forces(city_data)
-	products = City.get_products(city_data)
+	products = City.get_products(city_name)
 	render_info_panel()
 	
 func render_info_panel():
@@ -148,23 +148,35 @@ func _on_ShipyardPanel_leave():
 	Shop
 """
 func enter_shop():
-	$TradePanel.render_sell_container(Inventory.get_all().keys())
-	$TradePanel.render_buy_container(products)
+	render_sell_items()
+	render_buy_items()
 	$TradePanel.visible = true
 
+func render_sell_items():
+	$TradePanel.render_sell_container(Inventory.get_all())
+
+func render_buy_items():
+	products = City.get_products(city_name)
+	$TradePanel.render_buy_container(products)
+	
 func _on_ShopPanel_trade():
 	enter_shop()
 
 func _on_TradePanel_buy(id, price):
 	if !Economy.deduct_coins(price):
-		pass
+		# TODO: notification
+		return
 	Inventory.store_one_id(id)
-	$TradePanel.render_sell_container(Inventory.get_all().keys())
+	if !City.sold_product(city_name, id):
+		# TODO: notification
+		return
+	render_sell_items()
+	render_buy_items()
 	
 func _on_TradePanel_sell(id, price):
 	Economy.add_coins(price)
 	Inventory.remove_one_id(id)
-	$TradePanel.render_sell_container(Inventory.get_all().keys())
+	render_sell_items()
 
 func _on_TradePanel_confirm():
 	default()
@@ -178,4 +190,4 @@ func _on_TradePanel_sell_all():
 		for i in items[key]:
 			Economy.add_coins(price)
 			Inventory.remove_one_id(key)
-	$TradePanel.render_sell_container({})
+	render_sell_items()

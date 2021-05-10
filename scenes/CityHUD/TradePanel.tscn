@@ -106,5 +106,5 @@ btn_color = Color( 0, 0.647059, 1, 1 )
 [connection signal="product_selected" from="TradeGoodsContainer" to="." method="_on_TradeGoodsContainer_product_selected"]
 [connection signal="product_selected" from="TradeProductContainer" to="." method="_on_TradeProductContainer_product_selected"]
 [connection signal="deal" from="TradeInfoContainer" to="." method="_on_TradeInfoContainer_deal"]
-[connection signal="pressed" from="LeaveButton" to="." method="_on_ObjectPopupButton_pressed"]
+[connection signal="pressed" from="LeaveButton" to="." method="_on_LeaveButton_pressed"]
 [connection signal="pressed" from="SellAllButton" to="." method="_on_SellAllButton_pressed"]
