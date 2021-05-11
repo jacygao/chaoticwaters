@@ -8,7 +8,7 @@ signal enter_pressed(node)
 signal city_entered(node)
 
 func _ready():
-	show_tutorial()
+	hide_tutorial()
 
 func _on_City_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed('ui_touch'):

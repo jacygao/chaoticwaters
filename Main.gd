@@ -3,6 +3,8 @@ extends Node
 export var fire_rate = 2.0
 export var coins = 200
 
+signal change_scene
+
 func _ready():
 	update_coins(coins)
 	
@@ -78,6 +80,7 @@ func _on_Stockholm_enter_pressed(node):
 func _on_Stockholm_city_entered(node):
 	if node.team() == 1:
 		$Player.idle()
+	save_scene()
 	get_tree().change_scene("res://scenes/CityHUD/CityHUD.tscn")
 
 func _on_DialogUI_dialog_played(key):
@@ -96,9 +99,6 @@ func _on_Pirate_body_pressed(node):
 	$Pirate.hide_tutorial()
 	$Pirate.show_popup_tutorial()
 
-func reset_tutorial():
-	pass
-	
 func _on_HUD_ancher_on():
 	$Player.call("anchor_on")
 
@@ -116,3 +116,6 @@ func _on_HUD_world_view_off():
 func _on_Stockholm_body_pressed(popup_node):
 	$Stockholm.hide_tutorial()
 	$Stockholm.show_popup_tutorial()
+
+func save_scene():
+	get_parent().save_main()
