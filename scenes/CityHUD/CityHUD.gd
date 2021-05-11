@@ -53,7 +53,7 @@ func _on_CityPanel_pressed(btn):
 			$DialogUI.new_dialog("city_shipyard")
 			$ShipyardPanel.visible = true
 		DOCK:
-			pass
+			$DockPanel.visible = true
 			
 func default():
 	reset()
@@ -66,6 +66,7 @@ func reset():
 	$ShipyardPanel.visible = false
 	$ShopPanel.visible = false
 	$TradePanel.visible = false
+	$DockPanel.visible = false
 
 func _on_DialogUI_dialog_played(key):
 	match key:
@@ -199,3 +200,6 @@ func _on_TradePanel_sell_all():
 """
 func _on_DockPanel_leave():
 	default()
+
+func _on_DockPanel_depart():
+	get_tree().change_scene("res://Game.tscn")

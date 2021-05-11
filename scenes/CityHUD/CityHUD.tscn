@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://scenes/CityHUD/StatsWidget.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/city/places/shop.png" type="Texture" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://scenes/CityHUD/ShopPanel.gd" type="Script" id=20]
 [ext_resource path="res://scenes/CityHUD/TradePanel.tscn" type="PackedScene" id=21]
 [ext_resource path="res://assets/city/places/dock.png" type="Texture" id=22]
+[ext_resource path="res://scenes/CityHUD/DockPanel.gd" type="Script" id=23]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -445,13 +446,14 @@ __meta__ = {
 }
 
 [node name="DockPanel" type="Panel" parent="."]
+visible = false
 self_modulate = Color( 1, 1, 1, 0.196078 )
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_top = -300.0
 margin_right = 724.0
 margin_bottom = 300.0
-script = ExtResource( 20 )
+script = ExtResource( 23 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -523,9 +525,11 @@ visible = false
 [connection signal="pressed" from="ShipyardPanel/AlterButton" to="ShipyardPanel" method="_on_AlterButton_pressed"]
 [connection signal="pressed" from="ShipyardPanel/LeaveButton" to="ShipyardPanel" method="_on_LeaveButton_pressed"]
 [connection signal="leave" from="ShopPanel" to="." method="_on_ShipyardPanel_leave"]
+[connection signal="trade" from="ShopPanel" to="." method="_on_ShopPanel_trade"]
 [connection signal="pressed" from="ShopPanel/TradeButton" to="ShopPanel" method="_on_TradeButton_pressed"]
 [connection signal="pressed" from="ShopPanel/InvestButton" to="ShopPanel" method="_on_InvestButton_pressed"]
 [connection signal="pressed" from="ShopPanel/LeaveButton" to="ShopPanel" method="_on_LeaveButton_pressed"]
+[connection signal="depart" from="DockPanel" to="." method="_on_DockPanel_depart"]
 [connection signal="leave" from="DockPanel" to="." method="_on_DockPanel_leave"]
 [connection signal="pressed" from="DockPanel/DepartButton" to="DockPanel" method="_on_DepartButton_pressed"]
 [connection signal="pressed" from="DockPanel/LeaveButton" to="DockPanel" method="_on_LeaveButton_pressed"]
