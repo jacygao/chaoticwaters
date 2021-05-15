@@ -9,7 +9,17 @@ signal battle_victory(node)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = $Boat/Camera2D.position
+	set_position(Player.get_coordinate())
+	
+func _process(delta):
+	Player.set_coordinate(get_position())
 
+func get_position():
+	return $Boat.position
+
+func set_position(pos):
+	$Boat.position = pos
+	
 func is_player():
 	return true
 			
@@ -36,6 +46,9 @@ func _on_Boat_battle_victory(node):
 
 func moving_to(node):
 	$Boat.set_state_moving(node)
+
+func dock(node):
+	$Boat.set_state_docking(node)
 
 func idle():
 	$Boat.set_default_state()

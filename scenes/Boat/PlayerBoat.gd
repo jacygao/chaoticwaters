@@ -53,7 +53,8 @@ var cannon_ball = preload("res://scenes/CannonBall/CannonBall.tscn")
 # v2
 var target_node = null
 
-enum {IDLE, MOVING, ATTACKING, ATTACKED, BATTLING, SINKING, FLEEING}
+# TODO: Making these constant shared
+enum {IDLE, MOVING, ATTACKING, ATTACKED, BATTLING, SINKING, FLEEING, DOCKING}
 var player_state = IDLE
 
 signal is_sinking
@@ -101,6 +102,11 @@ func set_state_moving(target):
 	speed = default_speed
 	set_state(MOVING)
 
+func set_state_docking(target):
+	target_node = target
+	speed = default_speed
+	set_state(DOCKING)
+	
 func set_state_attacked():
 	set_state(ATTACKED)
 
@@ -171,6 +177,8 @@ func _physics_process(delta):
 			battle_animate(delta)
 		SINKING:
 			pass
+		DOCKING:
+			move_animate(delta)
 			
 # Controls ship movement animation
 func animate(ta):

@@ -8,12 +8,6 @@ signal change_scene
 func _ready():
 	update_coins(coins)
 	
-func _on_CityStockholm_city_entered():
-	pass
-
-func _on_CityStockholm_city_exited():
-	pass
-
 # Economy section starts here
 func _on_PopupMenu_fire_upgrade_pressed(cost):
 	if cost <= coins:
@@ -75,13 +69,13 @@ func _on_Pirate_boat_cleared():
 
 func _on_Stockholm_enter_pressed(node):
 	$Stockholm.hide_popup_tutorial()
-	$Player.moving_to(node)
+	$Player.dock(node)
 
 func _on_Stockholm_city_entered(node):
-	if node.team() == 1:
+	if node.team() == 1 && node.state() == $Player/Boat.DOCKING:
 		$Player.idle()
-	save_scene()
-	get_tree().change_scene("res://scenes/CityHUD/CityHUD.tscn")
+		save_scene()
+		get_tree().change_scene("res://scenes/CityHUD/CityHUD.tscn")
 
 func _on_DialogUI_dialog_played(key):
 	if key == "game_start":

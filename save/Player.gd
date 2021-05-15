@@ -12,6 +12,7 @@ var player = {
 	"name": "Laurien Plesger",
 	"tutorial_on": true,
 	"occupation": {},
+	"coordinate": Vector2(),
 }
 
 func set_tutorial_off():
@@ -30,3 +31,9 @@ func get_city_occupation(city):
 
 func get_name():
 	return player["name"]
+
+func set_coordinate(c:Vector2):
+	player["coordinate"] = c
+
+func get_coordinate():
+	return player["coordinate"]
