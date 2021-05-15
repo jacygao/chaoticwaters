@@ -1,6 +1,5 @@
 extends Node2D
 
-# Declare member variables here. Examples:
 export var fire_range = 500
 export var fire_damage = 5
 export (float) var default_rotation_speed = 1
@@ -17,11 +16,9 @@ var cannon_ball = preload("res://scenes/CannonBall/CannonBall.tscn")
 signal city_entered(collider)
 signal city_exited
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	$Outpost/FireRange.shape.radius = fire_range
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if !targets.empty():
 		var target_key = targets.keys().front()
@@ -76,7 +73,3 @@ func _on_Dock_body_exited(body):
 		if body.type() == "ship" && body.team() == team():
 			friendly_targets = null
 			emit_signal("city_exited")
-
-func _on_BodyRepairTimer_timeout():
-	if friendly_targets != null && friendly_targets.has_method("repair"):
-		friendly_targets.repair()

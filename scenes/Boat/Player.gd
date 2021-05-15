@@ -5,6 +5,7 @@ var screen_size
 
 signal enter_pressed
 signal battle_victory(node)
+signal state_change(state)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -58,6 +59,8 @@ func _on_Boat_state_changed(state):
 		$FatigueTimer.stop()
 	else:
 		$FatigueTimer.start()
+	
+	emit_signal("state_change", state)
 	
 func _on_FatigueTimer_timeout():
 	Statistic.add_fatigue(1)

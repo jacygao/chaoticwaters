@@ -7,6 +7,7 @@ signal change_scene
 
 func _ready():
 	update_coins(coins)
+	set_anchor_on()
 	
 # Economy section starts here
 func _on_PopupMenu_fire_upgrade_pressed(cost):
@@ -32,6 +33,14 @@ func update_coins(c):
 func show_warn_message(msg):
 	$HUD.show_message($HUD.message_level_warn, msg)
 
+func set_anchor_on():
+	$HUD/AnchorButton.on()
+	$Player/Boat.anchor_on()
+	
+func set_anchor_off():
+	$HUD/AnchorButton.off()
+	$Player/Boat.anchor_off()
+	
 func _on_BoatDisappearTimer_timeout():
 	$NPCBoat.queue_free()
 	$BoatDisappearTimer.stop()
@@ -44,6 +53,7 @@ func _on_NPCBoat_is_clicked(pos):
 
 # An attack button is pressed, moving player boat towards target.
 func _on_Pirate_attack_pressed(node):
+	set_anchor_off()
 	$Pirate.hide_popup_tutorial()
 	$Player.attacking(node)
 
@@ -70,6 +80,7 @@ func _on_Pirate_boat_cleared():
 func _on_Stockholm_enter_pressed(node):
 	$Stockholm.hide_popup_tutorial()
 	$Player.dock(node)
+	set_anchor_off()
 
 func _on_Stockholm_city_entered(node):
 	if node.team() == 1 && node.state() == $Player/Boat.DOCKING:
@@ -113,3 +124,9 @@ func _on_Stockholm_body_pressed(popup_node):
 
 func save_scene():
 	get_parent().save_main()
+
+func _on_Player_state_change(state):
+	if state == $Player/Boat.IDLE:
+		set_anchor_on()
+	else:
+		set_anchor_off()

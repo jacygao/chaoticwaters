@@ -10,14 +10,20 @@ signal anchor_off
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	self.texture_normal = anchor_off
+	on()
+
+func on():
+	is_anchor_on = true
+	texture_normal = anchor_on
+
+func off():
+	is_anchor_on = false
+	texture_normal = anchor_off
 
 func _on_AnchorButton_pressed():
 	if is_anchor_on:
-		is_anchor_on = false
-		texture_normal = anchor_off
+		off()
 		emit_signal("anchor_off")
 	else:
-		is_anchor_on = true
-		texture_normal = anchor_on
+		on()
 		emit_signal("anchor_on")

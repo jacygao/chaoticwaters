@@ -139,6 +139,7 @@ func anchor_on():
 	isAnchorOn = true
 	
 func anchor_off():
+	speed = default_speed
 	rotation_speed = default_rotation_speed
 	isAnchorOn = false
 
@@ -204,6 +205,7 @@ func battle_animate(delta):
 		move_and_rotate_animate(delta)
 
 func move_and_rotate_animate(delta):
+	print("moving with speed ", speed)
 	if cur_rotation > 2*PI:
 		cur_rotation-=2*PI
 	if cur_rotation < -2*PI:
