@@ -11,6 +11,10 @@ signal state_change(state)
 func _ready():
 	screen_size = $Boat/Camera2D.position
 	set_position(Player.get_coordinate())
+	$Boat.init_node(
+		Statistic.get_damage(),
+		Statistic.get_max_health(),
+		Statistic.get_health())
 
 func _unhandled_input(event):
 	if event is InputEventScreenTouch and event.pressed:

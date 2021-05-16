@@ -15,7 +15,10 @@ onready var control_node = $Boat
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	meta = NPC_Meta.get_pirate_boat(level)
-	$Boat.init_node(NPC_Meta.get_stats_damage(meta), NPC_Meta.get_stats_health(meta))
+	$Boat.init_node(
+		NPC_Meta.get_stats_damage(meta), 
+		NPC_Meta.get_stats_health(meta),
+		NPC_Meta.get_stats_health(meta))
 
 func get_items():
 	return NPC_Meta.get_items(meta)

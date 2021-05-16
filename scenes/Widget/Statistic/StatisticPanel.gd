@@ -31,7 +31,7 @@ func set_fatigue(v):
 	$Fatigue.set_text(fatigue)
 
 func update_text():
-	$Damage.set_text(Statistic.get_damage(stats))
-	$Health.set_text(Statistic.get_health(stats))
+	$Damage.set_text(Statistic.get_damage())
+	$Health.set_text(Statistic.get_health())
 	$Speed.set_text(Statistic.get_speed(stats))
 	$Fatigue.set_text(Statistic.get_fatigue(stats))

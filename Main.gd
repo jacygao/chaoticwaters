@@ -63,6 +63,7 @@ func _on_Player_battle_victory(node):
 	$HUD/DialogUI.new_dialog("first_victory")
 
 func _on_Pirate_sinking_boat_pressed(node):
+	$Player.call("anchor_on")
 	$Pirate.hide_tutorial()
 	$HUD/RewardUI.show_tutorial()
 	$HUD/RewardUI.open(node)

@@ -17,12 +17,15 @@ var statistic = {
 func get_all():
 	return statistic
 
-func get_damage(stats):
-	return stats["damage"]
+func get_damage():
+	return statistic["damage"]
 
-func get_health(stats):
-	return stats["health"]
+func get_health():
+	return statistic["health"]
 
+func get_max_health():
+	return statistic["max_health"]
+	
 func subtract_health(v):
 	if statistic["health"] < v:
 		statistic["health"] = 0

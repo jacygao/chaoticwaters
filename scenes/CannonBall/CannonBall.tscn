@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/CannonBall/CannonBall.gd" type="Script" id=1]
 [ext_resource path="res://assets/ship/cannon.png" type="Texture" id=2]
@@ -46,7 +46,23 @@ frame_8/delay_sec = 0.0
 frame_9/texture = ExtResource( 13 )
 frame_9/delay_sec = 0.0
 
+[sub_resource type="Animation" id=4]
+resource_name = "fire"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.8, 1.8 ), Vector2( 1, 1 ) ]
+}
+
 [node name="CannonBall" type="RigidBody2D"]
+scale = Vector2( 1.625, 1.625 )
 collision_layer = 2
 collision_mask = 2
 contacts_reported = 1
@@ -67,4 +83,8 @@ amount = 1
 one_shot = true
 process_material = SubResource( 2 )
 texture = SubResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "fire"
+anims/fire = SubResource( 4 )
 [connection signal="body_entered" from="." to="." method="_on_CannonBall_body_entered"]
