@@ -8,7 +8,6 @@
 [ext_resource path="res://assets/portaits/portrait-1-2.png" type="Texture" id=6]
 [ext_resource path="res://scenes/Dialog/DialogUI.gd" type="Script" id=8]
 
-
 [sub_resource type="DynamicFont" id=1]
 size = 30
 font_data = ExtResource( 2 )

@@ -205,7 +205,6 @@ func battle_animate(delta):
 		move_and_rotate_animate(delta)
 
 func move_and_rotate_animate(delta):
-	print("moving with speed ", speed)
 	if cur_rotation > 2*PI:
 		cur_rotation-=2*PI
 	if cur_rotation < -2*PI:
