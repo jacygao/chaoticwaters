@@ -58,7 +58,7 @@ func _on_PlayerBoat_input_event(viewport, event, shape_idx):
 			pos.y -= popup_controller.get_popup_size().y
 			
 		popup_controller.open(pos)
-		emit_signal("body_pressed", $PopupControlPirate)
+		emit_signal("body_pressed", self)
 		get_tree().set_input_as_handled()
 			
 func _on_PopupControlPirate_is_attacked():

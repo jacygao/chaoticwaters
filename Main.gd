@@ -105,9 +105,9 @@ func _on_DialogUI_dialog_played(key):
 		
 func _on_Pirate_body_pressed(node):
 	$Player.call("anchor_on")
-	$Pirate.hide_tutorial()
-	$Pirate.show_popup_tutorial()
-
+	node.hide_tutorial()
+	node.show_popup_tutorial()
+	
 func _on_HUD_ancher_on():
 	$Player.call("anchor_on")
 
