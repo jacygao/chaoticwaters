@@ -21,6 +21,8 @@ var rotation_speed = default_rotation_speed
 var friction = -0.9
 var drag = -0.0015
 
+var braking = -1
+
 # default health
 export var max_durability = 10
 var durability = 0
@@ -34,7 +36,7 @@ export var fire_blind_range = 100
 export var fire_rate = 2.0
 
 # speed sets to 0 when true
-var isAnchorOn = false
+var is_anchor_on = true
 
 var static_velocity = Vector2()
 var angle = 0
@@ -135,14 +137,13 @@ func angle_tidy(a):
 	return a
 
 func anchor_on():
-	speed = 0
 	rotation_speed = 0
-	isAnchorOn = true
+	is_anchor_on = true
 	set_state_idle()
 	
 func anchor_off():
 	rotation_speed = default_rotation_speed
-	isAnchorOn = false
+	is_anchor_on = false
 
 # Change the target whenever a touch event happens.
 func _input(event):
@@ -169,7 +170,7 @@ func _process(_delta):
 func _physics_process(delta):
 	match player_state:
 		IDLE:
-			pass
+			move_animate(delta)
 		MOVING:
 			move_animate(delta)
 		ATTACKING:
@@ -206,6 +207,7 @@ func battle_animate(delta):
 		move_and_rotate_animate(delta)
 
 func move_and_rotate_animate(delta):
+	apply_friction()
 	accelerate()
 	
 	if cur_rotation > 2*PI:
@@ -230,11 +232,26 @@ func move_and_rotate_animate(delta):
 	move_and_slide(velocity)
 
 func accelerate():
-	if speed > default_speed:
-		speed = default_speed
-	elif speed < default_speed:
-		speed += acceleration
-		
+	if !is_anchor_on:
+		if speed > default_speed:
+			speed = default_speed
+		elif speed < default_speed:
+			speed += acceleration
+	else:
+		if speed < 0:
+			speed = 0
+		else:
+			speed += braking
+			
+func apply_friction():
+	if velocity.length() < 5:
+		velocity = Vector2.ZERO
+	var friction_force = velocity * friction
+	var drag_force = velocity * velocity.length() * drag
+	if velocity.length() < 100:
+		friction_force *= 3
+	velocity += drag_force + friction_force
+	
 func get_target_direction():
 	if target_node != null:
 		return target_node.position - get_global_position()
