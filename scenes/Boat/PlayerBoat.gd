@@ -18,6 +18,9 @@ var acceleration = default_acceleration
 export (float) var default_rotation_speed = 1
 var rotation_speed = default_rotation_speed
 
+var friction = -0.9
+var drag = -0.0015
+
 # default health
 export var max_durability = 10
 var durability = 0
@@ -97,8 +100,15 @@ func set_state_idle():
 	set_state(IDLE)
 	target_node = null
 
-func set_state_moving(target):
-	target_node = target
+func set_state_moving_toward_mouse_position():
+	target_node = null
+	target_direction = get_global_mouse_position() - get_global_position()
+	speed = default_speed
+	set_state(MOVING)
+	
+func set_state_moving(direction):
+	target_node = null
+	target_direction = direction
 	speed = default_speed
 	set_state(MOVING)
 
@@ -187,7 +197,7 @@ func animate(ta):
 	rotation_degrees = ta - 90
 
 func move_animate(delta):
-	if target_node != null:
+	if target_node != null || target_direction != null:
 		move_and_rotate_animate(delta)
 	else:
 		set_default_state()
@@ -210,9 +220,8 @@ func move_and_rotate_animate(delta):
 	if cur_rotation < -2*PI:
 		cur_rotation+=2*PI
 	velocity = Vector2(speed, 0).rotated(cur_rotation)
-	var targetPos = target_node.get_global_position()
 	
-	var target_direction = targetPos - get_global_position()
+	var target_direction = get_target_direction()
 	var target_angle = rad2deg(target_direction.angle_to(velocity))
 	if player_state == BATTLING:
 		target_angle+=90
@@ -226,6 +235,12 @@ func move_and_rotate_animate(delta):
 		rotation_dir = -1 * rotate_velocity
 	cur_rotation += rotation_dir * rotation_speed * delta
 	move_and_slide(velocity)
+
+func get_target_direction():
+	if target_node != null:
+		return target_node.position - get_global_position()
+	elif target_direction != null:
+		return target_direction
 
 func health_bar_animate():
 	$AnimatedBoatSprite.animation = "hp_green"

@@ -11,10 +11,15 @@ signal state_change(state)
 func _ready():
 	screen_size = $Boat/Camera2D.position
 	set_position(Player.get_coordinate())
-	
+
+func _unhandled_input(event):
+	if event is InputEventScreenTouch and event.pressed:
+		print("here player")
+		moving_toward_mouse_position()
+		
 func _process(delta):
 	Player.set_coordinate(get_position())
-
+		
 func get_position():
 	return $Boat.position
 
@@ -23,7 +28,7 @@ func set_position(pos):
 	
 func is_player():
 	return true
-			
+
 func anchor_on():
 	$Boat.anchor_on()
 
@@ -45,8 +50,11 @@ func attacking(node):
 func _on_Boat_battle_victory(node):
 	emit_signal("battle_victory", node)
 
-func moving_to(node):
-	$Boat.set_state_moving(node)
+func moving_toward_mouse_position():
+	$Boat.set_state_moving_toward_mouse_position()
+	
+func moving_toward(direction):
+	$Boat.set_state_moving(direction)
 
 func dock(node):
 	$Boat.set_state_docking(node)

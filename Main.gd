@@ -101,6 +101,7 @@ func _on_DialogUI_dialog_played(key):
 		$HUD/TutorialUI.open()
 		
 func _on_Pirate_body_pressed(node):
+	$Player.call("anchor_on")
 	$Pirate.hide_tutorial()
 	$Pirate.show_popup_tutorial()
 
@@ -119,6 +120,7 @@ func _on_HUD_world_view_off():
 	$Player.set_boat_view()
 
 func _on_Stockholm_body_pressed(popup_node):
+	$Player.call("anchor_on")
 	$Stockholm.hide_tutorial()
 	$Stockholm.show_popup_tutorial()
 

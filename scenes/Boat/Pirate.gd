@@ -17,6 +17,10 @@ func _ready():
 	meta = NPC_Meta.get_pirate_boat(level)
 	$Boat.init_node(NPC_Meta.get_stats_damage(meta), NPC_Meta.get_stats_health(meta))
 
+func _unhandled_input(event):
+	if event is InputEventScreenTouch and event.pressed:
+		print("here pirate")
+
 func get_items():
 	return NPC_Meta.get_items(meta)
 
