@@ -1,5 +1,7 @@
 extends Node2D
 
+export var city_id = "default"
+
 onready var popup_controller = $PopupControlCity
 onready var control_node = $City
 
@@ -9,6 +11,7 @@ signal city_entered(node)
 
 func _ready():
 	hide_tutorial()
+	$PopupControlCity.render_city_name(city_id)
 
 func _on_City_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed('ui_touch'):

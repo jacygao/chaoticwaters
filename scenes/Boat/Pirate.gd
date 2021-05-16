@@ -18,7 +18,8 @@ func _ready():
 	$Boat.init_node(
 		NPC_Meta.get_stats_damage(meta), 
 		NPC_Meta.get_stats_health(meta),
-		NPC_Meta.get_stats_health(meta))
+		NPC_Meta.get_stats_health(meta),
+		100)
 	$PopupControlPirate.init_node(level)
 
 func get_items():

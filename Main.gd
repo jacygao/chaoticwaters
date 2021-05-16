@@ -88,8 +88,9 @@ func _on_Stockholm_enter_pressed(node):
 func _on_Stockholm_city_entered(node):
 	if node.team() == 1 && node.state() == $Player/Boat.DOCKING:
 		$Player.idle()
-		save_scene()
-		get_tree().change_scene("res://scenes/CityHUD/CityHUD.tscn")
+		var parent = get_parent()
+		parent.save_main()
+		parent.load_city()
 
 func _on_DialogUI_dialog_played(key):
 	if key == "game_start":
@@ -126,9 +127,6 @@ func _on_Stockholm_body_pressed(popup_node):
 	$Player.call("anchor_on")
 	$Stockholm.hide_tutorial()
 	$Stockholm.show_popup_tutorial()
-
-func save_scene():
-	get_parent().save_main()
 
 func _on_Player_state_change(state):
 	if state == $Player/Boat.IDLE:

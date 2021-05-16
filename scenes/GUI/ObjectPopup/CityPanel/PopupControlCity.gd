@@ -2,6 +2,9 @@ extends Node2D
 
 signal enter_pressed(node)
 
+func render_city_name(name:String):
+	$ObjectPopupPanel/CityPanel.render_city_name(name)
+	
 # pos - a Vector2D defining the popup position.
 func open(pos):
 	$ObjectPopupPanel.popup()

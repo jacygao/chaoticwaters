@@ -14,7 +14,8 @@ func _ready():
 	$Boat.init_node(
 		Statistic.get_damage(),
 		Statistic.get_max_health(),
-		Statistic.get_health())
+		Statistic.get_health(),
+		Statistic.get_speed())
 
 func _unhandled_input(event):
 	if event is InputEventScreenTouch and event.pressed:

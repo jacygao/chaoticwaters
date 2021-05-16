@@ -11,6 +11,36 @@ var city = {
 			"weapon":1, 
 			"bronze":1,
 		},
+		"places": {
+			"palace": true,
+			"bar": true,
+			"merchant": true,
+			"hotel": true,
+			"shipyard": true,
+			"port": true,
+		},
+		"forces": {
+			"Leo Linderroth": 30,
+		}
+	},
+	"Riga": {
+		"population": 96200,
+		"economy": 1020,
+		"defence": 800,
+		"products": {
+			"fish":2, 
+			"bread":2, 
+			"weapon":1, 
+			"bronze":1,
+		},
+		"places": {
+			"palace": true,
+			"bar": true,
+			"merchant": true,
+			"hotel": true,
+			"shipyard": false,
+			"port": true,
+		},
 		"forces": {
 			"Leo Linderroth": 20,
 		}
@@ -40,7 +70,10 @@ func get_forces(city_data):
 
 func get_products(city_name:String):
 	return city[city_name]["products"]
-	
+
+func get_places(city_name:String):
+	return city[city_name]["places"]
+
 func sold_product(city_name, pid):
 	if city[city_name]["products"][pid] > 0:
 		city[city_name]["products"][pid] -= 1

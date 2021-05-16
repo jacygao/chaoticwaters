@@ -75,10 +75,11 @@ func _ready():
 	$AnimatedBoatSprite.set_sprite_frames(load(boat_sprite_path))
 	$AnimatedBoatSprite.scale = Vector2(1, 1)
 
-func init_node(damage:int, max_health:int, cur_health:int):
+func init_node(damage:int, max_health:int, cur_health:int, max_speed:int):
 	fire_damage = damage
 	max_durability = max_health
 	durability = cur_health
+	default_speed  = max_speed
 
 # Meta Getters
 func type():

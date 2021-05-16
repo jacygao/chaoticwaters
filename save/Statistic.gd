@@ -10,7 +10,7 @@ var statistic = {
 	"damage": 1,
 	"max_health": 10,
 	"health": 10,
-	"speed": 100,
+	"speed": 200,
 	"fatigue": 0,
 }
 
@@ -35,8 +35,8 @@ func subtract_health(v):
 func reset_health():
 	statistic["health"] = statistic["max_health"]
 		
-func get_speed(stats):
-	return stats["speed"]
+func get_speed():
+	return statistic["speed"]
 
 func get_fatigue(stats):
 	return stats["fatigue"]
