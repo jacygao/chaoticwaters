@@ -19,7 +19,6 @@ func set_tutorial_off():
 	player["tutorial_on"] = false
 
 func occupy(city, rate):
-	print(player)
 	if !player["occupation"].has(city):
 		player["occupation"][city] = 0
 	player["occupation"][city] += rate

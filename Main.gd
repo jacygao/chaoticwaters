@@ -34,12 +34,14 @@ func show_warn_message(msg):
 	$HUD.show_message($HUD.message_level_warn, msg)
 
 func set_anchor_on():
-	$HUD/AnchorButton.on()
-	$Player/Boat.anchor_on()
+	if !$HUD/AnchorButton.is_on():
+		$HUD/AnchorButton.on()
+		$Player/Boat.anchor_on()
 	
 func set_anchor_off():
-	$HUD/AnchorButton.off()
-	$Player/Boat.anchor_off()
+	if $HUD/AnchorButton.is_on():
+		$HUD/AnchorButton.off()
+		$Player/Boat.anchor_off()
 	
 func _on_BoatDisappearTimer_timeout():
 	$NPCBoat.queue_free()

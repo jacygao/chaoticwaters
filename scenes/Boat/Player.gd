@@ -14,7 +14,6 @@ func _ready():
 
 func _unhandled_input(event):
 	if event is InputEventScreenTouch and event.pressed:
-		print("here player")
 		moving_toward_mouse_position()
 		
 func _process(delta):
@@ -67,7 +66,6 @@ func _on_Boat_state_changed(state):
 		$FatigueTimer.stop()
 	else:
 		$FatigueTimer.start()
-	
 	emit_signal("state_change", state)
 	
 func _on_FatigueTimer_timeout():

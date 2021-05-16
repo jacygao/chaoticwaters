@@ -20,6 +20,9 @@ func off():
 	is_anchor_on = false
 	texture_normal = anchor_off
 
+func is_on():
+	return is_anchor_on == true
+
 func _on_AnchorButton_pressed():
 	if is_anchor_on:
 		off()

@@ -44,17 +44,12 @@ var cur_rotation = 0
 var rotation_dir = 0
 var velocity = Vector2()
 
-var target_direction = Vector2()
-var target_rotation = 0
-
-var rotating = false
-var last_x = 0
-
 var smoke = preload("res://scenes/Boat/Smoke.tscn")
 var cannon_ball = preload("res://scenes/CannonBall/CannonBall.tscn")
 
 # v2
 var target_node = null
+var target_direction = Vector2()
 
 # TODO: Making these constant shared
 enum {IDLE, MOVING, ATTACKING, ATTACKED, BATTLING, SINKING, FLEEING, DOCKING}
@@ -96,25 +91,21 @@ func set_state(s):
 	emit_signal("state_changed", s)
 
 func set_state_idle():
-	anchor_on()
 	set_state(IDLE)
 	target_node = null
 
 func set_state_moving_toward_mouse_position():
 	target_node = null
 	target_direction = get_global_mouse_position() - get_global_position()
-	speed = default_speed
 	set_state(MOVING)
 	
 func set_state_moving(direction):
 	target_node = null
 	target_direction = direction
-	speed = default_speed
 	set_state(MOVING)
 
 func set_state_docking(target):
 	target_node = target
-	speed = default_speed
 	set_state(DOCKING)
 	
 func set_state_attacked():
@@ -147,9 +138,9 @@ func anchor_on():
 	speed = 0
 	rotation_speed = 0
 	isAnchorOn = true
+	set_state_idle()
 	
 func anchor_off():
-	speed = default_speed
 	rotation_speed = default_rotation_speed
 	isAnchorOn = false
 
@@ -215,6 +206,8 @@ func battle_animate(delta):
 		move_and_rotate_animate(delta)
 
 func move_and_rotate_animate(delta):
+	accelerate()
+	
 	if cur_rotation > 2*PI:
 		cur_rotation-=2*PI
 	if cur_rotation < -2*PI:
@@ -236,6 +229,12 @@ func move_and_rotate_animate(delta):
 	cur_rotation += rotation_dir * rotation_speed * delta
 	move_and_slide(velocity)
 
+func accelerate():
+	if speed > default_speed:
+		speed = default_speed
+	elif speed < default_speed:
+		speed += acceleration
+		
 func get_target_direction():
 	if target_node != null:
 		return target_node.position - get_global_position()
