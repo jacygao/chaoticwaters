@@ -19,6 +19,7 @@ func _ready():
 		NPC_Meta.get_stats_damage(meta), 
 		NPC_Meta.get_stats_health(meta),
 		NPC_Meta.get_stats_health(meta))
+	$PopupControlPirate.init_node(level)
 
 func get_items():
 	return NPC_Meta.get_items(meta)

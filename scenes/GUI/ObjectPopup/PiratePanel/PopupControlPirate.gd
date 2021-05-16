@@ -10,6 +10,9 @@ func _ready():
 func _process(delta):
 	global_rotation = 0
 
+func init_node(lvl):
+	$ObjectPopupPanel/PiratePopupPanel.render_title(lvl)
+
 # pos - a Vector2D defining the popup position.
 func open(pos):
 	$ObjectPopupPanel.popup()
