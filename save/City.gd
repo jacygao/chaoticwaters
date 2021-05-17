@@ -28,10 +28,9 @@ var city = {
 		"economy": 1020,
 		"defence": 800,
 		"products": {
-			"fish":2, 
-			"bread":2, 
-			"weapon":1, 
-			"bronze":1,
+			"grain":2, 
+			"fur":1,
+			"wax":1,
 		},
 		"places": {
 			"palace": true,

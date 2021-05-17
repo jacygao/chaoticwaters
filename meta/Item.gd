@@ -45,6 +45,21 @@ var meta = {
 		"image": "bronze.png",
 		"value": 1200,
 	},
+	"fur": {
+		"name": "Fur",
+		"image": "fur.png",
+		"value": 1400,
+	},
+	"grain": {
+		"name": "Grain",
+		"image": "grain.png",
+		"value": 120,
+	},
+	"wax": {
+		"name": "Wax",
+		"image": "wax.png",
+		"value": 400,
+	},
 }
 
 func get(name):
