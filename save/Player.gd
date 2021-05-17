@@ -13,6 +13,7 @@ var player = {
 	"tutorial_on": true,
 	"occupation": {},
 	"coordinate": Vector2(),
+	"docking": "",
 }
 
 func set_tutorial_off():
@@ -36,3 +37,9 @@ func set_coordinate(c:Vector2):
 
 func get_coordinate():
 	return player["coordinate"]
+
+func set_docking_city(city:String):
+	player["docking"] = city
+
+func get_docking_city():
+	return player["docking"]

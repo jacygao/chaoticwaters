@@ -10,7 +10,7 @@ var statistic = {
 	"damage": 1,
 	"max_health": 10,
 	"health": 10,
-	"speed": 200,
+	"speed": 100,
 	"fatigue": 0,
 }
 

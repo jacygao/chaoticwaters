@@ -7,7 +7,7 @@ onready var control_node = $City
 
 signal body_pressed(popup_node)
 signal enter_pressed(node)
-signal city_entered(node)
+signal city_entered(city, node)
 
 func _ready():
 	hide_tutorial()
@@ -32,7 +32,7 @@ func _on_PopupControlCity_enter_pressed(node):
 	emit_signal("enter_pressed", node)
 
 func _on_City_city_entered(node):
-	emit_signal("city_entered", node)
+	emit_signal("city_entered", self, node)
 
 func show_tutorial():
 	# adjust tutorial to be at the most appropriate spot

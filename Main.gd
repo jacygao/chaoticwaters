@@ -85,9 +85,10 @@ func _on_Stockholm_enter_pressed(node):
 	$Player.dock(node)
 	set_anchor_off()
 
-func _on_Stockholm_city_entered(node):
+func _on_Stockholm_city_entered(city, node):
 	if node.team() == 1 && node.state() == $Player/Boat.DOCKING:
 		$Player.idle()
+		Player.set_docking_city(city.city_id)
 		var parent = get_parent()
 		parent.save_main()
 		parent.load_city()

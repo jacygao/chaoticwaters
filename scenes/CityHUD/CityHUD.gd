@@ -12,6 +12,7 @@ enum {PALACE, BAR, SHOP, HOTEL, SHIPYARD, DOCK}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	city_name = Player.get_docking_city()
 	render_node()
 	default()
 	$DialogUI.new_dialog("first_city_visit")
@@ -26,6 +27,7 @@ func render_node():
 	render_info_panel()
 	
 func render_info_panel():
+	$InfoPanel.set_name(city_name)
 	$InfoPanel.set_population(population)
 	$InfoPanel.set_economy(economy)
 	$InfoPanel.set_defence(defence)

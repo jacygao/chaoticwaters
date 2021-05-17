@@ -1,5 +1,8 @@
 extends Panel
 
+func set_name(val:String):
+	$Name.text = val
+
 func set_economy(val:int):
 	$Economy/Number.text = String(val)
 	
