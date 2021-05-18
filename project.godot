@@ -34,6 +34,7 @@ Utils="*res://env/Utils.gd"
 Player="*res://save/Player.gd"
 City="*res://save/City.gd"
 Inventory="*res://save/Inventory.gd"
+Notification="*res://env/Notification.gd"
 
 [input]
 
