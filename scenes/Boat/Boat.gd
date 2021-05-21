@@ -18,6 +18,8 @@ var acceleration = default_acceleration
 export (float) var default_rotation_speed = 1
 var rotation_speed = 0
 
+var steering_angle = 15
+
 var friction = -0.9
 var drag = -0.0015
 
@@ -220,24 +222,28 @@ func steer(delta):
 		cur_rotation-=2*PI
 	if cur_rotation < -2*PI:
 		cur_rotation+=2*PI
+	var old_velocity = velocity
 	velocity = Vector2(speed, 0).rotated(cur_rotation)
+	var new_heading = (velocity - old_velocity).normalized()
+	velocity = velocity.linear_interpolate(new_heading * velocity.length(), traction_fast)
 	
 	var target_direction = get_target_direction()
 	var target_angle = rad2deg(target_direction.angle_to(velocity))
 	if player_state == BATTLING:
 		target_angle+=90
 	
-	var rotate_velocity = 1
+	var rotate_velocity = 0.5
 	if abs(target_angle) < 1:
 		rotate_velocity = abs(target_angle)
 	if target_angle < 0:
 		rotation_dir = rotate_velocity
 	elif target_angle > 0:
 		rotation_dir = -1 * rotate_velocity
+		
 	cur_rotation += rotation_dir * get_rotation_speed() * delta
 	
+	#calculate_steering(delta)
 	rotation_degrees = angle_tidy(rad2deg(cur_rotation)) - 90
-	velocity = velocity.linear_interpolate(velocity, traction_fast)
 
 func accelerate():
 	if !is_anchor_on:

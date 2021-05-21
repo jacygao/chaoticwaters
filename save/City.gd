@@ -52,7 +52,8 @@ func occupy(city_name, force_name, rate):
 		c["forces"][force_name] = 0
 	c["forces"][force_name] += rate
 
-func get_city(city_name):
+func get_city(city_name:String):
+	print(city_name)
 	return city[city_name]
 
 func get_population(city_data):

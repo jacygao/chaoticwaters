@@ -9,7 +9,6 @@
 script = ExtResource( 2 )
 
 [node name="Boat" parent="." instance=ExtResource( 1 )]
-boat_sprite_path = "res://scenes/Boat/Sprites/RoyalBoat.tres"
 fire_damage = 1
 
 [node name="Camera2D" type="Camera2D" parent="Boat"]

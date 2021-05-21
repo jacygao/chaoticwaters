@@ -12,7 +12,7 @@ enum {PALACE, BAR, SHOP, HOTEL, SHIPYARD, DOCK}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	city_name = Player.get_docking_city()
+	#city_name = Player.get_docking_city()
 	render_node()
 	default()
 	$DialogUI.new_dialog("first_city_visit")
@@ -125,6 +125,7 @@ func _on_PalacePanel_invest_10():
 func _on_HotelPanel_one_night():
 	# TODO: make it configurable
 	Statistic.subtract_fatigue(5)
+	Notification.info(self, "Fatigue recovered 5 points")
 	default()
 	$TutorialUI.close()
 	$DialogUI.new_dialog("first_shipyard_visit")
