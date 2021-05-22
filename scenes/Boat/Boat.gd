@@ -18,18 +18,16 @@ var acceleration = default_acceleration
 export (float) var default_rotation_speed = 1
 var rotation_speed = 0
 
-var steering_angle = 15
+var steering_angle = 30
 
 var friction = -0.9
 var drag = -0.0015
-
 var braking = -1
 
-var slip_speed = 400  # Speed where traction is reduced
+var wheel_base = 100
+var steer_angle
 
 var traction_fast = 0.1  # High-speed traction
-
-var traction_slow = 0.7  # Low-speed traction
 
 # default health
 export var max_durability = 10
@@ -218,34 +216,35 @@ func get_rotation_speed():
 	return speed/default_speed * default_rotation_speed
 
 func steer(delta):
-	if cur_rotation > 2*PI:
-		cur_rotation-=2*PI
-	if cur_rotation < -2*PI:
-		cur_rotation+=2*PI
-	var old_velocity = velocity
-	velocity = Vector2(speed, 0).rotated(cur_rotation)
-	var new_heading = (velocity - old_velocity).normalized()
-	
-	velocity = velocity.linear_interpolate(new_heading * velocity.length(), traction_fast)
-	
+	# Calculate steering direction
 	var target_direction = get_target_direction()
-	var target_angle = rad2deg(target_direction.angle_to(velocity))
-	if player_state == BATTLING:
-		target_angle+=90
+	var target_angle = target_direction.angle()
 	
-	var rotate_velocity = 1
-	if abs(target_angle) < 1:
-		rotate_velocity = abs(target_angle)
-	if target_angle < 0:
-		rotation_dir = rotate_velocity
-	elif target_angle > 0:
-		rotation_dir = -1 * rotate_velocity
+	var turn = 0
+	# turn boat right
+	var relative_angle = velocity.angle_to(target_direction)
+	# disable boat steering within blind angles
+	var blind_angle = deg2rad(179)
+	
+	if relative_angle < blind_angle && relative_angle > blind_angle*-1:
+		if relative_angle < 0 :
+			turn += 1
+		# turn boat left
+		elif relative_angle > 0:
+			turn-= 1
 		
-	cur_rotation += rotation_dir * get_rotation_speed() * delta
-	
-	#calculate_steering(delta)
-	rotation_degrees = angle_tidy(rad2deg(cur_rotation)) - 90
+	steer_angle = turn * deg2rad(steering_angle)
 
+	# Calculate velocity
+	velocity = transform.x * speed
+	var rear_wheel = position - transform.x * wheel_base / 2.0
+	var front_wheel = position + transform.x * wheel_base / 2.0
+	rear_wheel += velocity * delta
+	front_wheel += velocity.rotated(steer_angle) * delta
+	var new_heading = (front_wheel - rear_wheel).normalized()
+	velocity = velocity.linear_interpolate(new_heading * velocity.length(), traction_fast)
+	rotation = new_heading.angle()
+		
 func accelerate():
 	if !is_anchor_on:
 		if speed > default_speed:
