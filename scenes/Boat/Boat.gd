@@ -225,6 +225,7 @@ func steer(delta):
 	var old_velocity = velocity
 	velocity = Vector2(speed, 0).rotated(cur_rotation)
 	var new_heading = (velocity - old_velocity).normalized()
+	
 	velocity = velocity.linear_interpolate(new_heading * velocity.length(), traction_fast)
 	
 	var target_direction = get_target_direction()
@@ -232,7 +233,7 @@ func steer(delta):
 	if player_state == BATTLING:
 		target_angle+=90
 	
-	var rotate_velocity = 0.5
+	var rotate_velocity = 1
 	if abs(target_angle) < 1:
 		rotate_velocity = abs(target_angle)
 	if target_angle < 0:
