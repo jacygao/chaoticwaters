@@ -5,6 +5,7 @@ var city = {
 		"population": 134000,
 		"economy": 1880,
 		"defence": 2000,
+		"boom": 2,
 		"products": {
 			"fish":2, 
 			"bread":2, 
@@ -27,6 +28,7 @@ var city = {
 		"population": 96200,
 		"economy": 1020,
 		"defence": 800,
+		"boom": 2,
 		"products": {
 			"grain":2, 
 			"fur":1,
@@ -53,23 +55,28 @@ func occupy(city_name, force_name, rate):
 	c["forces"][force_name] += rate
 
 func get_city(city_name:String):
-	print(city_name)
 	return city[city_name]
 
-func get_population(city_data):
-	return city_data["population"]
+func get_population(city_name:String):
+	return city[city_name]["population"]
 
-func get_economy(city_data):
-	return city_data["economy"]
+func get_economy(city_name:String):
+	return city[city_name]["economy"]
 	
-func get_defence(city_data):
-	return city_data["defence"]
+func get_defence(city_name:String):
+	return city[city_name]["defence"]
 
-func get_forces(city_data):
-	return city_data["forces"]
+func get_boom(city_name:String):
+	return city[city_name]["boom"]
+
+func get_forces(city_name:String):
+	return city[city_name]["forces"]
 
 func get_products(city_name:String):
 	return city[city_name]["products"]
+
+func has_product(city_name:String, product_name:String):
+	return city[city_name]["products"].has(product_name)
 
 func get_places(city_name:String):
 	return city[city_name]["places"]

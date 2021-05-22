@@ -90,6 +90,7 @@ script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+mode = "BUY"
 
 [node name="TradeInfoContainer" parent="." instance=ExtResource( 2 )]
 margin_top = 110.0

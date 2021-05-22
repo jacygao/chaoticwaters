@@ -1,7 +1,7 @@
 extends Node
 
 """
-	The trade price is determined by the following aspects:
+	The sel price is determined by the following aspects:
 		If the product is locally produced
 		City's economy value
 		The boom value of the city
@@ -13,8 +13,7 @@ extends Node
 		
 	if the product is produced locally, the product value halves.
 """
-
-func get_price(product_value, economy, boom, is_local):
+func get_sell_price(product_value, economy, boom, is_local):
 	if is_local:
 		product_value = product_value / 2
 		

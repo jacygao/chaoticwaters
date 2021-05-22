@@ -12,19 +12,20 @@ enum {PALACE, BAR, SHOP, HOTEL, SHIPYARD, DOCK}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#city_name = Player.get_docking_city()
+	city_name = Player.get_docking_city()
 	render_node()
 	default()
 	$DialogUI.new_dialog("first_city_visit")
 
 func render_node():
 	var city_data = City.get_city(city_name)
-	population = City.get_population(city_data)
-	economy = City.get_economy(city_data)
-	defence = City.get_defence(city_data)
-	forces = City.get_forces(city_data)
+	population = City.get_population(city_name)
+	economy = City.get_economy(city_name)
+	defence = City.get_defence(city_name)
+	forces = City.get_forces(city_name)
 	products = City.get_products(city_name)
 	render_info_panel()
+	$TradePanel.city_id = city_name
 	
 func render_info_panel():
 	$InfoPanel.set_name(city_name)

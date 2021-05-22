@@ -4,20 +4,20 @@
 [ext_resource path="res://assets/texture/land_tile.png" type="Texture" id=2]
 [ext_resource path="res://scenes/World/WorldMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/City/Stockholm.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/City/Stockholm.gd" type="Script" id=5]
+[ext_resource path="res://scenes/GUI/HUD.gd" type="Script" id=5]
 [ext_resource path="res://scenes/GUI/HUD.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Main.gd" type="Script" id=7]
 [ext_resource path="res://scenes/Boat/Pirate.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/Dialog/DialogUI.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/Boat/Player.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scenes/GUI/HUD.gd" type="Script" id=11]
+[ext_resource path="res://scenes/GUI/ObjectPopup/RewardPanel/PopupControlReward.gd" type="Script" id=11]
 [ext_resource path="res://scenes/GUI/TutorialUI.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/World/WorldMap.gd" type="Script" id=13]
-[ext_resource path="res://scenes/GUI/ObjectPopup/RewardPanel/PopupControlReward.gd" type="Script" id=14]
+[ext_resource path="res://scenes/City/Stockholm.gd" type="Script" id=14]
 [ext_resource path="res://scenes/GUI/TutorialUI.gd" type="Script" id=15]
-[ext_resource path="res://scenes/Boat/Pirate.gd" type="Script" id=16]
-[ext_resource path="res://scenes/Dialog/DialogUI.gd" type="Script" id=17]
-[ext_resource path="res://scenes/Boat/Player.gd" type="Script" id=18]
+[ext_resource path="res://scenes/Dialog/DialogUI.gd" type="Script" id=16]
+[ext_resource path="res://scenes/Boat/Player.gd" type="Script" id=17]
+[ext_resource path="res://scenes/Boat/Pirate.gd" type="Script" id=18]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
@@ -60,13 +60,13 @@ fire_rate = 2.0
 coins = 200
 
 [node name="HUD" type="CanvasLayer" parent="." instance=ExtResource( 6 )]
-script = ExtResource( 11 )
+script = ExtResource( 5 )
 
 [node name="DialogUI" type="Control" parent="HUD" instance=ExtResource( 9 )]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 17 )
+script = ExtResource( 16 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -74,7 +74,7 @@ __meta__ = {
 [node name="RewardUI" type="Node2D" parent="HUD" instance=ExtResource( 1 )]
 visible = false
 position = Vector2( 300, 200 )
-script = ExtResource( 14 )
+script = ExtResource( 11 )
 
 [node name="TutorialUI" type="Node2D" parent="HUD" instance=ExtResource( 12 )]
 visible = false
@@ -91,20 +91,20 @@ script = ExtResource( 13 )
 
 [node name="Player" type="Node2D" parent="." instance=ExtResource( 10 )]
 position = Vector2( 287.769, -8.27304 )
-script = ExtResource( 18 )
+script = ExtResource( 17 )
 
 [node name="Pirate" type="Node2D" parent="." groups=[
 "PirateGroup",
 ] instance=ExtResource( 8 )]
 position = Vector2( 612, -26.2839 )
-script = ExtResource( 16 )
+script = ExtResource( 18 )
 level = 1
 
 [node name="Pirate2" type="Node2D" parent="." groups=[
 "PirateGroup",
 ] instance=ExtResource( 8 )]
 position = Vector2( 612, 480.604 )
-script = ExtResource( 16 )
+script = ExtResource( 18 )
 level = 2
 
 [node name="BoatDisappearTimer" type="Timer" parent="."]
@@ -112,12 +112,12 @@ wait_time = 10.0
 
 [node name="Stockholm" type="Node2D" parent="." instance=ExtResource( 4 )]
 position = Vector2( -115.891, 221.867 )
-script = ExtResource( 5 )
+script = ExtResource( 14 )
 city_id = "Stockholm"
 
 [node name="Riga" type="Node2D" parent="." instance=ExtResource( 4 )]
 position = Vector2( 7667.26, -284.41 )
-script = ExtResource( 5 )
+script = ExtResource( 14 )
 city_id = "Riga"
 [connection signal="ancher_off" from="HUD" to="." method="_on_HUD_ancher_off"]
 [connection signal="ancher_on" from="HUD" to="." method="_on_HUD_ancher_on"]

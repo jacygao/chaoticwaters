@@ -5,11 +5,14 @@ signal sell(id, price)
 signal sell_all
 signal confirm
 
+export var city_id = "Stockholm"
+
 var sell_products = {}
 var buy_products = {}
 
 func _ready():
 	$TradeInfoContainer.visible = false
+	$TradeGoodsContainer.city_id = city_id
 	
 # products are in a form of key-value pairs with 
 # key represneting the product id and 
