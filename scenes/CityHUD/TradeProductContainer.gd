@@ -23,8 +23,11 @@ func render_products(ps:Dictionary):
 	var margin = 20
 	for product in ps.keys():
 		var node = product_widget.instance()
-		node.product_id = product
-		node.quantity = ps[product]
+		node.init(
+			product,
+			ps[product],
+			Item_Meta.get_item_value(product),
+			Env.ITEM_ASSET_PATH + Item_Meta.get_item_image(product))
 		node.set_position(Vector2(count*(margin+node.rect_size.x), 0))
 		node.connect("pressed", self, "_on_product_pressed")
 		add_child(node)

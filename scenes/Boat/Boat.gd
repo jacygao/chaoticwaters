@@ -4,7 +4,7 @@ export var team = 1
 
 export var id = "player_boat_1"
 
-export (String) var boat_sprite_path = "res://scenes/Boat/Sprites/PlainBoat.tres"
+export var boat_id = "brigantine"
 
 # navigation speed
 export var default_speed = 100
@@ -70,10 +70,9 @@ signal is_hit(damage)
 
 # Called when the node enters the scene tree for thes first time.
 func _ready():
-	$CannonGunRight.rotation_degrees = -90
-	$CannonGunLeft.rotation_degrees = 90
-	$AnimatedBoatSprite.set_sprite_frames(load(boat_sprite_path))
-	$AnimatedBoatSprite.scale = Vector2(1, 1)
+	$CannonGunRight.rotation_degrees = 0
+	$CannonGunLeft.rotation_degrees = 180
+	$AnimatedBoatSprite.texture = load(Ship_Meta.get_asset_path(boat_id))
 
 func init_node(damage:int, max_health:int, cur_health:int, max_speed:int):
 	fire_damage = damage
@@ -167,9 +166,6 @@ func _process(_delta):
 		print(id(), " boat has sunk")
 		sink()
 		# TODO: player boat has sunk.. what now?
-
-	health_bar_animate()
-	$AnimatedBoatSprite.play()
 		
 func _physics_process(delta):
 	match player_state:
@@ -180,7 +176,6 @@ func _physics_process(delta):
 		ATTACKING:
 			attack_animate(delta)
 		BATTLING:
-			speed = default_speed * .5
 			battle_animate(delta)
 		SINKING:
 			pass
@@ -218,7 +213,6 @@ func get_rotation_speed():
 func steer(delta):
 	# Calculate steering direction
 	var target_direction = get_target_direction()
-	var target_angle = target_direction.angle()
 	
 	var turn = 0
 	# turn boat right
@@ -266,21 +260,13 @@ func apply_friction():
 		friction_force *= 3
 	velocity += drag_force + friction_force
 	
-func get_target_direction():
+func get_target_direction():	
 	if target_node != null:
-		return target_node.get_global_position() - get_global_position()
-	elif target_direction != null:
-		return target_direction
-
-func health_bar_animate():
-	$AnimatedBoatSprite.animation = "hp_green"
-	if durability < max_durability * 0.7:
-		$AnimatedBoatSprite.animation = "hp_yellow"
-	if durability < max_durability * 0.35:
-		$AnimatedBoatSprite.animation = "hp_red"
-	if durability <= 0:
-		$AnimatedBoatSprite.animation = "hp_0"
-		
+		target_direction = target_node.get_global_position() - get_global_position()
+	if player_state == BATTLING:
+		return target_direction.rotated(deg2rad(90))
+	return target_direction
+	
 func fire_animate_left(target):
 	if player_state == BATTLING:
 		if target.team() != team():

@@ -77,6 +77,12 @@ func get_value(item:Dictionary):
 		return item["value"]
 	return 0
 
+func get_item_value(item_id):
+	return meta[item_id]["value"]
+
+func get_item_image(item_id):
+	return meta[item_id]["image"]
+	
 func get_item_name(item):
 	if item.has("name"):
 		return item["name"]
