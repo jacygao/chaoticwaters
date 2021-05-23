@@ -24,8 +24,8 @@ func render_node():
 	defence = City.get_defence(city_name)
 	forces = City.get_forces(city_name)
 	products = City.get_products(city_name)
+	render_trade_panel()
 	render_info_panel()
-	$TradePanel.city_id = city_name
 	
 func render_info_panel():
 	$InfoPanel.set_name(city_name)
@@ -33,6 +33,9 @@ func render_info_panel():
 	$InfoPanel.set_economy(economy)
 	$InfoPanel.set_defence(defence)
 	$InfoPanel.set_forces(forces)
+
+func render_trade_panel():
+	$TradePanel.set_city_id(city_name)
 
 func _on_CityPanel_pressed(btn):
 	reset()

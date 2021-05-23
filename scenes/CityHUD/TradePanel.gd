@@ -12,8 +12,15 @@ var buy_products = {}
 
 func _ready():
 	$TradeInfoContainer.visible = false
+	render_node()
+
+func render_node():
 	$TradeGoodsContainer.city_id = city_id
-	
+
+func set_city_id(c_id):
+	city_id = c_id
+	render_node()
+
 # products are in a form of key-value pairs with 
 # key represneting the product id and 
 # value representing the quantity of the items
