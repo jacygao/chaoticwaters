@@ -45,6 +45,7 @@ func _on_CityPanel_pressed(btn):
 			$DialogUI.new_dialog("city_investment")
 			$PalacePanel.visible = true
 		BAR:
+			#TODO: implement me
 			pass
 		SHOP:
 			$TutorialUI.close()
