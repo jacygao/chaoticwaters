@@ -42,6 +42,9 @@ func show_popup_tutorial():
 func hide_popup_tutorial():
 	$PopupControlPirate.hide_tutorial()
 
+func attacking(node):
+	$Boat.set_state_attacking(node)
+	
 func _on_PlayerBoat_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed('ui_touch'):
 		if get_state() == $Boat.SINKING:
@@ -65,7 +68,7 @@ func _on_PlayerBoat_input_event(viewport, event, shape_idx):
 			
 func _on_PopupControlPirate_is_attacked():
 	$Boat.set_state_attacked()
-	emit_signal("attack_pressed", $Boat)
+	emit_signal("attack_pressed", self)
 
 func _on_Boat_is_sinking():
 	$SinkTimer.start()

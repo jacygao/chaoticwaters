@@ -58,6 +58,7 @@ func _on_Pirate_attack_pressed(node):
 	set_anchor_off()
 	$Pirate.hide_popup_tutorial()
 	$Player.attacking(node)
+	node.attacking($Player)
 
 func _on_Player_battle_victory(node):
 	$HUD/DialogUI.new_dialog("first_victory")
