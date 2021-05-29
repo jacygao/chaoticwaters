@@ -86,7 +86,6 @@ autoplay = "wavy"
 anims/wavy = SubResource( 3 )
 
 [node name="Tween" type="Tween" parent="."]
-[connection signal="input_event" from="." to="." method="_on_PlayerBoat_input_event"]
 [connection signal="fire" from="CannonGunLeft" to="." method="_on_CannonGunLeft_fire"]
 [connection signal="fire" from="CannonGunRight" to="." method="_on_CannonGunRight_fire"]
 [connection signal="body_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]

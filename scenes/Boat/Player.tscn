@@ -13,6 +13,7 @@ fire_damage = 1
 
 [node name="Camera2D" type="Camera2D" parent="Boat"]
 current = true
+zoom = Vector2( 1.5, 1.5 )
 smoothing_enabled = true
 script = ExtResource( 4 )
 

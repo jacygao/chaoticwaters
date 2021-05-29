@@ -260,9 +260,9 @@ func apply_friction():
 		friction_force *= 3
 	velocity += drag_force + friction_force
 	
-func get_target_direction():	
+func get_target_direction():
 	if target_node != null:
-		target_direction = target_node.get_global_position() - get_global_position()
+		target_direction = target_node.get_position() - get_global_position()
 	if player_state == BATTLING:
 		return target_direction.rotated(deg2rad(90))
 	return target_direction

@@ -22,6 +22,10 @@ func _ready():
 		100)
 	$PopupControlPirate.init_node(level)
 
+func _process(_delta):
+	if get_state() == $Boat.ATTACKING:
+		$Boat.anchor_off()
+
 func get_items():
 	return NPC_Meta.get_items(meta)
 

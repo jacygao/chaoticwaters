@@ -17,6 +17,9 @@ func _ready():
 		Statistic.get_health(),
 		Statistic.get_speed())
 
+func get_id():
+	return $Boat.id()
+
 func _unhandled_input(event):
 	if event is InputEventScreenTouch and event.pressed:
 		moving_toward_mouse_position()
@@ -25,7 +28,7 @@ func _process(delta):
 	Player.set_coordinate(get_position())
 		
 func get_position():
-	return $Boat.position
+	return $Boat.get_global_position()
 
 func set_position(pos):
 	$Boat.position = pos
