@@ -5,6 +5,7 @@ export var team = 1
 export var id = "player_boat_1"
 
 export var boat_id = "brigantine"
+export (Texture) var boat_sprite = load(Ship_Meta.get_asset_path(boat_id))
 
 # navigation speed
 export var default_speed = 100
@@ -72,7 +73,7 @@ signal is_hit(damage)
 func _ready():
 	$CannonGunRight.rotation_degrees = 0
 	$CannonGunLeft.rotation_degrees = 180
-	$AnimatedBoatSprite.texture = load(Ship_Meta.get_asset_path(boat_id))
+	$AnimatedBoatSprite.texture = boat_sprite
 
 func init_node(damage:int, max_health:int, cur_health:int, max_speed:int):
 	fire_damage = damage
@@ -264,6 +265,8 @@ func get_target_direction():
 	if target_node != null:
 		target_direction = target_node.get_position() - get_global_position()
 	if player_state == BATTLING:
+		print("here")
+		print(get_global_position().distance_to(target_node.get_position()))
 		return target_direction.rotated(deg2rad(90))
 	return target_direction
 	
@@ -309,6 +312,13 @@ func _on_CollisionDetector_body_entered(body):
 			if state() == ATTACKING || state() == ATTACKED:
 				# battle starts
 				set_state_battling(body)
+
+func _on_CollisionDetector_body_exited(body):
+	if body.has_method("id") && body.id() != id():
+		if body.has_method("type") && body.type() == "ship":
+			if state() == ATTACKING || state() == ATTACKED:
+				# battle starts
+				set_state_attacking(body)
 
 func _on_CannonGunLeft_fire(target):
 	fire_animate_right(target)
