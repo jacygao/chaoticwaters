@@ -13,7 +13,7 @@ radius = 28.5442
 height = 107.528
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 142.737
+radius = 192.185
 
 [sub_resource type="Animation" id=3]
 resource_name = "wavy"
@@ -42,7 +42,6 @@ __meta__ = {
 }
 
 [node name="AnimatedBoatSprite" type="Sprite" parent="."]
-position = Vector2( 20, 0 )
 rotation = 1.5708
 texture = ExtResource( 2 )
 
@@ -89,3 +88,4 @@ anims/wavy = SubResource( 3 )
 [connection signal="fire" from="CannonGunLeft" to="." method="_on_CannonGunLeft_fire"]
 [connection signal="fire" from="CannonGunRight" to="." method="_on_CannonGunRight_fire"]
 [connection signal="body_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
+[connection signal="body_exited" from="CollisionDetector" to="." method="_on_CollisionDetector_body_exited"]
