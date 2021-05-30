@@ -36,6 +36,7 @@ City="*res://save/City.gd"
 Inventory="*res://save/Inventory.gd"
 Notification="*res://env/Notification.gd"
 Ship_Meta="*res://meta/Ship.gd"
+Logger="*res://Env/Logger.gd"
 
 [input]
 
