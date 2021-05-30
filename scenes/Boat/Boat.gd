@@ -7,6 +7,9 @@ export var id = "player_boat_1"
 var default_boat_id = "brigantine"
 export (Texture) var boat_sprite = load(Ship_Meta.get_asset_path(default_boat_id))
 
+var default_wrack_id = "wrack"
+export (Texture) var wrack_sprite = load(Ship_Meta.get_asset_path(default_wrack_id)) 
+
 # navigation speed
 export var default_speed = 100
 var speed = 0
@@ -301,6 +304,7 @@ func hit(damage):
 func sink():
 	speed = 0
 	rotation_speed = 0
+	$AnimatedBoatSprite.texture = wrack_sprite
 	set_state_sinking()
 	emit_signal("is_sinking")
 	

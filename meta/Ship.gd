@@ -13,6 +13,9 @@ var meta = {
 	"1st_rate_priate": {
 		"asset_file": "1stRate-Pirate.png",
 	},
+	"wrack": {
+		"asset_file": "wrack.png",
+	},
 }
 
 func get_asset_path(boat_id):
