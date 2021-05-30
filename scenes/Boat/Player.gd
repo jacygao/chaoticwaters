@@ -17,7 +17,7 @@ func _ready():
 		Statistic.get_health(),
 		Statistic.get_speed())
 
-func get_id():
+func id():
 	return $Boat.id()
 
 func _unhandled_input(event):
@@ -47,7 +47,7 @@ func _on_PopupControlPlayer_enter_pressed():
 
 func _on_Boat_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed('ui_touch'):
-		$PopupControlPlayer.open($Boat.get_global_position())
+		$Boat/PopupControlPlayer.open($Boat.get_global_position())
 		get_tree().set_input_as_handled()
 
 # player boat is attacking an enemy boat

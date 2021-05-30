@@ -9,7 +9,7 @@ signal attack_pressed(node)
 signal sinking_boat_pressed(node)
 signal boat_cleared
 
-onready var popup_controller = $PopupControlPirate
+onready var popup_controller = $Boat/PopupControlPirate
 onready var control_node = $Boat
 
 # Called when the node enters the scene tree for the first time.
@@ -20,11 +20,14 @@ func _ready():
 		NPC_Meta.get_stats_health(meta),
 		NPC_Meta.get_stats_health(meta),
 		100)
-	$PopupControlPirate.init_node(level)
+	popup_controller.init_node(level)
 
 func _process(_delta):
 	if get_state() == $Boat.ATTACKING:
 		$Boat.anchor_off()
+
+func id():
+	return $Boat.id()
 
 func get_items():
 	return NPC_Meta.get_items(meta)
@@ -41,10 +44,10 @@ func hide_tutorial():
 	$TutorialUI.close()
 
 func show_popup_tutorial():
-	$PopupControlPirate.show_tutorial()
+	popup_controller.show_tutorial()
 	
 func hide_popup_tutorial():
-	$PopupControlPirate.hide_tutorial()
+	popup_controller.hide_tutorial()
 
 func attacking(node):
 	$Boat.set_state_attacking(node)
@@ -87,6 +90,6 @@ func clear_node():
 
 func _on_Boat_state_changed(state):
 	if state == $Boat.BATTLING:
-		$PopupControlPirate/ObjectPopupPanel/PiratePopupPanel/PirateAttackButton.disabled = true
+		$Boat/PopupControlPirate/ObjectPopupPanel/PiratePopupPanel/PirateAttackButton.disabled = true
 	else:
-		$PopupControlPirate/ObjectPopupPanel/PiratePopupPanel/PirateAttackButton.disabled = false
+		$Boat/PopupControlPirate/ObjectPopupPanel/PiratePopupPanel/PirateAttackButton.disabled = false

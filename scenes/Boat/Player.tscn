@@ -21,7 +21,7 @@ script = ExtResource( 4 )
 
 [node name="Tween" type="Tween" parent="Boat/Camera2D"]
 
-[node name="PopupControlPlayer" parent="." instance=ExtResource( 3 )]
+[node name="PopupControlPlayer" parent="Boat" instance=ExtResource( 3 )]
 
 [node name="FatigueTimer" type="Timer" parent="."]
 pause_mode = 1
@@ -30,5 +30,5 @@ wait_time = 3.0
 [connection signal="input_event" from="Boat" to="." method="_on_Boat_input_event"]
 [connection signal="is_hit" from="Boat" to="." method="_on_Boat_is_hit"]
 [connection signal="state_changed" from="Boat" to="." method="_on_Boat_state_changed"]
-[connection signal="enter_pressed" from="PopupControlPlayer" to="." method="_on_PopupControlPlayer_enter_pressed"]
+[connection signal="enter_pressed" from="Boat/PopupControlPlayer" to="." method="_on_PopupControlPlayer_enter_pressed"]
 [connection signal="timeout" from="FatigueTimer" to="." method="_on_FatigueTimer_timeout"]

@@ -4,8 +4,8 @@ export var team = 1
 
 export var id = "player_boat_1"
 
-export var boat_id = "brigantine"
-export (Texture) var boat_sprite = load(Ship_Meta.get_asset_path(boat_id))
+var default_boat_id = "brigantine"
+export (Texture) var boat_sprite = load(Ship_Meta.get_asset_path(default_boat_id))
 
 # navigation speed
 export var default_speed = 100
@@ -57,11 +57,16 @@ var smoke = preload("res://scenes/Boat/Smoke.tscn")
 var cannon_ball = preload("res://scenes/CannonBall/CannonBall.tscn")
 
 # v2
+# when player is in BATTLING state, cannons fire at the target node.
 var target_node = null
+
+# target_direction defines the direction the player ship is moving towards.
 var target_direction = Vector2()
 
 # TODO: Making these constant shared
 enum {IDLE, MOVING, ATTACKING, ATTACKED, BATTLING, SINKING, FLEEING, DOCKING}
+
+# default player state to IDLE
 var player_state = IDLE
 
 signal is_sinking
@@ -122,6 +127,7 @@ func set_state_attacked():
 func set_state_attacking(target):
 	set_state(ATTACKING)
 	target_node = target
+	$HostileController.append(target)
 	
 func set_state_battling(node):
 	set_state(BATTLING)
@@ -265,20 +271,16 @@ func get_target_direction():
 	if target_node != null:
 		target_direction = target_node.get_position() - get_global_position()
 	if player_state == BATTLING:
-		print("here")
-		print(get_global_position().distance_to(target_node.get_position()))
 		return target_direction.rotated(deg2rad(90))
 	return target_direction
 	
 func fire_animate_left(target):
-	if player_state == BATTLING:
-		if target.team() != team():
-			fire_animate($CannonGunLeft/CannonGunAngle, target)
+	if $HostileController.has(target.id()):
+		fire_animate($CannonGunLeft/CannonGunAngle, target)
 		
 func fire_animate_right(target):
-	if player_state == BATTLING:
-		if target.team() != team():
-			fire_animate($CannonGunRight/CannonGunAngle, target)
+	if $HostileController.has(target.id()):
+		fire_animate($CannonGunRight/CannonGunAngle, target)
 	
 # Fires an animated cannon ball at a given vector position
 func fire_animate(gun, target):
