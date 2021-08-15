@@ -1,8 +1,12 @@
 # Chaotic Waters
+
 I'm building an ambitious game and this repo is currently storing my work in progress. Will share more info soon!
 
-Project Status: Paused
+## Project Status: Paused
+
 I had to pause this project for the time being due to personal reason. I will hopefully resume the project late this year.
+
+## Sneak Peek
 
 ![Screenshot 2021-05-23 105740](https://user-images.githubusercontent.com/1997526/129480483-77d24b5a-4a02-4a07-a63c-57fd2c5885ad.png)
 
