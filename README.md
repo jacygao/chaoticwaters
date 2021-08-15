@@ -2,6 +2,8 @@
 
 I'm building an ambitious game and this repo is currently storing my work in progress. Will share more info soon!
 
+Check out how I managed to build animated ocean in 2D: https://github.com/chaotic-waters/animated-ocean
+
 ## Project Status: Paused
 
 I had to pause this project for the time being due to personal reason. I will hopefully resume the project late this year.
